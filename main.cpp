@@ -2,7 +2,7 @@
 #include "Point.h"
 #include "Rifle.h"
 #include "SolidObject.h"
-
+#include "Medic.h"
 using namespace std;
 
 int main() {
@@ -17,6 +17,8 @@ int main() {
 
     SolidObject so(&p,100,100);
 
+    Medic medic(p, 120, 4, 1);
+    medic.whoAreYou();
 
     std::cout << "Hello, World!" << std::endl;
     return 0;

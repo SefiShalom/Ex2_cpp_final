@@ -33,3 +33,7 @@ const Point Medic::getCurrentPosition() {
     return Point(*_currPosition);
 }
 
+void Medic::whoAreYou() {
+    std::cout << "I am a medic." << std::endl;
+}
+

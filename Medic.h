@@ -25,6 +25,8 @@ public:
 
     virtual const Point getCurrentPosition();
 
+    void whoAreYou();
+
 };
 
 
