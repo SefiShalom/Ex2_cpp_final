@@ -25,22 +25,15 @@ double Point::getIncline(const Point &other) {
     return (_y-other.get_y())/(_x-other.get_x());
 }
 
-Point Point::nextPoint(size_t speed, const Point &dest) {
-//    speed = pow(speed,2);
+Point Point::nextPoint(double distance, const Point &dest) {
+
+    if(_x == dest._x){
+        return dest._y > _y ? Point(_x,_y+distance) : Point(_x,_y-distance);
+    }
 
     double m = getIncline(dest);
-    double a = pow(m,2) + 1;
-    double b = 2*_x - 2*m*m*_x-4*_y*m;
-    double c = 4*_y*_y + 4*_y*m*_x + m*m*_x*_x+_x*_x - speed*speed;
-    double x1 = (-b+sqrt(b*b -4*a*c))/(2*a);
-    double x2 = (-b-sqrt(b*b -4*a*c))/(2*a);
+    double x1 = _x+sqrt(pow(distance,2)/(1+pow(m,2)));
+    double x2 = _x-sqrt(pow(distance,2)/(1+pow(m,2)));
 
-//    double y = m*(_x - x1) + _y;
-    std::cout<< m <<std::endl;
-    std::cout<< a <<std::endl;
-    std::cout<< b <<std::endl;
-    std::cout<< c <<std::endl;
-    std::cout<< x1 <<std::endl;
-    std::cout<< x2 <<std::endl;
-    return dest._x >= _x ? Point(x1, -(m*(_x - x1) + _y)) : Point(x2, -(m*(_x - x2) + _y));
+    return dest._x >= _x ? Point(x1, (m*(x1-_x) + _y)) : Point(x2, (m*(x2 - _x) + _y));
 }

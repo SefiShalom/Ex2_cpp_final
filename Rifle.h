@@ -14,6 +14,8 @@ class Rifle: public Weapon {
  public:
     Rifle(Point* position,size_t power,size_t bulletsPerShot);
     virtual ~Rifle();
+//    double attackArmor(SheildArmor* sheild);
+//    double attackArmor(BodyArmor* bodyarmor);
 
 };
 

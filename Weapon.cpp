@@ -8,6 +8,6 @@ Weapon::Weapon(Point* position, size_t power, size_t bulletsPerShot):
 
 Weapon::~Weapon() {}
 
-size_t Weapon::shoot(){
+double Weapon::shoot(){
     return _power*_bulletsPerShot;
 }

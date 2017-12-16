@@ -38,9 +38,9 @@ public:
 
     virtual const Point getCurrentPosition()=0;
 
-    void setCurrentPosition(double x, double y);
+    void setCurrentPosition(Point& newPoint);
 
-    void nextDestination(const Point &nextPoint);
+    void setNextDestination(const Point& nextPoint);
 
 //    virtual double getHitChance(Soldier *target);
 

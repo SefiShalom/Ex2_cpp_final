@@ -13,27 +13,31 @@ Soldier::~Soldier() {
     delete _currPosition;
 }
 
-void Soldier::setCurrentPosition(double x, double y) {
-    _currPosition->set_x(x);
-    _currPosition->set_y(y);
+void Soldier::setCurrentPosition(Point& newPoint) {
+    if(_currPosition != nullptr) delete _currPosition;
+    _currPosition = new Point(newPoint);
+
 }
 
-void Soldier::nextDestination(const Point &nextPoint) {
+void Soldier::setNextDestination(const Point &nextPoint) {
     if(_nextDestination != nullptr) delete _nextDestination;
     _nextDestination = new Point(nextPoint);
     _walking = true;
 }
 
 void Soldier::walk() {
-    if(!(*_currPosition == *_nextDestination)){
-        if(_currPosition->distance(*_nextDestination) <= _speed) {
+
+    if(_nextDestination == nullptr) return;
+
+    if(_currPosition->distance(*_nextDestination) <= _speed) {
+            setCurrentPosition(*_nextDestination);
             delete _nextDestination;
             _walking = false;
+            return;
         }
+    Point nextPoint(_currPosition->nextPoint(_speed,*_nextDestination));
+    setCurrentPosition(nextPoint);
     }
-
-//    setCurrentPosition()
-}
 
 bool Soldier::isWalking() {
     return _walking;

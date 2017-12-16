@@ -21,7 +21,7 @@ public:
     double distance(Point other);
     bool operator==(const Point& other);
     double getIncline(const Point& dest);
-    Point nextPoint(size_t speed,const Point& dest);
+    Point nextPoint(double distance, const Point& dest);
 };
 
 #endif //EX2_CPP_POINT_H
