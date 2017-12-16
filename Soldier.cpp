@@ -6,7 +6,7 @@
 
 
 Soldier::Soldier(const Point &currPosition, size_t hp, double speed, const int army)
-        : _currPosition(new Point(currPosition)), _hp(hp), _speed(speed), _army(army), _nextDestination(nullptr), _walking(false) {}
+        : _currPosition(new Point(currPosition)), _hp(hp), _speed(speed), _army(army), _nextDestination(nullptr), _walking(false), _init_hp(hp) {}
 
 
 Soldier::~Soldier() {
@@ -41,6 +41,14 @@ void Soldier::walk() {
 
 bool Soldier::isWalking() {
     return _walking;
+}
+
+void Soldier::healMe() {
+    _hp = _init_hp;
+}
+
+const int Soldier::getArmy() const {
+    return _army;
 }
 
 

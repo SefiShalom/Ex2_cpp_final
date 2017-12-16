@@ -11,12 +11,15 @@
 
 class Soldier {
 
-    size_t _hp;
+    friend class Medic;
+    size_t _hp, _init_hp;
     double _speed;
     const int _army;
     Point *_currPosition;
     Point* _nextDestination;
     bool _walking;
+
+    void healMe();
 
 protected:
 
@@ -45,6 +48,8 @@ public:
 //    virtual double getHitChance(Soldier *target);
 
     bool isWalking();
+
+    const int getArmy() const;
 };
 
 
