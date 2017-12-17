@@ -7,15 +7,17 @@
 
 
 #include "Weapon.h"
-#include "Point.h"
+#include "BodyArmor.h"
+#include "SheildArmor.h"
+
 
 class Rifle: public Weapon {
 
  public:
     Rifle(Point* position,size_t power,size_t bulletsPerShot);
     virtual ~Rifle();
-//    double attackArmor(SheildArmor* sheild);
-//    double attackArmor(BodyArmor* bodyarmor);
+    double attackArmor(SheildArmor* sheild);
+    double attackArmor(BodyArmor* bodyarmor);
 
 };
 

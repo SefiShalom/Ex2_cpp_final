@@ -11,6 +11,6 @@ BodyArmor::~BodyArmor() {
 
 }
 
-//double BodyArmor::defend(Weapon *weapon) {
-//    return weapon->attakArmor(this);
-//}
+double BodyArmor::defend(Weapon *weapon) {
+    return weapon->attackArmor(this);
+}

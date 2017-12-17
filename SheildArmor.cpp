@@ -11,6 +11,6 @@ SheildArmor::~SheildArmor() {
 
 }
 
-//double SheildArmor::defend(Weapon *weapon) {
-//    return weapon->attackArmor(this);
-//}
+double SheildArmor::defend(Weapon *weapon) {
+    return weapon->attackArmor(this);
+}

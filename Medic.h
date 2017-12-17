@@ -13,7 +13,7 @@ class Medic : public Soldier {
 public:
     Medic(const Point &currPosition, size_t hp, double speed, const int army);
 
-    void heal(Soldier& injured);
+    void heal(Soldier* injured);
 
     virtual void attack(Soldier *target);
 

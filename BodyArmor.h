@@ -6,15 +6,14 @@
 #define EX2_CPP_SEFI_BODYARMOR_H
 
 
-#include "Point.h"
+
 #include "Armor.h"
 
 class BodyArmor: public Armor {
 
     BodyArmor(Point* position, double defensePower);
     ~BodyArmor();
-//    double defend(Weapon* weapon);
-
+    double defend(Weapon* weapon);
 };
 
 

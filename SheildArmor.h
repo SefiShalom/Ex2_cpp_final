@@ -5,17 +5,15 @@
 #ifndef EX2_CPP_SEFI_SHEILDARMOR_H
 #define EX2_CPP_SEFI_SHEILDARMOR_H
 
-
-#include "Point.h"
-#include "Weapon.h"
 #include "Armor.h"
+#include "Weapon.h"
+
 
 class SheildArmor: public Armor {
 
     SheildArmor(Point* position, double defensePower);
     ~SheildArmor();
-//    double defend(Weapon* weapon);
-
+    double defend(Weapon* weapon);
 };
 
 
