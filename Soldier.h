@@ -6,20 +6,29 @@
 #define EX2_CPP_SEFI_SOLDIER_H
 
 #include <iostream>
+#include <vector>
 #include "Point.h"
 #include "Weapon.h"
 
 class Soldier {
 
+    friend class Player;
     friend class Medic;
     size_t _hp, _init_hp;
     double _speed;
     const int _army;
     Point *_currPosition;
     Point* _nextDestination;
+
+    // We should think about switching to independent soldiers:
+    std::vector<Point> allDestinations;
+    size_t currDestination;
+
     bool _walking;
 
     void healMe();
+
+    void feedMeWithDestinations(std::vector<Point> points);
 
 protected:
 
@@ -50,6 +59,8 @@ public:
     bool isWalking();
 
     const int getArmy() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 };
 
 

@@ -37,3 +37,8 @@ Point Point::nextPoint(double distance, const Point &dest) {
 
     return dest._x >= _x ? Point(x1, (m*(x1-_x) + _y)) : Point(x2, (m*(x2 - _x) + _y));
 }
+
+
+std::ostream& operator<<(std::ostream& os, const Point& p) {
+    os << "(X: " << p.get_x() << ", Y: " << p.get_y() << ")";
+}
