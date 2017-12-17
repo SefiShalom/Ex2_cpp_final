@@ -8,7 +8,7 @@
 
 #include "Weapon.h"
 #include "BodyArmor.h"
-#include "SheildArmor.h"
+#include "ShieldArmor.h"
 
 
 class Rifle: public Weapon {
@@ -16,7 +16,7 @@ class Rifle: public Weapon {
  public:
     Rifle(Point* position,size_t power,size_t bulletsPerShot);
     virtual ~Rifle();
-    double attackArmor(SheildArmor* sheild);
+    double attackArmor(ShieldArmor* sheild);
     double attackArmor(BodyArmor* bodyarmor);
 
 };

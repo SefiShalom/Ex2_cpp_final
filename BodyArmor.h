@@ -11,9 +11,11 @@
 
 class BodyArmor: public Armor {
 
-    BodyArmor(Point* position, double defensePower);
-    ~BodyArmor();
-    double defend(Weapon* weapon);
+    public:
+        BodyArmor(Point* position, double defensePower);
+        ~BodyArmor();
+        double defend(Weapon* weapon);
+
 };
 
 

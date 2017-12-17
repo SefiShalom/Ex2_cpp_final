@@ -2,10 +2,11 @@
 // Created by Sefi on 06/12/2017.
 //
 
-#include <cmath>
-
 #ifndef EX2_CPP_POINT_H
 #define EX2_CPP_POINT_H
+
+#include <cmath>
+#include <iostream>
 
 class Point {
     double _x,_y;
@@ -22,6 +23,7 @@ public:
     bool operator==(const Point& other);
     double getIncline(const Point& dest);
     Point nextPoint(double distance, const Point& dest);
+    friend std::ostream& operator<<(std::ostream& os, const Point& p);
 };
 
 #endif //EX2_CPP_POINT_H

@@ -12,9 +12,13 @@ Rifle::Rifle(Point* position,size_t power,size_t bulletsPerShot)
 Rifle::~Rifle(){}
 
 double Rifle::attackArmor(BodyArmor *bodyarmor) {
+    std::cout << "Rifle attacking BodyArmor: BodyArmor has reduced the attack to :" <<
+              shoot()*(bodyarmor->getDefensePower()) << std::endl;
     return shoot()*(bodyarmor->getDefensePower());
 }
 
-double Rifle::attackArmor(SheildArmor *sheild) {
-    return shoot()*(sheild->getDefensePower());
+double Rifle::attackArmor(ShieldArmor *shield) {
+    std::cout << "Rifle attacked ShieldArmor: ShieldArmor has reduced the attack to :" <<
+              shoot()*(shield->getDefensePower()) << std::endl;
+    return shoot()*(shield->getDefensePower());
 }

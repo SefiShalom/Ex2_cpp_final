@@ -9,11 +9,13 @@
 #include "Weapon.h"
 
 
-class SheildArmor: public Armor {
+class ShieldArmor: public Armor {
 
-    SheildArmor(Point* position, double defensePower);
-    ~SheildArmor();
-    double defend(Weapon* weapon);
+
+    public:
+        ShieldArmor(Point* position, double defensePower);
+        ~ShieldArmor();
+        double defend(Weapon* weapon);
 };
 
 

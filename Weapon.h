@@ -9,7 +9,7 @@
 #include <iostream>
 #include "CollectableObject.h"
 
-class SheildArmor;
+class ShieldArmor;
 class BodyArmor;
 
 
@@ -22,8 +22,8 @@ public:
     Weapon(Point *position, size_t power, size_t bulletsPerShot);
     virtual ~Weapon() = 0;
     double shoot();
-    virtual double attackArmor(SheildArmor* sheild) = 0;
-    virtual double attackArmor(BodyArmor* sheild) = 0;
+    virtual double attackArmor(ShieldArmor* sheild) = 0;
+    virtual double attackArmor(BodyArmor* armor) = 0;
 };
 
 

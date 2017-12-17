@@ -7,9 +7,7 @@
 BodyArmor::BodyArmor(Point* position, double defensePower)
         : Armor(position,defensePower){}
 
-BodyArmor::~BodyArmor() {
-
-}
+BodyArmor::~BodyArmor() {}
 
 double BodyArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);
