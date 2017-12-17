@@ -7,9 +7,9 @@
 Medic::Medic(const Point &currPosition, size_t hp, double speed, const int army)
         : Soldier(currPosition, hp, speed, army) {}
 
-void Medic::heal(Soldier &injured) {
-    if (injured.getArmy() == _army)
-        injured.healMe();
+void Medic::heal(Soldier* injured) {
+    if (injured->getArmy() == _army)
+        injured->healMe();
 }
 
 

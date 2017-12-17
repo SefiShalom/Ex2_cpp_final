@@ -14,7 +14,7 @@ class Armor: public CollectableObject{
 public:
     Armor(Point* position, double defensePower);
     virtual ~Armor()=0;
-//    virtual double defend(Weapon* weapon)=0;
+    virtual double defend(Weapon* weapon)=0;
     double getDefensePower();
 };
 

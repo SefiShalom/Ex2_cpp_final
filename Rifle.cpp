@@ -11,10 +11,10 @@ Rifle::Rifle(Point* position,size_t power,size_t bulletsPerShot)
 }
 Rifle::~Rifle(){}
 
-//double Rifle::attackArmor(BodyArmor *bodyarmor) {
-//    return shoot()*(bodyarmor->getDefensePower());
-//}
-//
-//double Rifle::attackArmor(SheildArmor *sheild) {
-//    return shoot()*(sheild->getDefensePower());
-//}
+double Rifle::attackArmor(BodyArmor *bodyarmor) {
+    return shoot()*(bodyarmor->getDefensePower());
+}
+
+double Rifle::attackArmor(SheildArmor *sheild) {
+    return shoot()*(sheild->getDefensePower());
+}
