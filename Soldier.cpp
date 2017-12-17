@@ -51,5 +51,24 @@ const int Soldier::getArmy() const {
     return _army;
 }
 
+void Soldier::feedMeWithDestinations(std::vector<Point> points) {
+    allDestinations = std::vector<Point>(points);
+    std::cout << "I got a point vector: " << std::endl;
+    for (auto& i : allDestinations) {
+        std::cout << i << std::endl;
+    }
+}
+std::ostream& operator<<(std::ostream& os, const Soldier& soldier) {
+    os << "Printing Soldier info: " << std::endl;
+    os << "Army: " << soldier._army << std::endl;
+    os << "HP: " << soldier._hp << std::endl;
+    os << "Current position: " << *soldier._currPosition << std::endl;
+//    os << "All points: " << std::endl;
+//    size_t currpoint = 1;
+//    for (auto& point : soldier.allDestinations) {
+//        os << "Point number " << currpoint << ": " << point << std::endl;
+//        currpoint++;
+//    }
+}
 
 
