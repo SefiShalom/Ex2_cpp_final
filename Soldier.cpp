@@ -16,7 +16,6 @@ Soldier::~Soldier() {
 void Soldier::setCurrentPosition(Point& newPoint) {
     if(_currPosition != nullptr) delete _currPosition;
     _currPosition = new Point(newPoint);
-
 }
 
 void Soldier::setNextDestination(const Point &nextPoint) {

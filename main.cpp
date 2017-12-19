@@ -17,8 +17,6 @@ int main() {
     Point p_test = p.nextPoint(2, Point(0,1));
     cout << p_test.get_x() << ", " << p_test.get_y() << endl;
 
-
-
     SolidObject so(&p,100,100);
 
     Medic medic(p, 120, 4, 1);
