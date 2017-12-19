@@ -15,11 +15,11 @@ class BodyArmor;
 
 class Weapon: public CollectableObject{
 
-    size_t _power;
+    const double _power;
     size_t _bulletsPerShot;
 
 public:
-    Weapon(Point *position, size_t power, size_t bulletsPerShot);
+    Weapon(Point *position, const double power, size_t bulletsPerShot);
     virtual ~Weapon() = 0;
     double shoot();
     virtual double attackArmor(ShieldArmor* sheild) = 0;

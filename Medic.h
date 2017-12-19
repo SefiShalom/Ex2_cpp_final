@@ -7,8 +7,11 @@
 
 
 #include "Soldier.h"
+#include "Fists.h"
 
 class Medic : public Soldier {
+
+    Fists* fists;
 
 public:
     Medic(const Point &currPosition, size_t hp, double speed, const int army);
@@ -21,7 +24,7 @@ public:
 
     virtual void dropObject(Point position);
 
-    virtual void defend(double attack);
+    virtual void defend(Weapon* attack);
 
     virtual const Point getCurrentPosition();
 

@@ -47,7 +47,6 @@ int main() {
 
     cout << medic << endl;
 
-    std::cout << "Hello, World!" << std::endl;
 
     Point p1(0,0);
     Point p2(1,5);
@@ -65,6 +64,10 @@ int main() {
     ba.defend(&missile);
     sa.defend(&rifle);
     sa.defend(&missile);
+
+
+
+    std::cout << "\n\n\nHello, World!" << std::endl;
 
 
     return 0;

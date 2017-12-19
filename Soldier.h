@@ -9,11 +9,15 @@
 #include <vector>
 #include "Point.h"
 #include "Weapon.h"
+#include "ShieldArmor.h"
+#include "BodyArmor.h"
 
 class Soldier {
 
     friend class Player;
     friend class Medic;
+
+
     size_t _hp, _init_hp;
     double _speed;
     const int _army;
@@ -23,8 +27,19 @@ class Soldier {
     std::vector<Point> allDestinations;
     size_t currDestination;
     bool _walking;
+
+    BodyArmor* _bodyarmor;
+    ShieldArmor* _shield;
+    Weapon* _weapon;
+
+    // For Medic
     void healMe();
+
+    // For Player
     void feedMeWithDestinations(std::vector<Point> points);
+
+    // For CollectableObject handler
+
 
 protected:
 
@@ -42,13 +57,21 @@ public:
 
     virtual void dropObject(Point position)=0;
 
-    virtual void defend(double attack)=0;
+    virtual void defend(Weapon* weapon)=0;
 
     virtual const Point getCurrentPosition()=0;
 
     void setCurrentPosition(Point& newPoint);
 
     void setNextDestination(const Point& nextPoint);
+
+    void setCollectable(BodyArmor* ba);
+
+    void setCollectable(ShieldArmor* sa);
+
+    void setCollectable(Weapon* weapon);
+
+    void dropCollectable(CollectableObject* col);
 
 //    virtual double getHitChance(Soldier *target);
 

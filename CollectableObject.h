@@ -10,12 +10,15 @@
 #include "Object.h"
 
 class CollectableObject : public Object{
-
+//    class Soldier;
     bool _isCarried;
-
+    
 public:
     CollectableObject(Point* position);
     virtual ~CollectableObject();
+//    virtual void useObject(Soldier* soldier) = 0;
+    void setCurrentPosition(const Point& pos);
+    void setCarried(bool is);
     bool isCarried();
 };
 

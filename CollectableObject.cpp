@@ -12,3 +12,11 @@ CollectableObject::~CollectableObject(){}
 bool CollectableObject::isCarried() {
     return _isCarried;
 }
+
+void CollectableObject::setCurrentPosition(const Point& pos) {
+
+}
+
+void CollectableObject::setCarried(bool is) {
+
+}

@@ -6,7 +6,10 @@
 
 
 Soldier::Soldier(const Point &currPosition, size_t hp, double speed, const int army)
-        : _currPosition(new Point(currPosition)), _hp(hp), _speed(speed), _army(army), _nextDestination(nullptr), _walking(false), _init_hp(hp) {}
+        : _currPosition(new Point(currPosition)), _hp(hp), _speed(speed), _army(army), _nextDestination(nullptr), _walking(false), _init_hp(hp) {
+
+
+}
 
 
 Soldier::~Soldier() {
@@ -68,6 +71,27 @@ std::ostream& operator<<(std::ostream& os, const Soldier& soldier) {
 //        os << "Point number " << currpoint << ": " << point << std::endl;
 //        currpoint++;
 //    }
+}
+
+
+void Soldier::pickObject(CollectableObject *object) {
+//    object->useObject(this);
+}
+
+void Soldier::setCollectable(BodyArmor *ba) {
+
+}
+
+void Soldier::setCollectable(ShieldArmor *sa) {
+
+}
+
+void Soldier::setCollectable(Weapon *weapon) {
+
+}
+
+void Soldier::dropCollectable(CollectableObject* col) {
+    
 }
 
 

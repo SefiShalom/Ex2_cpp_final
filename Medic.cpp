@@ -5,7 +5,9 @@
 #include "Medic.h"
 
 Medic::Medic(const Point &currPosition, size_t hp, double speed, const int army)
-        : Soldier(currPosition, hp, speed, army) {}
+        : Soldier(currPosition, hp, speed, army) {
+
+}
 
 void Medic::heal(Soldier* injured) {
     if (injured->getArmy() == _army)
@@ -14,7 +16,7 @@ void Medic::heal(Soldier* injured) {
 
 
 void Medic::attack(Soldier *target) {
-    target->defend(10);
+
 }
 
 void Medic::pickObject(CollectableObject *object) {
@@ -25,8 +27,15 @@ void Medic::dropObject(Point position) {
     // TODO
 }
 
-void Medic::defend(double attack) {
-
+void Medic::defend(Weapon* weapon) {
+    double reduce = _shield->defend(weapon);
+    std::cout << "Medic had HP: " << _hp << ", but he was attacked so now he has HP: " << _hp-reduce << std::endl;
+    _hp -= reduce;
+//    double reducer = 0;
+//    if (_bodyarmor != nullptr)
+//        reducer += weapon->attackArmor(_bodyarmor);
+//    if (_shield != nullptr)
+//        reducer += weapon->attackArmor(_shield);
 }
 
 const Point Medic::getCurrentPosition() {
