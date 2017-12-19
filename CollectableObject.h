@@ -8,15 +8,19 @@
 #define EX2_CPP_COLLECTABLEOBJECT_H
 
 #include "Object.h"
+//#include "Soldier.h"
+
+
+    class Soldier;
+
 
 class CollectableObject : public Object{
-//    class Soldier;
     bool _isCarried;
-    
+
 public:
     CollectableObject(Point* position);
     virtual ~CollectableObject();
-//    virtual void useObject(Soldier* soldier) = 0;
+    virtual void useObject(Soldier* soldier);
     void setCurrentPosition(const Point& pos);
     void setCarried(bool is);
     bool isCarried();

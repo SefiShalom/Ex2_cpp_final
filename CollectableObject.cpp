@@ -14,9 +14,21 @@ bool CollectableObject::isCarried() {
 }
 
 void CollectableObject::setCurrentPosition(const Point& pos) {
-
+    if (_position != nullptr)
+        delete _position;
+    _position = new Point(pos);
 }
 
 void CollectableObject::setCarried(bool is) {
+    _isCarried = is;
+}
 
+void CollectableObject::useObject(Soldier *soldier) {
+
+
+
+    /////////// GET THIS TO WORK!!!!!!!!!!!!!!!!!!!!!
+
+
+//    soldier->pickObject(this);
 }

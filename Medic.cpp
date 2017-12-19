@@ -20,7 +20,7 @@ void Medic::attack(Soldier *target) {
 }
 
 void Medic::pickObject(CollectableObject *object) {
-    // TODO
+
 }
 
 void Medic::dropObject(Point position) {

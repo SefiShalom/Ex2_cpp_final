@@ -38,8 +38,8 @@ class Soldier {
     // For Player
     void feedMeWithDestinations(std::vector<Point> points);
 
-    // For CollectableObject handler
-
+    // For CollectableObject handling
+    void setPickedObject(CollectableObject* col, CollectableObject* curr);
 
 protected:
 
@@ -53,7 +53,7 @@ public:
 
     void walk();
 
-    virtual void pickObject(CollectableObject *object)=0;
+//    virtual void pickObject(CollectableObject *object)=0;
 
     virtual void dropObject(Point position)=0;
 
@@ -65,11 +65,11 @@ public:
 
     void setNextDestination(const Point& nextPoint);
 
-    void setCollectable(BodyArmor* ba);
+    void pickObject(BodyArmor* ba);
 
-    void setCollectable(ShieldArmor* sa);
+    void pickObject(ShieldArmor* sa);
 
-    void setCollectable(Weapon* weapon);
+    void pickObject(Weapon* weapon);
 
     void dropCollectable(CollectableObject* col);
 

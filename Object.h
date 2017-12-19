@@ -10,6 +10,8 @@
 #include "Point.h"
 
 class Object {
+
+protected:
     Point* _position;
 public:
     Object(Point* position);

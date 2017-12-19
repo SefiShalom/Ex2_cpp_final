@@ -64,7 +64,9 @@ int main() {
     ba.defend(&missile);
     sa.defend(&rifle);
     sa.defend(&missile);
+    rifle.attackArmor(&sa);
 
+    medic.pickObject(&rifle);
 
 
     std::cout << "\n\n\nHello, World!" << std::endl;

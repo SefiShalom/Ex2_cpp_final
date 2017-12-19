@@ -4,6 +4,7 @@
 
 #include "Soldier.h"
 
+#define OUT_OF_RANGE -10
 
 Soldier::Soldier(const Point &currPosition, size_t hp, double speed, const int army)
         : _currPosition(new Point(currPosition)), _hp(hp), _speed(speed), _army(army), _nextDestination(nullptr), _walking(false), _init_hp(hp) {
@@ -74,24 +75,35 @@ std::ostream& operator<<(std::ostream& os, const Soldier& soldier) {
 }
 
 
-void Soldier::pickObject(CollectableObject *object) {
-//    object->useObject(this);
+//void Soldier::pickObject(CollectableObject *object) {
+//
+//}
+
+void Soldier::pickObject(BodyArmor *ba) {
+    setPickedObject(ba, _bodyarmor);
 }
 
-void Soldier::setCollectable(BodyArmor *ba) {
-
+void Soldier::pickObject(ShieldArmor *sa) {
+    setPickedObject(sa, _shield);
 }
 
-void Soldier::setCollectable(ShieldArmor *sa) {
-
+void Soldier::pickObject(Weapon *weapon) {
+    setPickedObject(weapon, _weapon);
 }
 
-void Soldier::setCollectable(Weapon *weapon) {
-
+void Soldier::setPickedObject(CollectableObject* col, CollectableObject* curr) {
+    dropCollectable(curr);
+    curr = col;
+    col->setCarried(true);
+    col->setCurrentPosition(Point(OUT_OF_RANGE, OUT_OF_RANGE));
 }
+
 
 void Soldier::dropCollectable(CollectableObject* col) {
-    
+    if (col != nullptr) {
+        col->setCurrentPosition(*_currPosition);
+        col->setCarried(false);
+    }
 }
 
 
