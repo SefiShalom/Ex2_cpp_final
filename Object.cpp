@@ -4,5 +4,8 @@
 
 #include "Object.h"
 Object::Object(Point* position): _position(position){}
-Object::~Object(){}
-const Point Object::getPosition() const {return Point(*_position);}
+
+Object::~Object(){delete _position;}
+
+const Point* Object::getPosition() const {return _position;}
+

@@ -6,7 +6,8 @@
 #define EX2_CPP_SEFI_ARMOR_H
 
 #include "CollectableObject.h"
-#include "Weapon.h"
+
+class Weapon;
 
 class Armor: public CollectableObject{
     double _defensePower;

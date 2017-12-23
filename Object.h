@@ -16,7 +16,7 @@ protected:
 public:
     Object(Point* position);
     virtual ~Object() = 0;
-    const Point getPosition() const;
+    const Point* getPosition() const;
 };
 
 #endif //EX2_CPP_OBJECT_H

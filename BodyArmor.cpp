@@ -3,7 +3,7 @@
 //
 
 #include "BodyArmor.h"
-
+#include "Soldier.h"
 BodyArmor::BodyArmor(Point* position, double defensePower)
         : Armor(position,defensePower){}
 
@@ -11,4 +11,8 @@ BodyArmor::~BodyArmor() {}
 
 double BodyArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);
+}
+
+void BodyArmor::useObject(Soldier *soldier) {
+    soldier->pickObject(this);
 }

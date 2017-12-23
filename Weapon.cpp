@@ -11,3 +11,5 @@ Weapon::~Weapon() {}
 double Weapon::shoot(){
     return _power*_bulletsPerShot;
 }
+
+

@@ -8,9 +8,15 @@
 #include <iostream>
 #include <vector>
 #include "Point.h"
-#include "Weapon.h"
-#include "ShieldArmor.h"
-#include "BodyArmor.h"
+
+//#include "Weapon.h"
+//#include "BodyArmor.h"
+//#include "ShieldArmor.h"
+
+//class CollectableObject;
+class Weapon;
+class ShieldArmor;
+class BodyArmor;
 
 class Soldier {
 
@@ -39,7 +45,7 @@ class Soldier {
     void feedMeWithDestinations(std::vector<Point> points);
 
     // For CollectableObject handling
-    void setPickedObject(CollectableObject* col, CollectableObject* curr);
+//    void setPickedObject(CollectableObject* col, CollectableObject* curr);
 
 protected:
 
@@ -65,13 +71,13 @@ public:
 
     void setNextDestination(const Point& nextPoint);
 
-    void pickObject(BodyArmor* ba);
+   virtual void pickObject(BodyArmor* ba)=0;
 
-    void pickObject(ShieldArmor* sa);
+    virtual void pickObject(ShieldArmor* sa)=0;
 
-    void pickObject(Weapon* weapon);
+    virtual void pickObject(Weapon* weapon)=0;
 
-    void dropCollectable(CollectableObject* col);
+//    void dropCollectable(CollectableObject* col);
 
 //    virtual double getHitChance(Soldier *target);
 

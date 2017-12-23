@@ -13,22 +13,22 @@ bool CollectableObject::isCarried() {
     return _isCarried;
 }
 
-void CollectableObject::setCurrentPosition(const Point& pos) {
-    if (_position != nullptr)
+void CollectableObject::setCurrentPosition(Point* pos) {
+    std::cout << "in setCurrPosition" << std::endl;
+    if (_position) {
         delete _position;
-    _position = new Point(pos);
+    }else{
+        std::cout << "_position is not nullptr" << std::endl;
+        _position = pos;
+    }
 }
 
 void CollectableObject::setCarried(bool is) {
     _isCarried = is;
 }
 
-void CollectableObject::useObject(Soldier *soldier) {
-
-
-
-    /////////// GET THIS TO WORK!!!!!!!!!!!!!!!!!!!!!
-
-
-//    soldier->pickObject(this);
+void CollectableObject::drop(Point* pos) {
+    setCurrentPosition(pos);
+    setCarried(false);
 }
+

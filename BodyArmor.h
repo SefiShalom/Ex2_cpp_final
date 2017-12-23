@@ -6,16 +6,19 @@
 #define EX2_CPP_SEFI_BODYARMOR_H
 
 
-
 #include "Armor.h"
+#include "Weapon.h"
+#include "Soldier.h"
 
-class BodyArmor: public Armor {
+class BodyArmor : public Armor {
 
-    public:
-        BodyArmor(Point* position, double defensePower);
-        ~BodyArmor();
-        double defend(Weapon* weapon);
+public:
+    BodyArmor(Point *position, double defensePower);
 
+    ~BodyArmor();
+
+    double defend(Weapon *weapon);
+    void useObject(Soldier* soldier);
 };
 
 

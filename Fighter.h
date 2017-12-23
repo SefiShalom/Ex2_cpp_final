@@ -12,12 +12,10 @@ class Fighter : public Soldier {
 
     Weapon* _weapon;
 
-
 public:
+
     Fighter(const Point& currPosition, size_t hp, double speed, const int army);
-
     virtual void attack(Soldier *target);
-
 };
 
 

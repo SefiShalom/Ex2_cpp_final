@@ -7,6 +7,8 @@
 
 
 #include "Soldier.h"
+#include "BodyArmor.h"
+#include "ShieldArmor.h"
 #include "Fists.h"
 
 class Medic : public Soldier {
@@ -27,6 +29,10 @@ public:
     virtual void defend(Weapon* attack);
 
     virtual const Point getCurrentPosition();
+
+    void pickObject(Weapon* weapon);
+    void pickObject(BodyArmor* weapon);
+    void pickObject(ShieldArmor* weapon);
 
     void whoAreYou();
 

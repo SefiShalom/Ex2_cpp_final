@@ -10,15 +10,13 @@
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
 
-
 class Rifle: public Weapon {
 
  public:
     Rifle(Point* position,size_t power,size_t bulletsPerShot);
-    virtual ~Rifle();
+    virtual ~Rifle() = 0;
     double attackArmor(ShieldArmor* sheild);
     double attackArmor(BodyArmor* bodyarmor);
-
 };
 
 

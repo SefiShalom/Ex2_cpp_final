@@ -21,3 +21,8 @@ double Missile::attackArmor(ShieldArmor *sheild) {
               shoot()*(sheild->getDefensePower())<< std::endl;
     return shoot()*(sheild->getDefensePower());
 }
+
+void Missile::useObject(Soldier *soldier) {
+    soldier->pickObject(this);
+}
+

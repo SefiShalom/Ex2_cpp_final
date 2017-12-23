@@ -6,8 +6,18 @@
 #define EX2_CPP_SEFI_M16_H
 
 
-class M16 {
+#include "Rifle.h"
+#include "Soldier.h"
 
+#define M16_POWER 50
+#define M16_BULLETSPERSHOT 1
+
+class M16: public Rifle{
+
+public:
+    M16(Point* position);
+    ~M16();
+    void useObject(Soldier* soldier);
 };
 
 

@@ -7,7 +7,7 @@
 
 #include "Armor.h"
 #include "Weapon.h"
-
+#include "Soldier.h"
 
 class ShieldArmor: public Armor {
 
@@ -16,6 +16,7 @@ class ShieldArmor: public Armor {
         ShieldArmor(Point* position, double defensePower);
         ~ShieldArmor();
         double defend(Weapon* weapon);
+        void useObject(Soldier* soldier);
 };
 
 

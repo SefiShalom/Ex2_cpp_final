@@ -8,6 +8,7 @@
 #include "Weapon.h"
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
+#include "Soldier.h"
 
 #define NOT_AFFECTED_BY_BODYARMOR 1
 
@@ -18,6 +19,7 @@ class Missile: public Weapon {
         virtual ~Missile();
         double attackArmor(ShieldArmor* sheild);
         double attackArmor(BodyArmor* bodyarmor);
+        void useObject(Soldier* soldier);
 };
 
 

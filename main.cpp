@@ -6,6 +6,7 @@
 #include "Medic.h"
 #include "Player.h"
 #include "Missile.h"
+#include "M16.h"
 
 using namespace std;
 
@@ -47,29 +48,25 @@ int main() {
 
     cout << medic << endl;
 
+    M16 m(new Point(0,0));
+    Missile missile(new Point(1,5),100,1);
 
-    Point p1(0,0);
-    Point p2(1,5);
-    Point p3(2,9);
-    Point p4(5,0);
+    BodyArmor ba(new Point(2,9),0.4);
+    ShieldArmor sa(new Point(5,0),0.7);
 
-
-    Rifle rifle(&p1,50,1);
-    Missile missile(&p2,100,1);
-
-    BodyArmor ba(&p3,0.4);
-    ShieldArmor sa(&p4,0.7);
-
-    ba.defend(&rifle);
+    ba.defend(&m);
     ba.defend(&missile);
-    sa.defend(&rifle);
+    sa.defend(&m);
     sa.defend(&missile);
-    rifle.attackArmor(&sa);
-
-    medic.pickObject(&rifle);
+    m.attackArmor(&sa);
 
 
-    std::cout << "\n\n\nHello, World!" << std::endl;
+    m.useObject(&medic);
+    ba.useObject(&medic);
+    sa.useObject(&medic);
+
+
+    std::cout << "\n\n\n**********MAIN DONE**********"<< std::endl;
 
 
     return 0;

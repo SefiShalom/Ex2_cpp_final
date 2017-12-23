@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <iostream>
+#define OUT_OF_RANGE -1
 
 class Point {
     double _x,_y;
