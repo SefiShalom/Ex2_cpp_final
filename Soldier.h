@@ -30,10 +30,11 @@ class Soldier {
     Point *_currPosition;
     Point* _nextDestination;
     // We should think about switching to independent soldiers:
-    std::vector<Point> allDestinations;
-    size_t currDestination;
+    std::vector<Point*> allDestinations;
+
     bool _walking;
 
+    //collectable object pointers
     BodyArmor* _bodyarmor;
     ShieldArmor* _shield;
     Weapon* _weapon;
@@ -45,7 +46,7 @@ class Soldier {
     void feedMeWithDestinations(std::vector<Point> points);
 
     // For CollectableObject handling
-//    void setPickedObject(CollectableObject* col, CollectableObject* curr);
+
 
 protected:
 
@@ -69,7 +70,7 @@ public:
 
     void setCurrentPosition(Point& newPoint);
 
-    void setNextDestination(const Point& nextPoint);
+    void setNextDestination(Point* nextPoint);
 
    virtual void pickObject(BodyArmor* ba)=0;
 
@@ -84,6 +85,7 @@ public:
     bool isWalking();
 
     const int getArmy() const;
+
     friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 
 };

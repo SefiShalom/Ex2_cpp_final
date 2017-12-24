@@ -20,7 +20,7 @@ public:
     double get_y() const;
     void set_x(double x);
     void set_y(double y);
-    double distance(Point other);
+    double distance(Point& other);
     bool operator==(const Point& other);
     double getIncline(const Point& dest);
     Point nextPoint(double distance, const Point& dest);

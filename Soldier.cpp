@@ -18,6 +18,10 @@ Soldier::Soldier(const Point &currPosition, size_t hp, double speed, const int a
 
 Soldier::~Soldier() {
     delete _currPosition;
+    delete _nextDestination;
+    delete _bodyarmor;
+    delete _shield;
+    delete _weapon;
 }
 
 void Soldier::setCurrentPosition(Point& newPoint) {
@@ -25,9 +29,9 @@ void Soldier::setCurrentPosition(Point& newPoint) {
     _currPosition = new Point(newPoint);
 }
 
-void Soldier::setNextDestination(const Point &nextPoint) {
+void Soldier::setNextDestination(Point* nextPoint) {
     if(_nextDestination != nullptr) delete _nextDestination;
-    _nextDestination = new Point(nextPoint);
+    _nextDestination = nextPoint;
     _walking = true;
 }
 
