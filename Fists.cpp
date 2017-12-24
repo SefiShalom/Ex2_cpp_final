@@ -4,5 +4,17 @@
 
 #include "Fists.h"
 
-Fists::Fists(Point *position, size_t power, size_t bulletsPerShot)
+Fists::Fists()
         : Weapon(nullptr, FISTS_POWER, BULLETS_PER_SHOT) {}
+
+Fists::~Fists() {std::cout << "Fists dtor" << std::endl;}
+
+double Fists::attackArmor(BodyArmor *armor) {
+    return 10;
+}
+
+double Fists::attackArmor(ShieldArmor *sheild) {
+    return 10;
+}
+
+void Fists::useObject(Soldier* soldier){}

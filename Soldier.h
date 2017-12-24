@@ -8,49 +8,45 @@
 #include <iostream>
 #include <vector>
 #include "Point.h"
+#include "MapObject.h"
 
-//#include "Weapon.h"
-//#include "BodyArmor.h"
-//#include "ShieldArmor.h"
 
-//class CollectableObject;
 class Weapon;
 class ShieldArmor;
 class BodyArmor;
 
-class Soldier {
+class Soldier: public MapObject {
 
     friend class Player;
     friend class Medic;
 
 
-    size_t _hp, _init_hp;
+    double _hp;
     double _speed;
-    const int _army;
-    Point *_currPosition;
+    const short _army;
     Point* _nextDestination;
     // We should think about switching to independent soldiers:
     std::vector<Point*> allDestinations;
 
     bool _walking;
 
-    //collectable object pointers
-    BodyArmor* _bodyarmor;
-    ShieldArmor* _shield;
-    Weapon* _weapon;
-
     // For Medic
-    void healMe();
+    virtual void healMe() = 0;
 
     // For Player
-    void feedMeWithDestinations(std::vector<Point> points);
+    void feedMeWithDestinations(std::vector<Point*> points);
 
     // For CollectableObject handling
 
 
 protected:
 
-    Soldier(const Point& currPosition, size_t hp, double speed, const int army);
+    Soldier(Point* currPosition, double hp, double speed, const short army);
+
+    //collectable object pointers
+    BodyArmor* _bodyarmor;
+    ShieldArmor* _shield;
+    Weapon* _weapon;
 
 public:
 
@@ -62,13 +58,14 @@ public:
 
 //    virtual void pickObject(CollectableObject *object)=0;
 
-    virtual void dropObject(Point position)=0;
 
-    virtual void defend(Weapon* weapon)=0;
+    virtual void defend(Weapon* weapon);
 
-    virtual const Point getCurrentPosition()=0;
+    void reduceHP(double hp);
 
-    void setCurrentPosition(Point& newPoint);
+    void refillHP(double refill);
+
+    void setCurrentPosition(Point* newPoint);
 
     void setNextDestination(Point* nextPoint);
 
@@ -85,6 +82,12 @@ public:
     bool isWalking();
 
     const int getArmy() const;
+
+    void set_bodyarmor(BodyArmor* bodyarmor);
+
+    void set_shield(ShieldArmor* shield);
+
+//    void set_weapon(Weapon* weapon);
 
     friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 

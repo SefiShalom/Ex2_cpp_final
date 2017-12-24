@@ -6,9 +6,9 @@
 #define EX2_CPP_SOLIDOBJECT_H
 
 #include "Point.h"
-#include "Object.h"
+#include "MapObject.h"
 
-class SolidObject : public Object {
+class SolidObject : public MapObject {
 
     double _length, _width;
 public:

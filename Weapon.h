@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "CollectableObject.h"
-#include "Soldier.h"
+#include "Fighter.h"
 
 class ShieldArmor;
 class BodyArmor;
@@ -24,7 +24,7 @@ public:
     double shoot();
     virtual double attackArmor(ShieldArmor* sheild) = 0;
     virtual double attackArmor(BodyArmor* armor) = 0;
-//    void useObject(Soldier* soldier);
+    void drop(Fighter* soldier);
 };
 
 

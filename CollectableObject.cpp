@@ -5,30 +5,22 @@
 #include "CollectableObject.h"
 
 CollectableObject::CollectableObject(Point* position):
-        Object(position),_isCarried(false){}
+        MapObject(position),_isCarried(false){}
 
-CollectableObject::~CollectableObject(){}
+CollectableObject::~CollectableObject(){std::cout << "CollectableObject dtor" << std::endl;}
 
 bool CollectableObject::isCarried() {
     return _isCarried;
 }
 
 void CollectableObject::setCurrentPosition(Point* pos) {
-    std::cout << "in setCurrPosition" << std::endl;
-    if (_position) {
+    if (_position != nullptr)
         delete _position;
-    }else{
-        std::cout << "_position is not nullptr" << std::endl;
-        _position = pos;
-    }
+    _position = pos;
 }
 
 void CollectableObject::setCarried(bool is) {
     _isCarried = is;
 }
 
-void CollectableObject::drop(Point* pos) {
-    setCurrentPosition(pos);
-    setCarried(false);
-}
 

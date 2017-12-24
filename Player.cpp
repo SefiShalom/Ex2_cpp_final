@@ -12,7 +12,7 @@ int Player::_armyCounter = 0;
 Player::Player(std::string name)
         : _army(_armyCounter++), _name(name) {}
 
-void Player::initSteps(std::vector<std::vector<Point>> points) {
+void Player::initSteps(std::vector<std::vector<Point*>> points) {
     size_t index = 0;
     for (auto& soldier : _soldiers) {
         soldier->feedMeWithDestinations(points[index]);

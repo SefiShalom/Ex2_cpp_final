@@ -16,3 +16,8 @@ double BodyArmor::defend(Weapon *weapon) {
 void BodyArmor::useObject(Soldier *soldier) {
     soldier->pickObject(this);
 }
+
+void BodyArmor::drop(Soldier *soldier) {
+    setCurrentPosition(soldier->getPosition());
+    soldier->set_bodyarmor(nullptr);
+}

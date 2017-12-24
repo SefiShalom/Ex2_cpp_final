@@ -7,6 +7,9 @@
 
 
 #include "Soldier.h"
+#include "BodyArmor.h"
+#include "ShieldArmor.h"
+#include "Fists.h"
 
 class Fighter : public Soldier {
 
@@ -14,8 +17,13 @@ class Fighter : public Soldier {
 
 public:
 
-    Fighter(const Point& currPosition, size_t hp, double speed, const int army);
+    Fighter(Point* currPosition, size_t hp, double speed, const int army);
+    virtual ~Fighter();
     virtual void attack(Soldier *target);
+    void pickObject(BodyArmor* ba);
+    void pickObject(ShieldArmor* sa);
+    void pickObject(Weapon* weapon);
+    void set_weapon(Weapon* weapon);
 };
 
 

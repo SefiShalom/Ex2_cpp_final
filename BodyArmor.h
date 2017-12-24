@@ -16,7 +16,7 @@ public:
     BodyArmor(Point *position, double defensePower);
 
     ~BodyArmor();
-
+    void drop(Soldier* soldier);
     double defend(Weapon *weapon);
     void useObject(Soldier* soldier);
 };

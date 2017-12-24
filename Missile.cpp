@@ -5,11 +5,10 @@
 #include "Missile.h"
 #include <iostream>
 
-Missile::Missile(Point* position,size_t power,size_t bulletsPerShot)
-        :Weapon(position,power,bulletsPerShot) {
-    std::cout<<"in Missile ctor"<<std::endl;
-}
-Missile::~Missile(){}
+
+Missile::Missile(Point* position)
+        :Weapon(position,MISSILE_POWER,MISSILE_BULLETS_PER_SHOT){}
+Missile::~Missile(){std::cout << "Missile dtor" << std::endl;}
 
 double Missile::attackArmor(BodyArmor* bodyarmor) {
     std::cout << "Missile attacked BodyArmor: NOT_AFFECTED_BY_BODYARMOR" << std::endl;

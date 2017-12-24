@@ -20,7 +20,7 @@ class Player {
 public:
 
     explicit Player(std::string name);
-    void initSteps(std::vector<std::vector<Point>> points);
+    void initSteps(std::vector<std::vector<Point*>> points);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
 };
 

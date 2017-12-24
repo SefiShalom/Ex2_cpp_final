@@ -11,31 +11,23 @@
 #include "ShieldArmor.h"
 #include "Fists.h"
 
+#define MEDIC_HP 120
+#define MEDIC_SPEED 4
+
 class Medic : public Soldier {
 
     Fists* fists;
 
 public:
-    Medic(const Point &currPosition, size_t hp, double speed, const int army);
-
+    Medic(Point* currPosition, const short army);
+    virtual ~Medic();
     void heal(Soldier* injured);
-
     virtual void attack(Soldier *target);
-
-    virtual void pickObject(CollectableObject *object);
-
-    virtual void dropObject(Point position);
-
-    virtual void defend(Weapon* attack);
-
-    virtual const Point getCurrentPosition();
-
     void pickObject(Weapon* weapon);
     void pickObject(BodyArmor* weapon);
     void pickObject(ShieldArmor* weapon);
-
+    void healMe();
     void whoAreYou();
-
 };
 
 

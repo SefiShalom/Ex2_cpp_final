@@ -15,9 +15,11 @@
 class Fists : public Weapon {
 
 public:
-    Fists(Point *position, size_t power, size_t bulletsPerShot);
-
-
+    Fists();
+    ~Fists();
+    double attackArmor(ShieldArmor* sheild);
+    double attackArmor(BodyArmor* armor);
+    void useObject(Soldier* soldier);
 };
 
 

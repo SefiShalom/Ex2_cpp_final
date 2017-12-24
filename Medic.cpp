@@ -4,42 +4,22 @@
 
 #include "Medic.h"
 
-Medic::Medic(const Point &currPosition, size_t hp, double speed, const int army)
-        : Soldier(currPosition, hp, speed, army) {
+Medic::Medic(Point* currPosition, const short army)
 
-}
+        : Soldier(currPosition, MEDIC_HP, MEDIC_SPEED, army), fists(new Fists){}
 
 void Medic::heal(Soldier* injured) {
     if (injured->getArmy() == _army)
         injured->healMe();
 }
 
+Medic::~Medic() {
+    std::cout << "Medic dtor" << std::endl;
+    delete fists;
+}
 
 void Medic::attack(Soldier *target) {
 
-}
-
-void Medic::pickObject(CollectableObject *object) {
-
-}
-
-void Medic::dropObject(Point position) {
-    // TODO
-}
-
-void Medic::defend(Weapon* weapon) {
-//    double reduce = _shield->defend(weapon);
-//    std::cout << "Medic had HP: " << _hp << ", but he was attacked so now he has HP: " << _hp-reduce << std::endl;
-//    _hp -= reduce;
-//    double reducer = 0;
-//    if (_bodyarmor != nullptr)
-//        reducer += weapon->attackArmor(_bodyarmor);
-//    if (_shield != nullptr)
-//        reducer += weapon->attackArmor(_shield);
-}
-
-const Point Medic::getCurrentPosition() {
-    return Point(*_currPosition);
 }
 
 void Medic::whoAreYou() {
@@ -47,23 +27,27 @@ void Medic::whoAreYou() {
 }
 
 void Medic::pickObject(Weapon *weapon) {
-    std::cout << "Cannot carry weapon \n Medics can only use their hands! " << std::endl;
+    std::cout << "Medic: Cannot carry weapon" << std::endl;
 }
 
 void Medic::pickObject(BodyArmor *ba) {
+    if(ba->isCarried()) return;
     std::cout << "Medic picked BodyArmor" << std::endl;
-    if(_bodyarmor != nullptr) _bodyarmor->drop(_currPosition);
+    if(_bodyarmor != nullptr) _bodyarmor->drop(this);
     _bodyarmor = ba;
     ba->setCarried(true);
-    ba->setCurrentPosition(new Point(OUT_OF_RANGE,OUT_OF_RANGE));
+    ba->setCurrentPosition(nullptr);
 }
 
 void Medic::pickObject(ShieldArmor *sa) {
-    std::cout << "Medic picked ShieldArmor" << std::endl;
-    std::cout << (_shield == nullptr) << std::endl;
-
-    if(_shield != nullptr) _shield->drop(_currPosition);
+    if(sa->isCarried()) return;
+    if(_shield != nullptr) _shield->drop(this);
     _shield = sa;
     sa->setCarried(true);
-    sa->setCurrentPosition(new Point(OUT_OF_RANGE,OUT_OF_RANGE));
+    sa->setCurrentPosition(nullptr);
 }
+
+void Medic::healMe() {
+    setHP(MEDIC_HP);
+}
+
