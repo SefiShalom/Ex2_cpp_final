@@ -13,7 +13,7 @@ class ShieldArmor: public Armor {
 
 
 public:
-    ShieldArmor(Point* position, double defensePower);
+    ShieldArmor(const Point& position, double defensePower);
     ~ShieldArmor();
     double defend(Weapon* weapon);
     void useObject(Soldier* soldier);

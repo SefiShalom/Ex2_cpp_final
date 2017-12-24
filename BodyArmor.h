@@ -13,7 +13,7 @@
 class BodyArmor : public Armor {
 
 public:
-    BodyArmor(Point *position, double defensePower);
+    BodyArmor(const Point& position, double defensePower);
 
     ~BodyArmor();
     void drop(Soldier* soldier);

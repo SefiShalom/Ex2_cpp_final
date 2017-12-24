@@ -13,10 +13,11 @@
 class Rifle: public Weapon {
 
  public:
-    Rifle(Point* position,size_t power,size_t bulletsPerShot);
+    Rifle(const Point& position,size_t power,size_t bulletsPerShot);
     virtual ~Rifle() = 0;
     double attackArmor(ShieldArmor* sheild);
     double attackArmor(BodyArmor* bodyarmor);
+    void drop(Fighter* figter);
 };
 
 

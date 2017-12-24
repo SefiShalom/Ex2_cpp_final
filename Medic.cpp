@@ -4,9 +4,9 @@
 
 #include "Medic.h"
 
-Medic::Medic(Point* currPosition, const short army)
+Medic::Medic(const Point& position, const short army)
 
-        : Soldier(currPosition, MEDIC_HP, MEDIC_SPEED, army), fists(new Fists){}
+        : Soldier(position, MEDIC_HP, MEDIC_SPEED, army), fists(new Fists){}
 
 void Medic::heal(Soldier* injured) {
     if (injured->getArmy() == _army)
@@ -36,7 +36,7 @@ void Medic::pickObject(BodyArmor *ba) {
     if(_bodyarmor != nullptr) _bodyarmor->drop(this);
     _bodyarmor = ba;
     ba->setCarried(true);
-    ba->setCurrentPosition(nullptr);
+    ba->setLocation(Point(OUT_OF_RANGE,OUT_OF_RANGE));
 }
 
 void Medic::pickObject(ShieldArmor *sa) {
@@ -44,10 +44,10 @@ void Medic::pickObject(ShieldArmor *sa) {
     if(_shield != nullptr) _shield->drop(this);
     _shield = sa;
     sa->setCarried(true);
-    sa->setCurrentPosition(nullptr);
+    sa->setLocation(UNREACHABLE_POINT);
 }
 
 void Medic::healMe() {
-    setHP(MEDIC_HP);
+//    setHP(MEDIC_HP);
 }
 

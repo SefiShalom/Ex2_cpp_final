@@ -9,9 +9,9 @@ MapObject::~MapObject(){
     std::cout << "MapObject dtor" << std::endl;
 }
 
-const Point& MapObject::getPosition() const {return _position;}
+const Point& MapObject::getLocation() const {return _position;}
 
-void MapObject::setLocation(Point &newPoint) {
+void MapObject::setLocation(const Point &newPoint) {
     _position = newPoint;
 }
 

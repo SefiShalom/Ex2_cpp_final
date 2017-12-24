@@ -10,15 +10,21 @@
 
 #define REGULAR_SOLDIER_HP 100
 #define REGULAR_SOLDIER_SPEED 2
+#define REGULAR_SOLDIER_RUNNING_SPEED 4
 
-#define REGULARSOLDIER_WALKING_SPEED 2
 class RegularSoldier: public Fighter {
 
 public:
-    RegularSoldier(Point* currPosition, const short army);
+    RegularSoldier(const Point& position, const short army);
     virtual ~RegularSoldier();
+
     void healMe();
 
+    double calculateHitChance(Soldier *enemy) const;
+
+    virtual void walk();
+
+    virtual void run();
 };
 
 

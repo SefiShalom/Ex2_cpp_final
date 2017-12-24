@@ -8,10 +8,11 @@
 
 #include <iostream>
 #include "CollectableObject.h"
-#include "Fighter.h"
+//#include "Fighter.h"
 
 class ShieldArmor;
 class BodyArmor;
+class Fighter;
 
 class Weapon: public CollectableObject{
 
@@ -19,12 +20,13 @@ class Weapon: public CollectableObject{
     size_t _bulletsPerShot;
 
 public:
-    Weapon(Point *position, const double power, size_t bulletsPerShot);
+    Weapon(const Point& position, const double power, size_t bulletsPerShot);
     virtual ~Weapon() = 0;
     double shoot();
     virtual double attackArmor(ShieldArmor* sheild) = 0;
     virtual double attackArmor(BodyArmor* armor) = 0;
-    void drop(Fighter* soldier);
+    virtual void drop(Fighter* soldier) = 0;
+    const double getPower() const;
 };
 
 

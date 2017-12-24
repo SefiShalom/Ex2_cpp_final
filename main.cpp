@@ -14,18 +14,37 @@ using namespace std;
 int main() {
 
 
-    RegularSoldier* reg = new RegularSoldier(new Point(0,5),1);
+    RegularSoldier reg(Point(0, 5), 1);
+    RegularSoldier reg2(Point(0, 5), 1);
+    M16 *m = new M16(Point(2, 2));
+    Missile *miss = new Missile(Point(8, 8));
+    BodyArmor *ba = new BodyArmor(Point(1, 5), 0.65);
+    ShieldArmor *sa = new ShieldArmor(Point(5, 5), 0.65);
 
-    M16* m = new M16(new Point(2,2));
-    Missile* miss = new Missile(new Point(8,8));
 
-    reg->pickObject(m);
-    reg->pickObject(miss);
+//    reg.pickObject(m);
+    reg.pickObject(miss);
+//    reg.pickObject(sa);
 
-    delete reg;
+
+    miss->attackArmor(sa);
+    m->attackArmor(sa);
+
+//    miss->attackArmor(ba);
+//    m->attackArmor(sa);
+
+    reg2.pickObject(sa);
+    reg2.pickObject(ba);
+    reg.attack(&reg2);
+
+    reg.setNextDestination(Point(10,10));
+    while(reg.isWalking()) reg.walk();
+
     delete m;
+    delete miss;
+    delete sa;
 
-    std::cout << "\n\n\n**********MAIN DONE**********"<< std::endl;
+    std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
 
     return 0;
 }

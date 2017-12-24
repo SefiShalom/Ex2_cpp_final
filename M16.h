@@ -7,7 +7,7 @@
 
 
 #include "Rifle.h"
-#include "Soldier.h"
+#include "Fighter.h"
 
 #define M16_POWER 50
 #define M16_BULLETSPERSHOT 1
@@ -15,9 +15,9 @@
 class M16: public Rifle{
 
 public:
-    M16(Point* position);
+    M16(const Point& position);
     ~M16();
-    void useObject(Soldier* soldier);
+    void useObject(Fighter* soldier);
 };
 
 

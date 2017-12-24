@@ -15,13 +15,12 @@ class CollectableObject : public MapObject{
     bool _isCarried;
 
 public:
-    CollectableObject(Point* position);
+    CollectableObject(const Point& position);
     virtual ~CollectableObject();
-    void setCurrentPosition(Point* pos);
     void setCarried(bool is);
-    virtual void drop(Soldier* soldier) = 0;
+//    virtual void drop(Soldier* soldier) = 0;
     bool isCarried();
-    virtual void useObject(Soldier* soldier)=0;
+//    virtual void useObject(Soldier* soldier)=0;
 };
 
 

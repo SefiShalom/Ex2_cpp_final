@@ -13,7 +13,7 @@ class SolidObject : public MapObject {
     double _length, _width;
 public:
 
-    SolidObject(Point* position, double len, double width);
+    SolidObject(const Point& position, double len, double width);
     virtual ~SolidObject();
 
 };

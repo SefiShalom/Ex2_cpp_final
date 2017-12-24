@@ -4,7 +4,7 @@
 
 #include "ShieldArmor.h"
 
-ShieldArmor::ShieldArmor(Point* position, double defensePower)
+ShieldArmor::ShieldArmor(const Point& position, double defensePower)
         : Armor(position,defensePower){}
 
 ShieldArmor::~ShieldArmor() {std::cout << "ShielArmor dtor" << std::endl;}
@@ -18,7 +18,7 @@ void ShieldArmor::useObject(Soldier *soldier) {
 }
 
 void ShieldArmor::drop(Soldier *soldier) {
-    setCurrentPosition(soldier->getPosition());
+    setLocation(soldier->getLocation());
     soldier->set_shield(nullptr);
 }
 

@@ -8,7 +8,7 @@
 #include "Weapon.h"
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
-#include "Soldier.h"
+#include "FIghter.h"
 
 #define MISSILE_POWER 100
 #define MISSILE_BULLETS_PER_SHOT 1
@@ -17,11 +17,13 @@
 class Missile: public Weapon {
 
     public:
-        Missile(Point* position);
+        Missile(const Point& position);
         virtual ~Missile();
         double attackArmor(ShieldArmor* sheild);
         double attackArmor(BodyArmor* bodyarmor);
-        void useObject(Soldier* soldier);
+        void useObject(Fighter* soldier);
+        void drop(Fighter* soldier);
+
 };
 
 

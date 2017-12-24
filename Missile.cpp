@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-Missile::Missile(Point* position)
+Missile::Missile(const Point& position)
         :Weapon(position,MISSILE_POWER,MISSILE_BULLETS_PER_SHOT){}
 Missile::~Missile(){std::cout << "Missile dtor" << std::endl;}
 
@@ -21,7 +21,11 @@ double Missile::attackArmor(ShieldArmor *sheild) {
     return shoot()*(sheild->getDefensePower());
 }
 
-void Missile::useObject(Soldier *soldier) {
+void Missile::useObject(Fighter* soldier) {
     soldier->pickObject(this);
+}
+
+void Missile::drop(Fighter *soldier) {
+
 }
 

@@ -5,7 +5,7 @@
 #include "Rifle.h"
 #include <iostream>
 
-Rifle::Rifle(Point* position,size_t power,size_t bulletsPerShot)
+Rifle::Rifle(const Point& position,size_t power,size_t bulletsPerShot)
         :Weapon(position,power,bulletsPerShot) {
 }
 Rifle::~Rifle(){std::cout << "Rifle dtor" << std::endl;}
@@ -20,4 +20,8 @@ double Rifle::attackArmor(ShieldArmor *shield) {
     std::cout << "Rifle attacked ShieldArmor: ShieldArmor has reduced the attack to :" <<
               shoot()*(shield->getDefensePower()) << std::endl;
     return shoot()*(shield->getDefensePower());
+}
+
+void Rifle::drop(Fighter *figter) {
+
 }

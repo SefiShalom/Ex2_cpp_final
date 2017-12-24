@@ -18,8 +18,8 @@ protected:
 public:
     explicit MapObject(const Point& position);
     virtual ~MapObject() = 0;
-    const Point& getPosition() const;
-    void setLocation(Point& newPoint);
+    const Point& getLocation() const;
+    void setLocation(const Point& newPoint);
 
 };
 

@@ -19,7 +19,7 @@ class Medic : public Soldier {
     Fists* fists;
 
 public:
-    Medic(Point* currPosition, const short army);
+    Medic(const Point& position, const short army);
     virtual ~Medic();
     void heal(Soldier* injured);
     virtual void attack(Soldier *target);

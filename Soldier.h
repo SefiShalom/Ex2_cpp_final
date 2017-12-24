@@ -9,26 +9,31 @@
 #include <vector>
 #include "Point.h"
 #include "MapObject.h"
-
+//////NEW
+#include "BodyArmor.h"
+#include "ShieldArmor.h"
+//////END
 
 class Weapon;
-class ShieldArmor;
-class BodyArmor;
+//class ShieldArmor;
+//class BodyArmor;
 
 class Soldier: public MapObject {
 
     friend class Player;
     friend class Medic;
 
-
+protected:
     double _hp;
     double _speed;
     const short _army;
-    Point* _nextDestination;
+    Point _nextDestination;
     // We should think about switching to independent soldiers:
     std::vector<Point*> allDestinations;
 
     bool _walking;
+
+
 
     // For Medic
     virtual void healMe() = 0;
@@ -39,14 +44,13 @@ class Soldier: public MapObject {
     // For CollectableObject handling
 
 
-protected:
-
-    Soldier(Point* currPosition, double hp, double speed, const short army);
+    Soldier(const Point& currPosition, double hp, double speed, const short army);
 
     //collectable object pointers
     BodyArmor* _bodyarmor;
     ShieldArmor* _shield;
-    Weapon* _weapon;
+
+    virtual void walk(double speed);
 
 public:
 
@@ -54,10 +58,10 @@ public:
 
     virtual void attack(Soldier *target)=0;
 
-    void walk();
+    virtual void walk() = 0;
 
 //    virtual void pickObject(CollectableObject *object)=0;
-
+    virtual double getHP() const;
 
     virtual void defend(Weapon* weapon);
 
@@ -65,15 +69,13 @@ public:
 
     void refillHP(double refill);
 
-    void setCurrentPosition(Point* newPoint);
+    void setNextDestination(const Point& nextPoint);
 
-    void setNextDestination(Point* nextPoint);
-
-   virtual void pickObject(BodyArmor* ba)=0;
+    virtual void pickObject(BodyArmor* ba)=0;
 
     virtual void pickObject(ShieldArmor* sa)=0;
 
-    virtual void pickObject(Weapon* weapon)=0;
+//    virtual void pickObject(Weapon* weapon)=0;
 
 //    void dropCollectable(CollectableObject* col);
 

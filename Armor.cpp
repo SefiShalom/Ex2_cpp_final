@@ -4,7 +4,7 @@
 
 #include "Armor.h"
 
-Armor::Armor(Point* position, double defensePower)
+Armor::Armor(const Point& position, double defensePower)
         :CollectableObject(position),_defensePower(defensePower){}
 
 Armor::~Armor(){};
@@ -12,3 +12,4 @@ Armor::~Armor(){};
 double Armor::getDefensePower(){
 return _defensePower;
 }
+

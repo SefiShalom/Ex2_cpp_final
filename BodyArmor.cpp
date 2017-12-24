@@ -4,7 +4,7 @@
 
 #include "BodyArmor.h"
 #include "Soldier.h"
-BodyArmor::BodyArmor(Point* position, double defensePower)
+BodyArmor::BodyArmor(const Point& position, double defensePower)
         : Armor(position,defensePower){}
 
 BodyArmor::~BodyArmor() {}
@@ -18,6 +18,6 @@ void BodyArmor::useObject(Soldier *soldier) {
 }
 
 void BodyArmor::drop(Soldier *soldier) {
-    setCurrentPosition(soldier->getPosition());
+    setLocation(soldier->getLocation());
     soldier->set_bodyarmor(nullptr);
 }

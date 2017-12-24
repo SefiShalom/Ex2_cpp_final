@@ -20,6 +20,7 @@ public:
     double attackArmor(ShieldArmor* sheild);
     double attackArmor(BodyArmor* armor);
     void useObject(Soldier* soldier);
+    void drop(Fighter* figter);
 };
 
 

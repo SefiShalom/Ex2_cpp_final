@@ -17,13 +17,15 @@ class Fighter : public Soldier {
 
 public:
 
-    Fighter(Point* currPosition, size_t hp, double speed, const int army);
+    Fighter(const Point& position, size_t hp, double speed, const int army);
     virtual ~Fighter();
     virtual void attack(Soldier *target);
     void pickObject(BodyArmor* ba);
     void pickObject(ShieldArmor* sa);
-    void pickObject(Weapon* weapon);
+    virtual void pickObject(Weapon* weapon);
     void set_weapon(Weapon* weapon);
+    virtual double calculateHitChance(Soldier* enemy) const = 0;
+//    void defend(Weapon* weapon);
 };
 
 
