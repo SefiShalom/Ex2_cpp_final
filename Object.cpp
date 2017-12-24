@@ -5,7 +5,10 @@
 #include "Object.h"
 Object::Object(Point* position): _position(position){}
 
-Object::~Object(){delete _position;}
+Object::~Object(){
+    delete _position;
+    std::cout << "deleted Point" << std::endl;
+}
 
 const Point* Object::getPosition() const {return _position;}
 
