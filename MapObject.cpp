@@ -6,7 +6,7 @@
 MapObject::MapObject(const Point& position): _position(position){}
 
 MapObject::~MapObject(){
-    std::cout << "MapObject dtor" << std::endl;
+//    std::cout << "MapObject dtor" << std::endl;
 }
 
 const Point& MapObject::getLocation() const {return _position;}

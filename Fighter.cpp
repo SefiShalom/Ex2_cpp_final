@@ -37,7 +37,7 @@ void Fighter::pickObject(Weapon *weapon) {
 }
 
 Fighter::~Fighter() {
-    std::cout << "Fighter dtor" << std::endl;
+//    std::cout << "Fighter dtor" << std::endl;
 }
 
 void Fighter::set_weapon(Weapon* weapon) {

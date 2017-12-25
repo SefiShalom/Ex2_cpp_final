@@ -4,10 +4,12 @@
 
 #include "ShieldArmor.h"
 
-ShieldArmor::ShieldArmor(const Point& position, double defensePower)
-        : Armor(position,defensePower){}
+ShieldArmor::ShieldArmor(const Point &position, double defensePower)
+        : Armor(position, defensePower) {}
 
-ShieldArmor::~ShieldArmor() {std::cout << "ShielArmor dtor" << std::endl;}
+ShieldArmor::~ShieldArmor() {
+//    std::cout << "ShielArmor dtor" << std::endl;
+}
 
 double ShieldArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);

@@ -13,7 +13,8 @@ Soldier::Soldier(const Point& currPosition, double hp, double speed, const short
 
 
 Soldier::~Soldier() {
-    std::cout << "Soldier dtor" << std::endl;}
+//    std::cout << "Soldier dtor" << std::endl;
+}
 
 
 void Soldier::setNextDestination(const Point& nextPoint) {

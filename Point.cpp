@@ -11,7 +11,7 @@ Point::Point() : _x(0), _y(0) {
 Point::Point(double x, double y): _x(x),_y(y) {}
 Point::Point(const Point& other): _x(other._x),_y(other._y){}
 Point::~Point(){
-    std::cout << "Point dtor for " << *this << std::endl;
+//    std::cout << "Point dtor for " << *this << std::endl;
 }
 double Point::get_x() const {return _x;}
 double Point::get_y() const {return _y;}

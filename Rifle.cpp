@@ -8,7 +8,9 @@
 Rifle::Rifle(const Point& position,size_t power,size_t bulletsPerShot)
         :Weapon(position,power,bulletsPerShot) {
 }
-Rifle::~Rifle(){std::cout << "Rifle dtor" << std::endl;}
+Rifle::~Rifle(){
+//    std::cout << "Rifle dtor" << std::endl;
+}
 
 double Rifle::attackArmor(BodyArmor *bodyarmor) {
     std::cout << "Rifle attacking BodyArmor: BodyArmor has reduced the attack to :" <<

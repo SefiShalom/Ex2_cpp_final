@@ -11,7 +11,9 @@ void RegularSoldier::healMe() {
     refillHP(REGULAR_SOLDIER_HP);
 }
 
-RegularSoldier::~RegularSoldier() {std::cout << "RegularSoldier dtor" << std::endl;}
+RegularSoldier::~RegularSoldier() {
+//    std::cout << "RegularSoldier dtor" << std::endl;
+}
 
 
 double RegularSoldier::calculateHitChance(Soldier* enemy) const{

@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+
+#include <memory>
+
 #include "Point.h"
 #include "Rifle.h"
 #include "SolidObject.h"
@@ -20,6 +23,8 @@ int main() {
     Missile *miss = new Missile(Point(8, 8));
     BodyArmor *ba = new BodyArmor(Point(1, 5), 0.65);
     ShieldArmor *sa = new ShieldArmor(Point(5, 5), 0.65);
+
+    shared_ptr<Missile> missile = make_shared<Missile>(Missile(Point(8,8)));
 
 
 //    reg.pickObject(m);

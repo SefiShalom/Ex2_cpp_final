@@ -8,7 +8,9 @@
 
 Missile::Missile(const Point& position)
         :Weapon(position,MISSILE_POWER,MISSILE_BULLETS_PER_SHOT){}
-Missile::~Missile(){std::cout << "Missile dtor" << std::endl;}
+Missile::~Missile(){
+//    std::cout << "Missile dtor" << std::endl;
+}
 
 double Missile::attackArmor(BodyArmor* bodyarmor) {
     std::cout << "Missile attacked BodyArmor: NOT_AFFECTED_BY_BODYARMOR" << std::endl;

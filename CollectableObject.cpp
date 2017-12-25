@@ -7,7 +7,9 @@
 CollectableObject::CollectableObject(const Point& position):
         MapObject(position),_isCarried(false){}
 
-CollectableObject::~CollectableObject(){std::cout << "CollectableObject dtor" << std::endl;}
+CollectableObject::~CollectableObject(){
+//    std::cout << "CollectableObject dtor" << std::endl;
+}
 
 bool CollectableObject::isCarried() {
     return _isCarried;
