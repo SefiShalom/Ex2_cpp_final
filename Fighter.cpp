@@ -5,32 +5,33 @@
 #include "Fighter.h"
 #include "Missile.h"
 
-Fighter::Fighter(const Point& position, size_t hp, double speed, const int army)
-        : Soldier(position, hp, speed, army), _weapon(nullptr){}
+Fighter::Fighter(const Point &position, size_t hp, double speed, const int army)
+        : Soldier(position, hp, speed, army), _weapon(nullptr) {}
 
 void Fighter::attack(Soldier *target) {
-    target->defend(_weapon);
+//    target->defend(_weapon);
+    target->defend(__weapon);
 }
 
 void Fighter::pickObject(BodyArmor *ba) {
-    if(ba->isCarried()) return;
-    if(_bodyarmor != nullptr) _bodyarmor->drop(this);
+    if (ba->isCarried()) return;
+    if (_bodyarmor != nullptr) _bodyarmor->drop(this);
     _bodyarmor = ba;
     ba->setCarried(true);
     ba->setLocation(UNREACHABLE_POINT);
 }
 
 void Fighter::pickObject(ShieldArmor *sa) {
-    if(sa->isCarried()) return;
-    if(_shield != nullptr) _shield->drop(this);
+    if (sa->isCarried()) return;
+    if (_shield != nullptr) _shield->drop(this);
     _shield = sa;
     sa->setCarried(true);
     sa->setLocation(UNREACHABLE_POINT);
 }
 
 void Fighter::pickObject(Weapon *weapon) {
-    if(weapon->isCarried()) return;
-    if(_weapon!= nullptr) _weapon->drop(this);
+    if (weapon->isCarried()) return;
+    if (_weapon != nullptr) _weapon->drop(this);
     _weapon = weapon;
     weapon->setCarried(true);
     weapon->setLocation(UNREACHABLE_POINT);
@@ -40,8 +41,20 @@ Fighter::~Fighter() {
 //    std::cout << "Fighter dtor" << std::endl;
 }
 
-void Fighter::set_weapon(Weapon* weapon) {
+void Fighter::set_weapon(Weapon *weapon) {
     _weapon = weapon;
+}
+
+void Fighter::pickObject(std::shared_ptr<Weapon> weapon) {
+    if (weapon->isCarried())
+        return;
+
+    if (__weapon)
+        __weapon->drop(this);
+
+    __weapon = weapon;
+    weapon->setCarried(true);
+    weapon->setLocation(UNREACHABLE_POINT);
 }
 
 //void Fighter::defend(Weapon *weapon) {

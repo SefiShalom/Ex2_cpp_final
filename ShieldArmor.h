@@ -5,6 +5,8 @@
 #ifndef EX2_CPP_SEFI_SHEILDARMOR_H
 #define EX2_CPP_SEFI_SHEILDARMOR_H
 
+#include <memory>
+
 #include "Armor.h"
 #include "Weapon.h"
 #include "Soldier.h"
@@ -18,6 +20,8 @@ public:
     double defend(Weapon* weapon);
     void useObject(Soldier* soldier);
     void drop(Soldier* soldier);
+
+    double defend(std::shared_ptr<Weapon> weapon);
 };
 
 

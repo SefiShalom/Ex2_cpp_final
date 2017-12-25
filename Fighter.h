@@ -5,7 +5,7 @@
 #ifndef EX2_CPP_SEFI_FIGHTER_H
 #define EX2_CPP_SEFI_FIGHTER_H
 
-
+#include <memory>
 #include "Soldier.h"
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
@@ -13,18 +13,27 @@
 
 class Fighter : public Soldier {
 
-    Weapon* _weapon;
-
+    Weapon *_weapon;
+    std::shared_ptr<Weapon> __weapon;
 public:
 
-    Fighter(const Point& position, size_t hp, double speed, const int army);
+    Fighter(const Point &position, size_t hp, double speed, const int army);
+
     virtual ~Fighter();
+
     virtual void attack(Soldier *target);
-    void pickObject(BodyArmor* ba);
-    void pickObject(ShieldArmor* sa);
-    virtual void pickObject(Weapon* weapon);
-    void set_weapon(Weapon* weapon);
-    virtual double calculateHitChance(Soldier* enemy) const = 0;
+
+    void pickObject(BodyArmor *ba);
+
+    void pickObject(ShieldArmor *sa);
+
+    virtual void pickObject(Weapon *weapon);
+
+    virtual void pickObject(std::shared_ptr<Weapon> weapon);
+
+    void set_weapon(Weapon *weapon);
+
+    virtual double calculateHitChance(Soldier *enemy) const = 0;
 //    void defend(Weapon* weapon);
 };
 

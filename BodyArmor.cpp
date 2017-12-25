@@ -13,6 +13,10 @@ double BodyArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);
 }
 
+double BodyArmor::defend(std::shared_ptr<Weapon> weapon) {
+    return weapon->attackArmor(this);
+}
+
 void BodyArmor::useObject(Soldier *soldier) {
     soldier->pickObject(this);
 }

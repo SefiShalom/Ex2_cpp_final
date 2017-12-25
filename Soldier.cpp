@@ -108,6 +108,35 @@ void Soldier::defend(Weapon *weapon) {
     reduceHP(damage);
 }
 
+
+void Soldier::defend(std::shared_ptr<Weapon> weapon) {
+    double damage = 1;
+//    if(_bodyarmor != nullptr) damage = _bodyarmor->defend(weapon);
+    // power*defense*power*defense/power
+
+    int counter = -1;
+
+    if (_bodyarmor != nullptr){
+        damage = _bodyarmor->defend(weapon);
+        counter++;
+    }
+    if (_shield != nullptr) {
+        damage *= _shield->defend(weapon);
+        counter++;
+    }
+
+    damage /= pow(weapon->getPower(), counter != -1 ? counter : 0);
+
+    std::cout << "The attack power was reduced by " << weapon->getPower() - damage << ".\n"
+            "The original damage was supposed to be " << weapon->getPower() << ".\nTotal damage: " << damage << std::endl;
+    reduceHP(damage);
+}
+
+
+
+
+
+
 double Soldier::getHP() const {
     return _hp;
 }

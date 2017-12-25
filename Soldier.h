@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Point.h"
 #include "MapObject.h"
 //////NEW
@@ -93,6 +94,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 
+    void defend(std::shared_ptr<Weapon> weapon);
 };
 
 

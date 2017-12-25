@@ -5,6 +5,7 @@
 #ifndef EX2_CPP_SEFI_BODYARMOR_H
 #define EX2_CPP_SEFI_BODYARMOR_H
 
+#include <memory>
 
 #include "Armor.h"
 #include "Weapon.h"
@@ -19,6 +20,8 @@ public:
     void drop(Soldier* soldier);
     double defend(Weapon *weapon);
     void useObject(Soldier* soldier);
+
+    double defend(std::shared_ptr<Weapon> weapon);
 };
 
 

@@ -15,6 +15,10 @@ double ShieldArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);
 }
 
+double ShieldArmor::defend(std::shared_ptr<Weapon> weapon) {
+    return weapon->attackArmor(this);
+}
+
 void ShieldArmor::useObject(Soldier *soldier) {
     soldier->pickObject(this);
 }

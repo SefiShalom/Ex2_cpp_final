@@ -26,14 +26,15 @@ int main() {
 
     shared_ptr<Missile> missile = make_shared<Missile>(Missile(Point(8,8)));
 
+    reg.pickObject(missile);
 
 //    reg.pickObject(m);
-    reg.pickObject(miss);
+//    reg.pickObject(miss);
 //    reg.pickObject(sa);
 
 
-    miss->attackArmor(sa);
-    m->attackArmor(sa);
+//    miss->attackArmor(sa);
+//    m->attackArmor(sa);
 
 //    miss->attackArmor(ba);
 //    m->attackArmor(sa);
