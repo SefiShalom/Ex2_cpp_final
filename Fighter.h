@@ -35,6 +35,11 @@ public:
 
     virtual double calculateHitChance(Soldier *enemy) const = 0;
 //    void defend(Weapon* weapon);
+    void pickObject(std::shared_ptr<ShieldArmor> sa);
+
+    void pickObject(std::shared_ptr<BodyArmor> ba);
+
+    void attack(std::shared_ptr<Soldier> target);
 };
 
 

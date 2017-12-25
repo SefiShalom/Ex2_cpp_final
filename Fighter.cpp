@@ -13,6 +13,10 @@ void Fighter::attack(Soldier *target) {
     target->defend(__weapon);
 }
 
+void Fighter::attack(std::shared_ptr<Soldier> target) {
+    target->defend(__weapon);
+}
+
 void Fighter::pickObject(BodyArmor *ba) {
     if (ba->isCarried()) return;
     if (_bodyarmor != nullptr) _bodyarmor->drop(this);
@@ -55,6 +59,30 @@ void Fighter::pickObject(std::shared_ptr<Weapon> weapon) {
     __weapon = weapon;
     weapon->setCarried(true);
     weapon->setLocation(UNREACHABLE_POINT);
+}
+
+void Fighter::pickObject(std::shared_ptr<ShieldArmor> sa) {
+    if (sa->isCarried())
+        return;
+
+    if (__shield)
+        __shield->drop(this);
+
+    __shield = sa;
+    sa->setCarried(true);
+    sa->setLocation(UNREACHABLE_POINT);
+}
+
+void Fighter::pickObject(std::shared_ptr<BodyArmor> ba) {
+    if (ba->isCarried())
+        return;
+
+    if (__bodyarmor)
+        __bodyarmor->drop(this);
+
+    __bodyarmor = ba;
+    ba->setCarried(true);
+    ba->setLocation(UNREACHABLE_POINT);
 }
 
 //void Fighter::defend(Weapon *weapon) {

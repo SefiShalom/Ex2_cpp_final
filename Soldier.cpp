@@ -116,12 +116,12 @@ void Soldier::defend(std::shared_ptr<Weapon> weapon) {
 
     int counter = -1;
 
-    if (_bodyarmor != nullptr){
-        damage = _bodyarmor->defend(weapon);
+    if (__bodyarmor){
+        damage = __bodyarmor->defend(weapon);
         counter++;
     }
-    if (_shield != nullptr) {
-        damage *= _shield->defend(weapon);
+    if (__shield) {
+        damage *= __shield->defend(weapon);
         counter++;
     }
 

@@ -50,6 +50,8 @@ protected:
     //collectable object pointers
     BodyArmor* _bodyarmor;
     ShieldArmor* _shield;
+    std::shared_ptr<BodyArmor> __bodyarmor;
+    std::shared_ptr<ShieldArmor> __shield;
 
     virtual void walk(double speed);
 
