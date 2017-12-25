@@ -85,6 +85,10 @@ void Fighter::pickObject(std::shared_ptr<BodyArmor> ba) {
     ba->setLocation(UNREACHABLE_POINT);
 }
 
+void Fighter::set_weapon(std::shared_ptr<Weapon> weapon) {
+    __weapon = weapon;
+}
+
 //void Fighter::defend(Weapon *weapon) {
 //    double damage = 1;
 ////    if(_bodyarmor != nullptr) damage = _bodyarmor->defend(weapon);

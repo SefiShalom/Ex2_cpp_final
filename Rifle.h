@@ -5,6 +5,7 @@
 #ifndef EX2_CPP_SEFI_RIFLE_H
 #define EX2_CPP_SEFI_RIFLE_H
 
+#include <memory>
 
 #include "Weapon.h"
 #include "BodyArmor.h"
@@ -18,6 +19,12 @@ class Rifle: public Weapon {
     double attackArmor(ShieldArmor* sheild);
     double attackArmor(BodyArmor* bodyarmor);
     void drop(Fighter* figter);
+
+    double attackArmor(std::shared_ptr<ShieldArmor> shield);
+
+    double attackArmor(std::shared_ptr<BodyArmor> bodyarmor);
+
+    void drop(std::shared_ptr<Fighter> fighter);
 };
 
 

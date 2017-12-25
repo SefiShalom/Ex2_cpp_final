@@ -27,3 +27,20 @@ double Rifle::attackArmor(ShieldArmor *shield) {
 void Rifle::drop(Fighter *figter) {
 
 }
+
+
+double Rifle::attackArmor(std::shared_ptr<ShieldArmor> shield) {
+    std::cout << "Rifle attacked ShieldArmor: ShieldArmor has reduced the attack to :" <<
+              shoot()*(shield->getDefensePower()) << std::endl;
+    return shoot()*(shield->getDefensePower());
+}
+
+double Rifle::attackArmor(std::shared_ptr<BodyArmor> bodyarmor) {
+    std::cout << "Rifle attacking BodyArmor: BodyArmor has reduced the attack to :" <<
+              shoot()*(bodyarmor->getDefensePower()) << std::endl;
+    return shoot()*(bodyarmor->getDefensePower());
+}
+
+void Rifle::drop(std::shared_ptr<Fighter> fighter) {
+
+}

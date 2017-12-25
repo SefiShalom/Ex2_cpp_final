@@ -5,7 +5,7 @@
 #ifndef EX2_CPP_SEFI_FISTS_H
 #define EX2_CPP_SEFI_FISTS_H
 
-
+#include <memory>
 #include "Weapon.h"
 
 #define FISTS_POWER 10
@@ -21,6 +21,14 @@ public:
     double attackArmor(BodyArmor* armor);
     void useObject(Soldier* soldier);
     void drop(Fighter* figter);
+
+    double attackArmor(std::shared_ptr<ShieldArmor> shield);
+
+    double attackArmor(std::shared_ptr<BodyArmor> bodyarmor);
+
+    void useObject(std::shared_ptr<Soldier> soldier);
+
+    void drop(std::shared_ptr<Fighter> fighter);
 };
 
 

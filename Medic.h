@@ -5,7 +5,7 @@
 #ifndef EX2_CPP_SEFI_MEDIC_H
 #define EX2_CPP_SEFI_MEDIC_H
 
-
+#include <memory>
 #include "Soldier.h"
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
@@ -28,6 +28,16 @@ public:
     void pickObject(ShieldArmor* weapon);
     void healMe();
     void whoAreYou();
+
+    void heal(std::shared_ptr<Soldier> injured);
+
+    virtual void attack(std::shared_ptr<Soldier> target);
+
+    void pickObject(std::shared_ptr<Weapon> weapon);
+
+    void pickObject(std::shared_ptr<BodyArmor> weapon);
+
+    void pickObject(std::shared_ptr<ShieldArmor> weapon);
 };
 
 

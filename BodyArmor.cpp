@@ -25,3 +25,12 @@ void BodyArmor::drop(Soldier *soldier) {
     setLocation(soldier->getLocation());
     soldier->set_bodyarmor(nullptr);
 }
+
+void BodyArmor::drop(std::shared_ptr<Soldier> soldier) {
+    setLocation(soldier->getLocation());
+    soldier->set_bodyarmor(nullptr);
+}
+
+void BodyArmor::useObject(std::shared_ptr<Soldier> soldier) {
+    soldier->pickObject(std::make_shared<BodyArmor>(*this));
+}

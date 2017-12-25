@@ -5,6 +5,7 @@
 #ifndef EX2_CPP_SEFI_ARMOR_H
 #define EX2_CPP_SEFI_ARMOR_H
 
+#include <memory>
 #include "CollectableObject.h"
 
 class Weapon;
@@ -17,6 +18,8 @@ public:
     virtual ~Armor()=0;
     virtual double defend(Weapon* weapon)=0;
     virtual void drop(Soldier* soldier) = 0;
+    virtual double defend(std::shared_ptr<Weapon> weapon) = 0;
+    virtual void drop(std::shared_ptr<Soldier> soldier) = 0;
     double getDefensePower();
 };
 

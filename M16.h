@@ -5,7 +5,7 @@
 #ifndef EX2_CPP_SEFI_M16_H
 #define EX2_CPP_SEFI_M16_H
 
-
+#include <memory>
 #include "Rifle.h"
 #include "Fighter.h"
 
@@ -18,6 +18,8 @@ public:
     M16(const Point& position);
     ~M16();
     void useObject(Fighter* soldier);
+
+    void useObject(std::shared_ptr<Fighter> fighter);
 };
 
 

@@ -20,7 +20,9 @@ public:
 
     void healMe();
 
-    double calculateHitChance(Soldier *enemy) const;
+    virtual double calculateHitChance(Soldier *enemy) const;
+
+    virtual double calculateHitChance(std::shared_ptr<Soldier> enemy) const;
 
     virtual void walk();
 

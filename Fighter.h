@@ -33,13 +33,18 @@ public:
 
     void set_weapon(Weapon *weapon);
 
+    void set_weapon(std::shared_ptr<Weapon> weapon);
+
     virtual double calculateHitChance(Soldier *enemy) const = 0;
+
+    virtual double calculateHitChance(std::shared_ptr<Soldier> enemy) const = 0;
+
 //    void defend(Weapon* weapon);
     void pickObject(std::shared_ptr<ShieldArmor> sa);
 
     void pickObject(std::shared_ptr<BodyArmor> ba);
 
-    void attack(std::shared_ptr<Soldier> target);
+    virtual void attack(std::shared_ptr<Soldier> target);
 };
 
 

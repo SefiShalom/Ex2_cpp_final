@@ -61,6 +61,8 @@ public:
 
     virtual void attack(Soldier *target)=0;
 
+    virtual void attack(std::shared_ptr<Soldier> target) = 0;
+
     virtual void walk() = 0;
 
 //    virtual void pickObject(CollectableObject *object)=0;
@@ -77,6 +79,10 @@ public:
     virtual void pickObject(BodyArmor* ba)=0;
 
     virtual void pickObject(ShieldArmor* sa)=0;
+
+    virtual void pickObject(std::shared_ptr<BodyArmor> ba) = 0;
+
+    virtual void pickObject(std::shared_ptr<ShieldArmor> ba) = 0;
 
 //    virtual void pickObject(Weapon* weapon)=0;
 
@@ -96,7 +102,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 
-    void defend(std::shared_ptr<Weapon> weapon);
+    virtual void defend(std::shared_ptr<Weapon> weapon);
 };
 
 

@@ -22,3 +22,18 @@ void Fists::useObject(Soldier* soldier){}
 void Fists::drop(Fighter *figter) {
 
 }
+
+
+double Fists::attackArmor(std::shared_ptr<ShieldArmor> shield) {
+    return FISTS_POWER;
+}
+
+double Fists::attackArmor(std::shared_ptr<BodyArmor> bodyarmor) {
+    return FISTS_POWER;
+}
+
+void Fists::useObject(std::shared_ptr<Soldier> soldier) {}
+
+void Fists::drop(std::shared_ptr<Fighter> fighter) {
+
+}

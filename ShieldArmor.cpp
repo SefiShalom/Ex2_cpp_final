@@ -28,3 +28,12 @@ void ShieldArmor::drop(Soldier *soldier) {
     soldier->set_shield(nullptr);
 }
 
+void ShieldArmor::drop(std::shared_ptr<Soldier> soldier) {
+    setLocation(soldier->getLocation());
+    soldier->set_shield(nullptr);
+}
+
+void ShieldArmor::useObject(std::shared_ptr<Soldier> soldier) {
+    soldier->pickObject(this);
+}
+

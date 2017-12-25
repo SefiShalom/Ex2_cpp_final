@@ -21,7 +21,9 @@ public:
     double defend(Weapon *weapon);
     void useObject(Soldier* soldier);
 
-    double defend(std::shared_ptr<Weapon> weapon);
+    virtual double defend(std::shared_ptr<Weapon> weapon);
+    virtual void drop(std::shared_ptr<Soldier> soldier);
+    virtual void useObject(std::shared_ptr<Soldier> soldier);
 };
 
 

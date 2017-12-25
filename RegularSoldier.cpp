@@ -41,3 +41,7 @@ void RegularSoldier::run() {
     Soldier::walk(REGULAR_SOLDIER_RUNNING_SPEED);
     std::cout << "RUNNING" << std::endl;
 }
+
+double RegularSoldier::calculateHitChance(std::shared_ptr<Soldier> enemy) const {
+    return 1 / (getLocation().distance(enemy->getLocation()));
+}

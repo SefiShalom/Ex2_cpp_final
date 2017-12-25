@@ -21,6 +21,8 @@ public:
 
     double calculateHitChance(Soldier &enemy) const;
 
+    virtual double calculateHitChance(std::shared_ptr<Soldier> enemy);
+
     void walk();
 
     virtual int getType();
