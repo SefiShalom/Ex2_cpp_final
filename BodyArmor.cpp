@@ -3,7 +3,8 @@
 //
 
 #include "BodyArmor.h"
-#include "Soldier.h"
+
+
 BodyArmor::BodyArmor(const Point& position, double defensePower)
         : Armor(position,defensePower){}
 
@@ -13,24 +14,14 @@ double BodyArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);
 }
 
-double BodyArmor::defend(std::shared_ptr<Weapon> weapon) {
-    return weapon->attackArmor(this);
-}
-
 void BodyArmor::useObject(Soldier *soldier) {
     soldier->pickObject(this);
 }
 
 void BodyArmor::drop(Soldier *soldier) {
     setLocation(soldier->getLocation());
-    soldier->set_bodyarmor(nullptr);
 }
 
-void BodyArmor::drop(std::shared_ptr<Soldier> soldier) {
-    setLocation(soldier->getLocation());
-    soldier->set_bodyarmor(nullptr);
-}
-
-void BodyArmor::useObject(std::shared_ptr<Soldier> soldier) {
-    soldier->pickObject(std::make_shared<BodyArmor>(*this));
+void BodyArmor::acceptAction(Soldier* soldier) {
+    soldier->performAction(this);
 }

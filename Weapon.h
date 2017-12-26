@@ -9,13 +9,12 @@
 #include <memory>
 #include <iostream>
 #include "CollectableObject.h"
-//#include "Fighter.h"
 
 class ShieldArmor;
 class BodyArmor;
 class Fighter;
 
-class Weapon: public CollectableObject{
+class Weapon: public CollectableObject, public std::enable_shared_from_this<Weapon> {
 
     const double _power;
     size_t _bulletsPerShot;
@@ -26,12 +25,9 @@ public:
     double shoot();
     virtual double attackArmor(ShieldArmor* sheild) = 0;
     virtual double attackArmor(BodyArmor* armor) = 0;
-    virtual void drop(Fighter* soldier) = 0;
     const double getPower() const;
-
-    virtual double attackArmor(std::shared_ptr<ShieldArmor> sheild) = 0;
-    virtual double attackArmor(std::shared_ptr<BodyArmor> armor) = 0;
-    virtual void drop(std::shared_ptr<Fighter> soldier) = 0;
+    void acceptAction(Soldier* soldier);
+    void useObject(Fighter* fighter);
 };
 
 

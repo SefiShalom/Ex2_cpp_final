@@ -3,7 +3,8 @@
 //
 
 #include "SolidObject.h"
-#include <iostream>
+#include "Soldier.h"
+
 SolidObject::SolidObject(const Point& position, double len, double width)
         : MapObject(position), _length(len), _width(width) {
     std::cout<<"in SolidObject ctor"<<std::endl;
@@ -12,4 +13,7 @@ SolidObject::SolidObject(const Point& position, double len, double width)
 
 SolidObject::~SolidObject() {std::cout << "SolidObject dtor" << std::endl;}
 
+void SolidObject::acceptAction(Soldier* soldier) {
+    soldier->performAction(this);
+}
 

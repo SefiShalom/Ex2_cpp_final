@@ -15,13 +15,16 @@ double Weapon::shoot(){
     return _power*_bulletsPerShot;
 }
 
-void Weapon::drop(Fighter* soldier) {
-    setLocation(soldier->getLocation());
-    soldier->set_weapon(nullptr);
-}
-
 const double Weapon::getPower() const {
     return _power;
+}
+
+void Weapon::acceptAction(Soldier* soldier) {
+    soldier->performAction(this);
+}
+
+void Weapon::useObject(Fighter *fighter) {
+    fighter->pickObject(this);
 }
 
 

@@ -15,9 +15,6 @@ double ShieldArmor::defend(Weapon *weapon) {
     return weapon->attackArmor(this);
 }
 
-double ShieldArmor::defend(std::shared_ptr<Weapon> weapon) {
-    return weapon->attackArmor(this);
-}
 
 void ShieldArmor::useObject(Soldier *soldier) {
     soldier->pickObject(this);
@@ -25,15 +22,9 @@ void ShieldArmor::useObject(Soldier *soldier) {
 
 void ShieldArmor::drop(Soldier *soldier) {
     setLocation(soldier->getLocation());
-    soldier->set_shield(nullptr);
 }
 
-void ShieldArmor::drop(std::shared_ptr<Soldier> soldier) {
-    setLocation(soldier->getLocation());
-    soldier->set_shield(nullptr);
-}
-
-void ShieldArmor::useObject(std::shared_ptr<Soldier> soldier) {
-    soldier->pickObject(this);
+void ShieldArmor::acceptAction(Soldier* soldier) {
+    soldier->performAction(this);
 }
 

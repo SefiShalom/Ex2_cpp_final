@@ -28,5 +28,5 @@ int SniperSoldier::getType() {
 
 double SniperSoldier::calculateHitChance(std::shared_ptr<Soldier> enemy) {
     double dist = _position.distance(enemy->getLocation());
-    return dist/(dist-1);
+    return (dist-1)/dist;
 }

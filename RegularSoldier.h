@@ -14,6 +14,8 @@
 
 class RegularSoldier: public Fighter {
 
+    virtual void run();
+
 public:
     RegularSoldier(const Point& position, const short army);
     virtual ~RegularSoldier();
@@ -26,7 +28,7 @@ public:
 
     virtual void walk();
 
-    virtual void run();
+
 };
 
 

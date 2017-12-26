@@ -20,10 +20,7 @@ public:
     double defend(Weapon* weapon);
     void useObject(Soldier* soldier);
     void drop(Soldier* soldier);
-
-    virtual double defend(std::shared_ptr<Weapon> weapon);
-    void useObject(std::shared_ptr<Soldier> soldier);
-    virtual void drop(std::shared_ptr<Soldier> soldier);
+    void acceptAction(Soldier* soldier);
 };
 
 

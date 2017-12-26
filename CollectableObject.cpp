@@ -3,6 +3,7 @@
 //
 
 #include "CollectableObject.h"
+#include "Soldier.h"
 
 CollectableObject::CollectableObject(const Point& position):
         MapObject(position),_isCarried(false){}
@@ -19,5 +20,10 @@ bool CollectableObject::isCarried() {
 void CollectableObject::setCarried(bool is) {
     _isCarried = is;
 }
+
+void CollectableObject::drop(Soldier *soldier) {
+    setLocation(soldier->getLocation());
+}
+
 
 

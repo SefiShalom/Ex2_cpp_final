@@ -8,18 +8,24 @@
 Fighter::Fighter(const Point &position, size_t hp, double speed, const int army)
         : Soldier(position, hp, speed, army), _weapon(nullptr) {}
 
-void Fighter::attack(Soldier *target) {
-//    target->defend(_weapon);
-    target->defend(__weapon);
+void Fighter::attack(Soldier* target) {
+    if(getRandom() <= calculateHitChance(target))
+        target->defend(_weapon);
+    else std::cout << "Missed" << std::endl;
 }
 
-void Fighter::attack(std::shared_ptr<Soldier> target) {
-    target->defend(__weapon);
+float Fighter::getRandom(){
+    float r = ((double) rand() / (RAND_MAX));
+    std::cout << "RANDON EQVALS " << r << std::endl;
+    return r;
 }
 
 void Fighter::pickObject(BodyArmor *ba) {
     if (ba->isCarried()) return;
-    if (_bodyarmor != nullptr) _bodyarmor->drop(this);
+    if (_bodyarmor != nullptr) {
+        _bodyarmor->drop(this);
+        set_bodyarmor(nullptr);
+    }
     _bodyarmor = ba;
     ba->setCarried(true);
     ba->setLocation(UNREACHABLE_POINT);
@@ -27,7 +33,10 @@ void Fighter::pickObject(BodyArmor *ba) {
 
 void Fighter::pickObject(ShieldArmor *sa) {
     if (sa->isCarried()) return;
-    if (_shield != nullptr) _shield->drop(this);
+    if (_shield != nullptr){
+        _shield->drop(this);
+        set_shield(nullptr);
+    }
     _shield = sa;
     sa->setCarried(true);
     sa->setLocation(UNREACHABLE_POINT);
@@ -35,7 +44,10 @@ void Fighter::pickObject(ShieldArmor *sa) {
 
 void Fighter::pickObject(Weapon *weapon) {
     if (weapon->isCarried()) return;
-    if (_weapon != nullptr) _weapon->drop(this);
+    if (_weapon != nullptr){
+        _weapon->drop(this);
+        set_weapon(nullptr);
+    }
     _weapon = weapon;
     weapon->setCarried(true);
     weapon->setLocation(UNREACHABLE_POINT);
@@ -49,90 +61,8 @@ void Fighter::set_weapon(Weapon *weapon) {
     _weapon = weapon;
 }
 
-void Fighter::pickObject(std::shared_ptr<Weapon> weapon) {
-    if (weapon->isCarried())
-        return;
-
-    if (__weapon)
-        __weapon->drop(this);
-
-    __weapon = weapon;
-    weapon->setCarried(true);
-    weapon->setLocation(UNREACHABLE_POINT);
+void Fighter::performAction(Soldier *soldier) {
+    attack(soldier);
 }
 
-void Fighter::pickObject(std::shared_ptr<ShieldArmor> sa) {
-    if (sa->isCarried())
-        return;
 
-    if (__shield)
-        __shield->drop(this);
-
-    __shield = sa;
-    sa->setCarried(true);
-    sa->setLocation(UNREACHABLE_POINT);
-}
-
-void Fighter::pickObject(std::shared_ptr<BodyArmor> ba) {
-    if (ba->isCarried())
-        return;
-
-    if (__bodyarmor)
-        __bodyarmor->drop(this);
-
-    __bodyarmor = ba;
-    ba->setCarried(true);
-    ba->setLocation(UNREACHABLE_POINT);
-}
-
-void Fighter::set_weapon(std::shared_ptr<Weapon> weapon) {
-    __weapon = weapon;
-}
-
-//void Fighter::defend(Weapon *weapon) {
-//    double damage = 1;
-////    if(_bodyarmor != nullptr) damage = _bodyarmor->defend(weapon);
-//    // power*defense*power*defense/power
-//
-//    int counter = -1;
-//
-//    if (_bodyarmor != nullptr){
-//        damage = _bodyarmor->defend(weapon);
-//        counter++;
-//    }
-//    if (_shield != nullptr) {
-//        damage *= _shield->defend(weapon);
-//        counter++;
-//    }
-//
-//    damage /= pow(weapon->getPower(), counter != -1 ? counter : 0);
-//
-//    std::cout << "The attack power was reduced by " << weapon->getPower() - damage << ".\n"
-//            "The original damage was supposed to be " << weapon->getPower() << ".\nTotal damage: " << damage << std::endl;
-//    reduceHP(damage);
-//
-////    if (dynamic_cast<Missile*>(weapon)) {
-////        std::cout << "YES MISSILE" << std::endl;
-////        if (_shield != nullptr) {
-////            damage *= _shield->getDefensePower();
-////            std::cout << "YES SHIELD" << std::endl;
-////        }
-////    } else {
-////        std::cout << "NOT MISSILE" << std::endl;
-////        if (_shield != nullptr) {
-////            damage *= _shield->getDefensePower();
-////            std::cout << "YES SHIELD" << std::endl;
-////        }
-////        if (_bodyarmor != nullptr) {
-////            damage *= _bodyarmor->getDefensePower();
-////            std::cout << "YES BODYARMOR" << std::endl;
-////        }
-////    }
-//
-////    std::cout << "DAMAGE = " << damage << std::endl;
-////    damage = std::max(0.65, damage);
-////
-////    reduceHP(weapon->getPower() * damage);
-////
-////    std::cout << "Reduced by " << weapon->getPower() * damage << " HP" << std::endl;
-//}

@@ -91,3 +91,8 @@ void Medic::pickObject(std::shared_ptr<ShieldArmor> sa) {
     sa->setLocation(Point(OUT_OF_RANGE,OUT_OF_RANGE));
 }
 
+void Medic::performAction(std::shared_ptr<Soldier> soldier) {
+    if(getArmy() == soldier->getArmy()) soldier->healMe();
+    else attack(soldier);
+}
+
