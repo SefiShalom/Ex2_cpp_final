@@ -17,7 +17,7 @@ class M16: public Rifle{
 public:
     M16(const Point& position);
     ~M16();
-    void useObject(Fighter* soldier);
+    void useObject(Fighter* fighter);
 
     void useObject(std::shared_ptr<Fighter> fighter);
 };

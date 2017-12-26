@@ -3,6 +3,8 @@
 //
 
 #include "MapObject.h"
+
+
 MapObject::MapObject(const Point& position): _position(position){}
 
 MapObject::~MapObject(){
@@ -14,5 +16,7 @@ const Point& MapObject::getLocation() const {return _position;}
 void MapObject::setLocation(const Point &newPoint) {
     _position = newPoint;
 }
+
+
 
 

@@ -38,6 +38,8 @@ public:
     void pickObject(std::shared_ptr<BodyArmor> weapon);
 
     void pickObject(std::shared_ptr<ShieldArmor> weapon);
+
+    void performAction(std::shared_ptr<Soldier> soldier);
 };
 
 

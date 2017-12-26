@@ -8,13 +8,14 @@
 #include "Point.h"
 #include "MapObject.h"
 
-class SolidObject : public MapObject {
+class SolidObject : public MapObject, public std::enable_shared_from_this<SolidObject> {
 
     double _length, _width;
 public:
 
     SolidObject(const Point& position, double len, double width);
     virtual ~SolidObject();
+    void acceptAction(Soldier* soldier);
 
 };
 

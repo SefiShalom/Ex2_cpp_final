@@ -18,9 +18,8 @@ public:
     CollectableObject(const Point& position);
     virtual ~CollectableObject();
     void setCarried(bool is);
-//    virtual void drop(Soldier* soldier) = 0;
+    virtual void drop(Soldier* soldier);
     bool isCarried();
-//    virtual void useObject(Soldier* soldier)=0;
 };
 
 

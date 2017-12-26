@@ -7,12 +7,12 @@
 
 #include <iostream>
 #include <vector>
-#include <memory>
 #include "Point.h"
 #include "MapObject.h"
 //////NEW
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
+#include "SolidObject.h"
 //////END
 
 class Weapon;
@@ -22,6 +22,7 @@ class Weapon;
 class Soldier: public MapObject {
 
     friend class Player;
+    friend class HumanPlayer;
     friend class Medic;
 
 protected:
@@ -59,13 +60,10 @@ public:
 
     virtual ~Soldier();
 
-    virtual void attack(Soldier *target)=0;
-
-    virtual void attack(std::shared_ptr<Soldier> target) = 0;
+    virtual void attack(Soldier* target) = 0;
 
     virtual void walk() = 0;
 
-//    virtual void pickObject(CollectableObject *object)=0;
     virtual double getHP() const;
 
     virtual void defend(Weapon* weapon);
@@ -80,16 +78,6 @@ public:
 
     virtual void pickObject(ShieldArmor* sa)=0;
 
-    virtual void pickObject(std::shared_ptr<BodyArmor> ba) = 0;
-
-    virtual void pickObject(std::shared_ptr<ShieldArmor> ba) = 0;
-
-//    virtual void pickObject(Weapon* weapon)=0;
-
-//    void dropCollectable(CollectableObject* col);
-
-//    virtual double getHitChance(Soldier *target);
-
     bool isWalking();
 
     const int getArmy() const;
@@ -98,11 +86,20 @@ public:
 
     void set_shield(ShieldArmor* shield);
 
-//    void set_weapon(Weapon* weapon);
 
     friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 
-    virtual void defend(std::shared_ptr<Weapon> weapon);
+    std::vector<MapObject> scanRadius();
+
+    void acceptAction(Soldier* soldier);
+
+    void performAction(ShieldArmor* shield);
+    void performAction(BodyArmor* bodyarmor);
+    virtual void performAction(Soldier* soldier) = 0;
+    void performAction(Weapon* weapon);
+    void performAction(SolidObject* solidObject);
+
+
 };
 
 

@@ -8,18 +8,25 @@
 #define EX2_CPP_OBJECT_H
 
 #include "Point.h"
+#include <memory>
 
-
+class Soldier;
 
 class MapObject {
+
 
 protected:
     Point _position;
 public:
     explicit MapObject(const Point& position);
+
     virtual ~MapObject() = 0;
+
     const Point& getLocation() const;
+
     void setLocation(const Point& newPoint);
+
+    virtual void acceptAction(Soldier* soldier) = 0;
 
 };
 
