@@ -12,7 +12,8 @@ class Player {
 
     friend class Game;
 
-    std::vector<Soldier*> _soldiers;
+protected:
+    std::vector<Soldier *> _soldiers;
     static int _armyCounter;
     const int _army;
     const std::string _name;
@@ -20,11 +21,11 @@ class Player {
 public:
 
     explicit Player(std::string name);
-    void initSteps(std::vector<std::vector<Point*>> points);
-    friend std::ostream& operator<<(std::ostream& os, const Player& player);
+
+    virtual void playTurn() = 0;
+
+    friend std::ostream &operator<<(std::ostream &os, const Player &player);
 };
-
-
 
 
 #endif //EX2_CPP_SEFI_PLAYER_H
