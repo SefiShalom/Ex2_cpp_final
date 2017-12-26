@@ -14,16 +14,26 @@
 #define MISSILE_BULLETS_PER_SHOT 1
 #define NOT_AFFECTED_BY_BODYARMOR 1
 
-class Missile: public Weapon {
+class Missile : public Weapon {
 
-    public:
-        Missile(const Point& position);
-        virtual ~Missile();
-        double attackArmor(ShieldArmor* sheild);
-        double attackArmor(BodyArmor* bodyarmor);
-        void useObject(Fighter* soldier);
-        void drop(Fighter* soldier);
+public:
+    Missile(const Point &position);
 
+    virtual ~Missile();
+
+    double attackArmor(ShieldArmor *sheild);
+
+    double attackArmor(BodyArmor *bodyarmor);
+
+    void useObject(Fighter *soldier);
+
+    void drop(Fighter *soldier);
+
+    virtual double attackArmor(std::shared_ptr<ShieldArmor> sheild);
+
+    virtual double attackArmor(std::shared_ptr<BodyArmor> armor);
+
+    virtual void drop(std::shared_ptr<Fighter> soldier);
 };
 
 

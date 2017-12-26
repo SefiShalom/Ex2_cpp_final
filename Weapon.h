@@ -6,6 +6,7 @@
 #ifndef EX2_CPP_WEAPON_H
 #define EX2_CPP_WEAPON_H
 
+#include <memory>
 #include <iostream>
 #include "CollectableObject.h"
 //#include "Fighter.h"
@@ -27,6 +28,10 @@ public:
     virtual double attackArmor(BodyArmor* armor) = 0;
     virtual void drop(Fighter* soldier) = 0;
     const double getPower() const;
+
+    virtual double attackArmor(std::shared_ptr<ShieldArmor> sheild) = 0;
+    virtual double attackArmor(std::shared_ptr<BodyArmor> armor) = 0;
+    virtual void drop(std::shared_ptr<Fighter> soldier) = 0;
 };
 
 

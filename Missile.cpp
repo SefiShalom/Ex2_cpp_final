@@ -31,3 +31,20 @@ void Missile::drop(Fighter *soldier) {
 
 }
 
+
+
+double Missile::attackArmor(std::shared_ptr<ShieldArmor> sheild) {
+    std::cout << "Missile attacked ShieldArmor: ShieldArmor has reduced the attack to " <<
+              shoot()*(sheild->getDefensePower())<< std::endl;
+    return shoot()*(sheild->getDefensePower());;
+}
+
+double Missile::attackArmor(std::shared_ptr<BodyArmor> armor) {
+    std::cout << "Missile attacked BodyArmor: NOT_AFFECTED_BY_BODYARMOR" << std::endl;
+    return shoot()*NOT_AFFECTED_BY_BODYARMOR;
+}
+
+void Missile::drop(std::shared_ptr<Fighter> soldier) {
+
+}
+
