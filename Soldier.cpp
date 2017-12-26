@@ -108,27 +108,17 @@ double Soldier::getHP() const {
     return _hp;
 }
 
-
-
-
-void Soldier::performAction(ShieldArmor*shield) {
-
+void Soldier::performAction(ShieldArmor* shield) {
+    pickObject(shield);
 }
 
 void Soldier::performAction(BodyArmor* bodyarmor) {
-
+    pickObject(bodyarmor);
 }
 
-void Soldier::performAction(Soldier* soldier) {
-
-}
-
-void Soldier::performAction(Weapon* weapon) {
-
-}
 
 void Soldier::performAction(SolidObject* solidObject) {
-
+    std::cout << "SolidObject Ahead!" << std::endl;
 }
 
 std::vector<MapObject> Soldier::scanRadius() {
@@ -138,6 +128,30 @@ std::vector<MapObject> Soldier::scanRadius() {
 void Soldier::acceptAction(Soldier* soldier) {
     soldier->performAction(this);
 }
+
+void Soldier::pickObject(BodyArmor *ba) {
+    if (ba->isCarried()) return;
+
+    if (_bodyarmor != nullptr) {
+        _bodyarmor->drop(this);
+        set_bodyarmor(nullptr);
+    }
+    set_bodyarmor(ba);
+    ba->setCarried(true);
+    ba->setLocation(UNREACHABLE_POINT);
+}
+
+void Soldier::pickObject(ShieldArmor *sa) {
+    if (sa->isCarried()) return;
+    if (_shield != nullptr) {
+        _shield->drop(this);
+        set_shield(nullptr);
+    }
+    set_shield(sa);
+    sa->setCarried(true);
+    sa->setLocation(UNREACHABLE_POINT);
+}
+
 
 
 

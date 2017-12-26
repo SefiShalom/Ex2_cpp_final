@@ -18,13 +18,12 @@ class RegularSoldier: public Fighter {
 
 public:
     RegularSoldier(const Point& position, const short army);
+
     virtual ~RegularSoldier();
 
     void healMe();
 
     virtual double calculateHitChance(Soldier *enemy) const;
-
-    virtual double calculateHitChance(std::shared_ptr<Soldier> enemy) const;
 
     virtual void walk();
 

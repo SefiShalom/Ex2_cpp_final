@@ -11,61 +11,56 @@
 #include "Missile.h"
 #include "M16.h"
 #include "RegularSoldier.h"
+#include "SniperSoldier.h"
 
 using namespace std;
 
 int main() {
+
     srand(time(NULL));// getting the current time for the random function at Fighter
 
 
     RegularSoldier reg(Point(0, 5), 1);
-    RegularSoldier reg2(Point(0, 5), 1);
-
-//    shared_ptr<RegularSoldier> reg2p = make_shared<RegularSoldier>(RegularSoldier(Point(5, 5), 1));
-//    shared_ptr<RegularSoldier> regp = make_shared<RegularSoldier>(RegularSoldier(Point(0, 5), 1));
+    SniperSoldier sniper(Point(4, 5), 2);
+    Medic med1(Point(5,2),1);
+    Medic med2(Point(10,10),2);
 
     M16 *m = new M16(Point(2, 2));
     Missile *miss = new Missile(Point(8, 8));
     BodyArmor *ba = new BodyArmor(Point(1, 5), 0.65);
     ShieldArmor *sa = new ShieldArmor(Point(5, 5), 0.65);
+    SolidObject * so = new SolidObject(Point(8,8),10,10);
 
-//    shared_ptr<Missile> missile = make_shared<Missile>(Missile(Point(8,8)));
-//    shared_ptr<BodyArmor> bodyarmor = make_shared<BodyArmor>(BodyArmor(Point(1,5), 0.65));
-//    shared_ptr<ShieldArmor> shield = make_shared<ShieldArmor>(ShieldArmor(Point(5,5), 0.65));
+    /*
+    NOTE:
+    In order to perform an action on an instance. the instance has
+    to accept the action you perform on it. instance->acceptAction(performer);
+   */
 
-//    reg.pickObject(missile);
-//    regp->pickObject(missile);
+    m->acceptAction(&sniper); //sniper picked an M16
+    miss->acceptAction(&reg);//reg picked a Missile
+    ba->acceptAction(&sniper);// sniper picked a BodyArmor
+    sa->acceptAction(&reg); // reg picked a ShieldArmor
+    reg.acceptAction(&sniper);//reg was attacked by sniper
+    sniper.acceptAction(&reg);
+    so->acceptAction(&reg);
 
-    reg.pickObject(m);
-    reg.pickObject(miss);
-    reg.pickObject(sa);
-
-
-    miss->attackArmor(sa);
-    m->attackArmor(sa);
-
-    miss->attackArmor(ba);
-    m->attackArmor(sa);
-
-    reg2.pickObject(sa);
-
-//    reg2.pickObject(bodyarmor);
-//    reg2.pickObject(shield);
-    reg.attack(&reg2);
-
-//    reg2p->pickObject(bodyarmor);
-//    reg2p->pickObject(shield);
+    reg.acceptAction(&med1);
+    sniper.acceptAction(&med2);
+    med1.acceptAction(&reg);
 
     for(int i = 0; i < 4; i++)
-        reg.attack(&reg2);
-//        regp->attack(reg2p);
+        reg.acceptAction(&sniper);
+
 
     reg.setNextDestination(Point(10,10));
     while(reg.isWalking()) reg.walk();
 
-//    delete m;
-//    delete miss;
-//    delete sa;
+    delete m;
+    delete miss;
+    delete sa;
+    delete ba;
+    delete so;
 
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
 

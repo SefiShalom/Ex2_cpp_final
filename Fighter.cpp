@@ -3,7 +3,6 @@
 //
 
 #include "Fighter.h"
-#include "Missile.h"
 
 Fighter::Fighter(const Point &position, size_t hp, double speed, const int army)
         : Soldier(position, hp, speed, army), _weapon(nullptr) {}
@@ -20,27 +19,6 @@ float Fighter::getRandom(){
     return r;
 }
 
-void Fighter::pickObject(BodyArmor *ba) {
-    if (ba->isCarried()) return;
-    if (_bodyarmor != nullptr) {
-        _bodyarmor->drop(this);
-        set_bodyarmor(nullptr);
-    }
-    _bodyarmor = ba;
-    ba->setCarried(true);
-    ba->setLocation(UNREACHABLE_POINT);
-}
-
-void Fighter::pickObject(ShieldArmor *sa) {
-    if (sa->isCarried()) return;
-    if (_shield != nullptr){
-        _shield->drop(this);
-        set_shield(nullptr);
-    }
-    _shield = sa;
-    sa->setCarried(true);
-    sa->setLocation(UNREACHABLE_POINT);
-}
 
 void Fighter::pickObject(Weapon *weapon) {
     if (weapon->isCarried()) return;
@@ -62,7 +40,12 @@ void Fighter::set_weapon(Weapon *weapon) {
 }
 
 void Fighter::performAction(Soldier *soldier) {
-    attack(soldier);
+    if(getArmy() != soldier->getArmy()) attack(soldier);
+    else std::cout << "We are brothers in arms!" << std::endl;
+}
+
+void Fighter::performAction(Weapon *weapon) {
+    pickObject(weapon);
 }
 
 

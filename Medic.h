@@ -23,23 +23,13 @@ public:
     virtual ~Medic();
     void heal(Soldier* injured);
     virtual void attack(Soldier *target);
-    void pickObject(Weapon* weapon);
-    void pickObject(BodyArmor* weapon);
-    void pickObject(ShieldArmor* weapon);
+
     void healMe();
     void whoAreYou();
+    void walk();
+    void performAction(Soldier* soldier);
+    void performAction(Weapon* weapon);
 
-    void heal(std::shared_ptr<Soldier> injured);
-
-    virtual void attack(std::shared_ptr<Soldier> target);
-
-    void pickObject(std::shared_ptr<Weapon> weapon);
-
-    void pickObject(std::shared_ptr<BodyArmor> weapon);
-
-    void pickObject(std::shared_ptr<ShieldArmor> weapon);
-
-    void performAction(std::shared_ptr<Soldier> soldier);
 };
 
 

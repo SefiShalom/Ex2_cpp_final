@@ -26,6 +26,10 @@ public:
     void walk();
 
     virtual int getType();
+
+    void healMe();
+
+    double calculateHitChance(Soldier *enemy) const;
 };
 
 

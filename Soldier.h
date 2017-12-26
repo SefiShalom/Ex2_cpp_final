@@ -51,8 +51,6 @@ protected:
     //collectable object pointers
     BodyArmor* _bodyarmor;
     ShieldArmor* _shield;
-    std::shared_ptr<BodyArmor> __bodyarmor;
-    std::shared_ptr<ShieldArmor> __shield;
 
     virtual void walk(double speed);
 
@@ -74,9 +72,9 @@ public:
 
     void setNextDestination(const Point& nextPoint);
 
-    virtual void pickObject(BodyArmor* ba)=0;
+    virtual void pickObject(BodyArmor* ba);
 
-    virtual void pickObject(ShieldArmor* sa)=0;
+    virtual void pickObject(ShieldArmor* sa);
 
     bool isWalking();
 
@@ -86,7 +84,6 @@ public:
 
     void set_shield(ShieldArmor* shield);
 
-
     friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 
     std::vector<MapObject> scanRadius();
@@ -94,11 +91,14 @@ public:
     void acceptAction(Soldier* soldier);
 
     void performAction(ShieldArmor* shield);
-    void performAction(BodyArmor* bodyarmor);
-    virtual void performAction(Soldier* soldier) = 0;
-    void performAction(Weapon* weapon);
-    void performAction(SolidObject* solidObject);
 
+    void performAction(BodyArmor* bodyarmor);
+
+    virtual void performAction(Weapon* weapon) = 0;
+
+    virtual void performAction(Soldier* soldier) = 0;
+
+    void performAction(SolidObject* solidObject);
 
 };
 

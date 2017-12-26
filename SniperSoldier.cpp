@@ -30,3 +30,12 @@ double SniperSoldier::calculateHitChance(std::shared_ptr<Soldier> enemy) {
     double dist = _position.distance(enemy->getLocation());
     return (dist-1)/dist;
 }
+
+double SniperSoldier::calculateHitChance(Soldier* enemy) const{
+    double d = getLocation().distance(enemy->getLocation());
+    return d-1 / d;
+}
+
+void SniperSoldier::healMe() {
+    refillHP(SNIPER_SOLDIER_HP);
+}
