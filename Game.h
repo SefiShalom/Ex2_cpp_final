@@ -7,12 +7,21 @@
 
 #include "MapObject.h"
 #include "Soldier.h"
+#include "Battlefield.h"
 #include <iostream>
 #include <vector>
+
+
+#define BATTLEFIELD_LINE 1
+#define PLAYERS_LINE 2
+#define NUM_OF_SOLDIERS_LINE 3
+
 
 class Game {
 
     std::vector<MapObject*> _gameMap;// contains all of the MapObjects in the game
+
+    Battlefield* _battlefield;
 
 public:
 
@@ -25,6 +34,8 @@ public:
     void addMapObject(MapObject* object);
 
     std::vector<MapObject*>& getAllObjects();
+
+    void initGame(std::string path);
 };
 
 

@@ -122,6 +122,8 @@ int main() {
 //        }
 //    }
 
+    cout << "Battlefield size: (" << stoi(parseMat[1][1]) << ", " << stoi(parseMat[1][2]) << ")" << endl;
+
     cout << "Got a vector of size " << parseMat.size() << endl;
 
 
