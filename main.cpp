@@ -113,14 +113,14 @@ int main() {
 
     vector<vector<string>> parseMat = gfp.parse();
 
-//    for (auto &i : parseMat) {
-//        cout << "\n--This line is of length " << i.size() << endl;
-//        cout << "The last element is " << i[i.size()-1] << endl;
-//        cout << "Its length is \n" << i[i.size()-1].size() << endl;
-//        for (auto &j : i) {
-//            cout << j << endl;
-//        }
-//    }
+    for (auto &i : parseMat) {
+        cout << "\n--This line is of length " << i.size() << endl;
+        cout << "The last element is " << i[i.size()-1] << endl;
+        cout << "Its length is " << i[i.size()-1].size() << endl;
+        for (auto &j : i) {
+            cout << j << endl;
+        }
+    }
 
     cout << "Battlefield size: (" << stoi(parseMat[1][1]) << ", " << stoi(parseMat[1][2]) << ")" << endl;
 

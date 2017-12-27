@@ -5,12 +5,12 @@
 #include "Game.h"
 #include "GameFileParser.h"
 
-Game::Game(){}
+Game::Game() {}
 
 Game::~Game(){
     std::vector<MapObject*>::iterator it;
     for( it = _gameMap.begin(); it!= _gameMap.end(); it++) delete *it;
-    delete _battlefield;
+//    delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
 }
 
 std::vector<MapObject *> Game::retrieveObjectsInRadius(Soldier *soldier, double radius) {

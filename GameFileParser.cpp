@@ -23,22 +23,13 @@ std::vector<std::vector<std::string>> GameFileParser::parse() {
     while (getline(file, tmp)) {
 
         ft.setText(tmp);
-        line = ft.tokenizeBy(", \n\r\b\t");
+        line = ft.tokenizeBy(",\n\r\b\t");
 
         if (lineNumber < OBJECTS_NO && lineNumber > 0) {
             if (!checkLineNumber(lineNumber, line[0])) {
                 std::cout << std::endl;
                 std::cout << "Error on game.csv. Error line: " << lineNumber << std::endl;
                 std::cout << "Found the word " << line[0].c_str() << std::endl;
-
-                if (line[0][line[0].length() - 1] == ' ' || line[0][line[0].length() - 1] == '\n') {
-                    std::cout << "FOUND SOME DELIMITER!" << std::endl;
-                }
-
-                for (int i = 0; i < line[0].length(); ++i) {
-                    std::cout << line[0] << std::endl;
-                    std::cout << "[" << i << "] = " << line[0][i] << std::endl;
-                }
 
                 return std::vector<std::vector<std::string>>();
             }
