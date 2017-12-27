@@ -16,9 +16,13 @@ class FileTokenizer {
 
 public:
 
+    FileTokenizer();
+
     explicit FileTokenizer(std::string text);
 
     std::vector<std::string> tokenizeBy(std::string delims);
+
+    void setText(std::string text);
 
 };
 

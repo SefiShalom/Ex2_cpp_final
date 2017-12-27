@@ -4,6 +4,9 @@
 
 #include "FileTokenizer.h"
 
+FileTokenizer::FileTokenizer()
+        : toParse("") {}
+
 FileTokenizer::FileTokenizer(std::string text)
         : toParse(text) {}
 
@@ -20,3 +23,8 @@ std::vector<std::string> FileTokenizer::tokenizeBy(std::string delims) {
 
     return ret;
 }
+
+void FileTokenizer::setText(std::string text) {
+    toParse = text;
+}
+

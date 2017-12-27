@@ -24,3 +24,7 @@ std::vector<MapObject *> Game::retrieveObjectsInRadius(Soldier *soldier, double 
 void Game::addMapObject(MapObject* object) {
     _gameMap.emplace_back(object);
 }
+
+std::vector<MapObject *> &Game::getAllObjects() {
+    return _gameMap;
+}

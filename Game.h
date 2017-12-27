@@ -17,9 +17,14 @@ class Game {
 public:
 
     Game();
+
     ~Game();
+
     std::vector<MapObject*> retrieveObjectsInRadius(Soldier* soldier, double radius);
+
     void addMapObject(MapObject* object);
+
+    std::vector<MapObject*>& getAllObjects();
 };
 
 
