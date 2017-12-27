@@ -13,6 +13,7 @@
 #include "RegularSoldier.h"
 #include "SniperSoldier.h"
 #include "Game.h"
+#include "GameFileParser.h"
 
 using namespace std;
 
@@ -105,6 +106,25 @@ int main() {
 //    delete sa;
 //    delete ba;
 //    delete so;
+
+
+    GameFileParser gfp("csvs/init_file_example.csv");
+//    gfp.parse();
+
+    vector<vector<string>> parseMat = gfp.parse();
+
+//    for (auto &i : parseMat) {
+//        cout << "\n--This line is of length " << i.size() << endl;
+//        cout << "The last element is " << i[i.size()-1] << endl;
+//        cout << "Its length is \n" << i[i.size()-1].size() << endl;
+//        for (auto &j : i) {
+//            cout << j << endl;
+//        }
+//    }
+
+    cout << "Got a vector of size " << parseMat.size() << endl;
+
+
 
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
 
