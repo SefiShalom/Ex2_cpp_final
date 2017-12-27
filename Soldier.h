@@ -9,6 +9,7 @@
 #include <vector>
 #include "Point.h"
 #include "MapObject.h"
+
 //////NEW
 #include "BodyArmor.h"
 #include "ShieldArmor.h"

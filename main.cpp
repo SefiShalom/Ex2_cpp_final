@@ -22,37 +22,52 @@ int main() {
 
     Game game;
     RegularSoldier* reg = new RegularSoldier(Point(0, 0), 1);
-    SniperSoldier* sniper = new SniperSoldier(Point(5, 5), 1);
-    Medic* med1 = new Medic(Point(5,2),1);
-    Medic* med2 = new Medic(Point(10,10),2);
-    M16 *m = new M16(Point(20, 20));
-    Missile *miss = new Missile(Point(4, 4));
-    BodyArmor *ba = new BodyArmor(Point(1, 5), 0.65);
-    ShieldArmor *sa = new ShieldArmor(Point(5, 5), 0.65);
-    SolidObject * so = new SolidObject(Point(8,8),10,10);
+    SniperSoldier* sniper = new SniperSoldier(Point(5, 20), 1);
+//    Medic* med1 = new Medic(Point(5,2),1);
+    Medic* med2 = new Medic(Point(5,5),2);
+    M16 *m = new M16(Point(15, 15));
+    Missile *miss = new Missile(Point(10, 10));
+//    BodyArmor *ba = new BodyArmor(Point(1, 5), 0.65);
+//    ShieldArmor *sa = new ShieldArmor(Point(5, 5), 0.65);
+//    SolidObject * so = new SolidObject(Point(8,8),10,10);
 
     game.addMapObject(reg);
     game.addMapObject(sniper);
     game.addMapObject(m);
     game.addMapObject(miss);
-    game.addMapObject(ba);
-    game.addMapObject(sa);
-    game.addMapObject(med1);
+//    game.addMapObject(ba);
+//    game.addMapObject(sa);
+//    game.addMapObject(med1);
     game.addMapObject(med2);
-    game.addMapObject(so);
+//    game.addMapObject(so);
 
-    std::vector<MapObject*> obj = game.retrieveObjectsInRadius(sniper,4);
+    sniper->setNextDestination(Point(5,0));
+
+    while(sniper->isWalking()) {
+        sniper->walk();
+
+        std::vector<MapObject *> obj = game.retrieveObjectsInRadius(sniper, 4);
+
+        std::cout << "Objects found in radius 4 around Location: "
+                  << sniper->getLocation() << std::endl;
+
+        for(auto it = obj.begin();it < obj.end(); it++)
+            std::cout << *(*it);
+
+        for(auto it = obj.begin();it < obj.end(); it++)
+            (*it)->acceptAction(sniper);
+    }
 
 
-    std::cout << "Objects found in radius:" << std::endl;
-    for(auto it = obj.begin();it < obj.end(); it++)
-        std::cout << *(*it);
+    std::cout << (*m);
 
 
-    for(auto it = obj.begin();it < obj.end(); it++)
-        (*it)->acceptAction(sniper);
 
-    std::cout<< (*med1);
+
+
+
+
+//    std::cout<< (*med1);
 
 
 
@@ -81,9 +96,9 @@ int main() {
 //    for(int i = 0; i < 4; i++)
 //        sniper->acceptAction(reg);
 
-    reg->setNextDestination(Point(10,10));
 
-    while(reg->isWalking()) reg->walk();
+
+
 
 //    delete m;
 //    delete miss;
