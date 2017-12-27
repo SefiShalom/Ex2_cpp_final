@@ -17,6 +17,7 @@ double Point::get_x() const {return _x;}
 double Point::get_y() const {return _y;}
 void Point::set_x(double x){_x = x;}
 void Point::set_y(double y){_y = y;}
+
 double Point::distance(const Point& other) const {
     return sqrt(pow(_x - other._x, 2) + pow(_y - other._y, 2));
 }

@@ -22,7 +22,7 @@ int main() {
 
     Game game;
     RegularSoldier* reg = new RegularSoldier(Point(0, 0), 1);
-    SniperSoldier* sniper = new SniperSoldier(Point(20, 20), 1);
+    SniperSoldier* sniper = new SniperSoldier(Point(5, 20), 1);
 //    Medic* med1 = new Medic(Point(5,2),1);
     Medic* med2 = new Medic(Point(5,5),2);
     M16 *m = new M16(Point(15, 15));
@@ -41,7 +41,7 @@ int main() {
     game.addMapObject(med2);
 //    game.addMapObject(so);
 
-    sniper->setNextDestination(Point(0,0));
+    sniper->setNextDestination(Point(5,0));
 
     while(sniper->isWalking()) {
         sniper->walk();
