@@ -10,7 +10,7 @@ SniperSoldier::SniperSoldier(const Point &location, short army)
 
 double SniperSoldier::calculateHitChance(Soldier &enemy) const {
     double dist = _position.distance(enemy.getLocation());
-    return dist/(dist-1);
+    return (dist-1)/dist;
 }
 
 void SniperSoldier::walk() {
