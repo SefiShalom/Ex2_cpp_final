@@ -34,6 +34,8 @@ public:
     virtual double attackArmor(std::shared_ptr<BodyArmor> armor);
 
     virtual void drop(std::shared_ptr<Fighter> soldier);
+
+    std::ostream& toString(std::ostream& out);
 };
 
 

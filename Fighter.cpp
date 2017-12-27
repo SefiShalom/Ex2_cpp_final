@@ -5,7 +5,7 @@
 #include "Fighter.h"
 
 Fighter::Fighter(const Point &position, size_t hp, double speed, const int army)
-        : Soldier(position, hp, speed, army), _weapon(nullptr) {}
+        : Soldier(position, hp, speed, army), _weapon(new Fists) {}
 
 void Fighter::attack(Soldier* target) {
     if(getRandom() <= calculateHitChance(target))
@@ -15,7 +15,7 @@ void Fighter::attack(Soldier* target) {
 
 float Fighter::getRandom(){
     float r = ((double) rand() / (RAND_MAX));
-    std::cout << "RANDON EQVALS " << r << std::endl;
+    std::cout << "RANDON EQUALS " << r << std::endl;
     return r;
 }
 
@@ -32,7 +32,7 @@ void Fighter::pickObject(Weapon *weapon) {
 }
 
 Fighter::~Fighter() {
-//    std::cout << "Fighter dtor" << std::endl;
+
 }
 
 void Fighter::set_weapon(Weapon *weapon) {

@@ -16,6 +16,7 @@
 //////END
 
 class Weapon;
+class Fists;
 //class ShieldArmor;
 //class BodyArmor;
 
@@ -34,7 +35,7 @@ protected:
     std::vector<Point*> allDestinations;
 
     bool _walking;
-
+    bool _isAlive;
 
 
     // For Medic
@@ -66,6 +67,7 @@ public:
 
     virtual void defend(Weapon* weapon);
 
+
     void reduceHP(double hp);
 
     void refillHP(double refill);
@@ -78,13 +80,14 @@ public:
 
     bool isWalking();
 
+    bool isAlive();
+
     const int getArmy() const;
 
     void set_bodyarmor(BodyArmor* bodyarmor);
 
     void set_shield(ShieldArmor* shield);
 
-    friend std::ostream& operator<<(std::ostream& os, const Soldier& soldier);
 
     std::vector<MapObject> scanRadius();
 

@@ -27,7 +27,7 @@ public:
 
     virtual void walk();
 
-
+    std::ostream& toString (std::ostream& out);
 };
 
 

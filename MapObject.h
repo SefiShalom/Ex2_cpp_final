@@ -28,6 +28,10 @@ public:
 
     virtual void acceptAction(Soldier* soldier) = 0;
 
+    virtual std::ostream& toString(std::ostream& out) = 0;
+
+    friend std::ostream& operator << (std::ostream& out,MapObject& object);
+
 };
 
 #endif //EX2_CPP_OBJECT_H

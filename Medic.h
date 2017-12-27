@@ -16,7 +16,7 @@
 
 class Medic : public Soldier {
 
-    Fists* fists;
+    Fists* _fists;
 
 public:
     Medic(const Point& position, const short army);
@@ -29,6 +29,7 @@ public:
     void walk();
     void performAction(Soldier* soldier);
     void performAction(Weapon* weapon);
+    std::ostream& toString (std::ostream& out);
 
 };
 

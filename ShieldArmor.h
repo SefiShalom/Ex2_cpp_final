@@ -13,7 +13,6 @@
 
 class ShieldArmor: public Armor {
 
-
 public:
     ShieldArmor(const Point& position, double defensePower);
     ~ShieldArmor();
@@ -21,6 +20,7 @@ public:
     void useObject(Soldier* soldier);
     void drop(Soldier* soldier);
     void acceptAction(Soldier* soldier);
+    std::ostream& toString(std::ostream& out);
 };
 
 

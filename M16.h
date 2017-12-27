@@ -18,8 +18,9 @@ public:
     M16(const Point& position);
     ~M16();
     void useObject(Fighter* fighter);
-
     void useObject(std::shared_ptr<Fighter> fighter);
+    std::ostream& toString(std::ostream& out);
+
 };
 
 

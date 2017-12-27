@@ -21,14 +21,8 @@ public:
     double attackArmor(BodyArmor* armor);
     void useObject(Soldier* soldier);
     void drop(Fighter* figter);
+    std::ostream& toString(std::ostream& out);
 
-    double attackArmor(std::shared_ptr<ShieldArmor> shield);
-
-    double attackArmor(std::shared_ptr<BodyArmor> bodyarmor);
-
-    void useObject(std::shared_ptr<Soldier> soldier);
-
-    void drop(std::shared_ptr<Fighter> fighter);
 };
 
 

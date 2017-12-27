@@ -17,23 +17,15 @@ double Fists::attackArmor(ShieldArmor *sheild) {
     return 10;
 }
 
-void Fists::useObject(Soldier* soldier){}
+void Fists::useObject(Soldier* soldier){
+
+}
 
 void Fists::drop(Fighter *figter) {
-
+    delete this;
 }
 
-
-double Fists::attackArmor(std::shared_ptr<ShieldArmor> shield) {
-    return FISTS_POWER;
-}
-
-double Fists::attackArmor(std::shared_ptr<BodyArmor> bodyarmor) {
-    return FISTS_POWER;
-}
-
-void Fists::useObject(std::shared_ptr<Soldier> soldier) {}
-
-void Fists::drop(std::shared_ptr<Fighter> fighter) {
-
+std::ostream &Fists::toString(std::ostream &out) {
+    out << "Fists" << std::endl;
+    return out;
 }

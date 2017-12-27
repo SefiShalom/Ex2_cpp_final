@@ -25,3 +25,9 @@ void BodyArmor::drop(Soldier *soldier) {
 void BodyArmor::acceptAction(Soldier* soldier) {
     soldier->performAction(this);
 }
+
+std::ostream& BodyArmor::toString(std::ostream& out){
+    out << "BodyArmor:\nPoint: " << getLocation() <<
+       "\nDefense Power: "<< getDefensePower() << std::endl;
+    return out;
+}

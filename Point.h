@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <iostream>
+
 #define OUT_OF_RANGE -1
 #define UNREACHABLE_POINT Point(OUT_OF_RANGE,OUT_OF_RANGE)
 

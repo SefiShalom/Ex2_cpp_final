@@ -40,3 +40,12 @@ void RegularSoldier::run() {
     Soldier::walk(REGULAR_SOLDIER_RUNNING_SPEED);
     std::cout << "RUNNING" << std::endl;
 }
+
+
+std::ostream &RegularSoldier::toString(std::ostream &out) {
+    out<< "RegularSoldier:" <<std::endl;
+    out<< "Army: " << getArmy() <<std::endl;
+    out<< "Location: " << getLocation() <<std::endl;
+    out<< "HP: " << getHP() <<std::endl;
+    return out;
+}

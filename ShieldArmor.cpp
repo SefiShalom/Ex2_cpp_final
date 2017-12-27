@@ -28,3 +28,10 @@ void ShieldArmor::acceptAction(Soldier* soldier) {
     soldier->performAction(this);
 }
 
+std::ostream& ShieldArmor::toString(std::ostream &out) {
+    out << "ShieldArmor:\nLocation: " << getLocation() <<
+       "\nDefense Power: "<< getDefensePower() << std::endl;
+    return out;
+}
+
+

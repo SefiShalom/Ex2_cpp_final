@@ -17,6 +17,10 @@ void MapObject::setLocation(const Point &newPoint) {
     _position = newPoint;
 }
 
+std::ostream& operator<<(std::ostream &out, MapObject &object) {
+    return object.toString(out);
+}
+
 
 
 

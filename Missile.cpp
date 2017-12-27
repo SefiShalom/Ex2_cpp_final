@@ -48,3 +48,12 @@ void Missile::drop(std::shared_ptr<Fighter> soldier) {
 
 }
 
+std::ostream &Missile::toString(std::ostream &out) {
+    out<< "Missile:" <<std::endl;
+    out << "Location: " << getLocation() <<std::endl;
+    out<< "Power: " << getPower() <<std::endl;
+    out<< "Bullets per shot: " << MISSILE_BULLETS_PER_SHOT <<std::endl;
+
+    return out;
+}
+

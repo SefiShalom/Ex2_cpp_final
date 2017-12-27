@@ -39,3 +39,11 @@ double SniperSoldier::calculateHitChance(Soldier* enemy) const{
 void SniperSoldier::healMe() {
     refillHP(SNIPER_SOLDIER_HP);
 }
+
+std::ostream &SniperSoldier::toString(std::ostream &out) {
+    out<< "SniperSoldier:" <<std::endl;
+    out<< "Army: " << getArmy() <<std::endl;
+    out<< "Location: " << getLocation() <<std::endl;
+    out<< "HP: " << getHP() <<std::endl;
+    return out;
+}

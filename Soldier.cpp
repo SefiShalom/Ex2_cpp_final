@@ -9,7 +9,8 @@ Soldier::Soldier(const Point &currPosition, double hp, double speed, const short
         : MapObject(currPosition),
           _speed(speed), _army(army),
           _bodyarmor(nullptr), _shield(nullptr),
-          _walking(false), _hp(hp), _nextDestination(UNREACHABLE_POINT) {}
+          _walking(false), _hp(hp), _isAlive(true),
+          _nextDestination(UNREACHABLE_POINT) {}
 
 
 Soldier::~Soldier() {
@@ -42,24 +43,11 @@ const int Soldier::getArmy() const {
 }
 
 void Soldier::feedMeWithDestinations(std::vector<Point *> points) {
-    allDestinations = std::vector<Point *>(points);
+    allDestinations = std::vector<Point*>(points);
     std::cout << "I got a point vector: " << std::endl;
     for (auto &i : allDestinations) {
         std::cout << i << std::endl;
     }
-}
-
-std::ostream &operator<<(std::ostream &os, const Soldier &soldier) {
-    os << "Printing Soldier info: " << std::endl;
-    os << "Army: " << soldier._army << std::endl;
-    os << "HP: " << soldier._hp << std::endl;
-    os << "Current position: " << soldier.getLocation() << std::endl;
-//    os << "All points: " << std::endl;
-//    size_t currpoint = 1;
-//    for (auto& point : soldier.allDestinations) {
-//        os << "Point number " << currpoint << ": " << point << std::endl;
-//        currpoint++;
-//    }
 }
 
 
@@ -80,19 +68,25 @@ void Soldier::refillHP(double refill) {
     _hp = refill;
 }
 
+
+
 void Soldier::defend(Weapon *weapon) {
+
     double damage = 1;
 
     int counter = -1;
 
-    if (_bodyarmor) {
-        damage = _bodyarmor->defend(weapon);
-        counter++;
-    }
-
-    if (_shield) {
-        damage *= _shield->defend(weapon);
-        counter++;
+    if(!(_bodyarmor || _shield)){
+        damage = weapon->getPower();
+    }else {
+        if (_bodyarmor) {
+            damage = _bodyarmor->defend(weapon);
+            counter++;
+        }
+        if (_shield) {
+            damage *= _shield->defend(weapon);
+            counter++;
+        }
     }
 
     damage /= pow(weapon->getPower(), counter != -1 ? counter : 0);
@@ -101,6 +95,8 @@ void Soldier::defend(Weapon *weapon) {
             "The original damage was supposed to be " << weapon->getPower() << ".\nTotal damage: " << damage
               << std::endl;
     reduceHP(damage);
+
+//    if(getHP() <= 0) kill();
 }
 
 
@@ -151,6 +147,11 @@ void Soldier::pickObject(ShieldArmor *sa) {
     sa->setCarried(true);
     sa->setLocation(UNREACHABLE_POINT);
 }
+
+bool Soldier::isAlive() {
+    return _isAlive;
+}
+
 
 
 

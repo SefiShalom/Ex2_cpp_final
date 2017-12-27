@@ -30,6 +30,8 @@ public:
     void healMe();
 
     double calculateHitChance(Soldier *enemy) const;
+
+    std::ostream& toString (std::ostream& out);
 };
 
 
