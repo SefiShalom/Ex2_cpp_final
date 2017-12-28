@@ -44,6 +44,7 @@ void Game::initGame(std::string path) {
 
     int startSearchingObjectsFrom = 4 + (numOfPlayers * (numOfSoldierPerPlayer + 1));
 
+
     // Player p_i = GenerateSoldiersForPlayer(int playerNumber, int startReadingFrom, int numOfSoldiers, bool isComputer = false);
 
 

@@ -68,3 +68,13 @@ int PointsFactory::checkLineCorrectness(std::string& toCheck) {
 
     return points;
 }
+
+Point PointsFactory::makeSinglePoint(std::string &input) {
+    FileTokenizer ft(input);
+    std::vector<std::string> strings = ft.tokenizeBy("[], ");
+    if (strings.size() != 2) {
+        std::cout << "ERROR IN SINGLE POINT FACTORY!" << std::endl;
+        return Point();
+    }
+    return Point(std::stoi(strings[0]), std::stoi(strings[1]));
+}
