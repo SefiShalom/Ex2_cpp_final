@@ -19,10 +19,6 @@ public:
 
     SniperSoldier(const Point &location, short army);
 
-    double calculateHitChance(Soldier &enemy) const;
-
-    virtual double calculateHitChance(std::shared_ptr<Soldier> enemy);
-
     void walk();
 
     virtual int getType();

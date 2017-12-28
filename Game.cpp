@@ -5,12 +5,13 @@
 #include "Game.h"
 #include "GameFileParser.h"
 
-Game::Game() {}
+Game::Game()
+        : _battlefield(nullptr){}
 
 Game::~Game(){
     std::vector<MapObject*>::iterator it;
     for( it = _gameMap.begin(); it!= _gameMap.end(); it++) delete *it;
-//    delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
+    delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
 }
 
 std::vector<MapObject *> Game::retrieveObjectsInRadius(Soldier *soldier, double radius) {
@@ -38,19 +39,34 @@ void Game::initGame(std::string path) {
     std::vector<std::vector<std::string>> csv = gfp.parse();
 
     _battlefield = new Battlefield(std::stoi(csv[BATTLEFIELD_LINE][1]), std::stoi(csv[BATTLEFIELD_LINE][2]));
-
     int numOfPlayers          = std::stoi(csv[PLAYERS_LINE][1]);
     int numOfSoldierPerPlayer = std::stoi(csv[NUM_OF_SOLDIERS_LINE][1]);
 
     int startSearchingObjectsFrom = 4 + (numOfPlayers * (numOfSoldierPerPlayer + 1));
 
-
     // Player p_i = GenerateSoldiersForPlayer(int playerNumber, int startReadingFrom, int numOfSoldiers, bool isComputer = false);
-
 
 
     // CONTINUE FROM HERE
 
 }
+
+void Game::killSoldier(Soldier *soldier) {
+
+    std::vector<MapObject*> objects = soldier->kill();
+
+//    std::vector<MapObject*>::iterator i,j;
+
+    auto i = objects.begin();
+    auto j = _gameMap.begin();
+
+    while(i != objects.end())
+            while(j != _gameMap.end())
+                if(*i != *j){
+                    delete *i;
+                    _gameMap.erase(j);
+                }
+}
+
 
 

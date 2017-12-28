@@ -27,6 +27,7 @@ public:
     double getIncline(const Point& dest) const;
     Point nextPoint(double distance, const Point& dest) const;
     Point& operator=(const Point& other);
+    bool isReachable();
     friend std::ostream& operator<<(std::ostream& os, const Point& p);
 };
 

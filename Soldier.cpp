@@ -3,12 +3,12 @@
 //
 
 #include "Soldier.h"
-
+#include "Fists.h"
 
 Soldier::Soldier(const Point &currPosition, double hp, double speed, const short army)
         : MapObject(currPosition),
           _speed(speed), _army(army),
-          _bodyarmor(nullptr), _shield(nullptr),
+          _bodyarmor(nullptr), _shield(nullptr), _weapon(new Fists),
           _walking(false), _hp(hp), _isAlive(true),
           _nextDestination(UNREACHABLE_POINT) {}
 
@@ -53,6 +53,9 @@ void Soldier::feedMeWithDestinations(std::vector<Point *> points) {
 
 void Soldier::reduceHP(double hp) {
     _hp -= hp;
+
+//    if(_hp <= 0)
+
 }
 
 void Soldier::set_bodyarmor(BodyArmor *bodyarmor) {
@@ -111,7 +114,6 @@ void Soldier::performAction(ShieldArmor* shield) {
 void Soldier::performAction(BodyArmor* bodyarmor) {
     pickObject(bodyarmor);
 }
-
 
 void Soldier::performAction(SolidObject* solidObject) {
     std::cout << "SolidObject Ahead!" << std::endl;

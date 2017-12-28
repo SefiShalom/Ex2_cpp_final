@@ -5,7 +5,7 @@
 #include "Fists.h"
 
 Fists::Fists()
-        : Weapon(UNREACHABLE_POINT, FISTS_POWER, BULLETS_PER_SHOT) {}
+        : Weapon(UNREACHABLE_POINT, FISTS_POWER, FISTS_BULLETS_PER_SHOT) {}
 
 Fists::~Fists() {std::cout << "Fists dtor" << std::endl;}
 

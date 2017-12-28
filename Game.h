@@ -40,6 +40,8 @@ public:
     std::vector<MapObject*>& getAllObjects();
 
     void initGame(std::string path);
+
+    void killSoldier(Soldier* soldier);
 };
 
 

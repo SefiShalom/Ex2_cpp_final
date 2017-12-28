@@ -3,3 +3,7 @@
 //
 
 #include "MedicStrategy.h"
+
+int MedicStrategy::applyStrategy(Soldier *soldier) {
+    return 0;
+}

@@ -8,10 +8,6 @@
 SniperSoldier::SniperSoldier(const Point &location, short army)
         : Fighter(location,SNIPER_SOLDIER_HP,SNIPER_SOLDIER_SPEED,army){}
 
-double SniperSoldier::calculateHitChance(Soldier &enemy) const {
-    double dist = _position.distance(enemy.getLocation());
-    return (dist-1)/dist;
-}
 
 void SniperSoldier::walk() {
     if (getHP() < 30) {
@@ -26,14 +22,13 @@ int SniperSoldier::getType() {
     return SNIPER_SOLDIER_IDENTIFIER;
 }
 
-double SniperSoldier::calculateHitChance(std::shared_ptr<Soldier> enemy) {
-    double dist = _position.distance(enemy->getLocation());
-    return (dist-1)/dist;
-}
 
 double SniperSoldier::calculateHitChance(Soldier* enemy) const{
-    double d = getLocation().distance(enemy->getLocation());
-    return d-1 / d;
+    double dist = getLocation().distance(enemy->getLocation());
+    double hitChance = (dist-1)/dist;
+    std::cout<< "Enemy is " << dist << " meters away" <<std::endl;
+    std::cout<< "HitChance: " << hitChance <<std::endl;
+    return hitChance;
 }
 
 void SniperSoldier::healMe() {

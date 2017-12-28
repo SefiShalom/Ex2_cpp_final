@@ -4,6 +4,7 @@
 
 #include "Point.h"
 #include <iostream>
+//#include <w32api/rpcndr.h>
 
 Point::Point() : _x(0), _y(0) {
     std::cout << "Invoked def ctor" << std::endl;
@@ -52,4 +53,8 @@ Point &Point::operator=(const Point &other) {
     _x = other._x;
     _y = other._y;
     return *this;
+}
+
+bool Point::isReachable() {
+    return !(_x == OUT_OF_RANGE &&_y == OUT_OF_RANGE);
 }

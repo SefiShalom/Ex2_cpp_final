@@ -10,8 +10,6 @@
 
 class Fighter : public Soldier {
 
-    Weapon *_weapon;
-    std::shared_ptr<Weapon> __weapon;
 public:
 
     Fighter(const Point &position, size_t hp, double speed, const int army);
@@ -29,6 +27,8 @@ public:
     void performAction(Soldier* soldier);
 
     void performAction(Weapon* weapon);
+
+    virtual std::vector<MapObject*> kill();
 
     float getRandom();
 };

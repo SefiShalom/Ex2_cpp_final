@@ -51,6 +51,7 @@ protected:
     Soldier(const Point& currPosition, double hp, double speed, const short army);
 
     //collectable object pointers
+    Weapon* _weapon;
     BodyArmor* _bodyarmor;
     ShieldArmor* _shield;
 
@@ -67,7 +68,6 @@ public:
     virtual double getHP() const;
 
     virtual void defend(Weapon* weapon);
-
 
     void reduceHP(double hp);
 
@@ -89,7 +89,6 @@ public:
 
     void set_shield(ShieldArmor* shield);
 
-
     std::vector<MapObject> scanRadius();
 
     void acceptAction(Soldier* soldier);
@@ -104,6 +103,7 @@ public:
 
     void performAction(SolidObject* solidObject);
 
+    virtual std::vector<MapObject*> kill() = 0;
 };
 
 

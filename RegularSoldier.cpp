@@ -17,7 +17,9 @@ RegularSoldier::~RegularSoldier() {
 
 
 double RegularSoldier::calculateHitChance(Soldier* enemy) const{
-    return 1 / (getLocation().distance(enemy->getLocation()));
+    double dist = getLocation().distance(enemy->getLocation());
+    std::cout<< "Enemy is " << dist << " meters away" <<std::endl;
+    return 1/dist;
 }
 
 void RegularSoldier::walk() {

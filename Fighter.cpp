@@ -5,7 +5,7 @@
 #include "Fighter.h"
 
 Fighter::Fighter(const Point &position, size_t hp, double speed, const int army)
-        : Soldier(position, hp, speed, army), _weapon(new Fists) {}
+        : Soldier(position, hp, speed, army){}
 
 void Fighter::attack(Soldier* target) {
     if(getRandom() <= calculateHitChance(target))
@@ -15,7 +15,7 @@ void Fighter::attack(Soldier* target) {
 
 float Fighter::getRandom(){
     float r = ((double) rand() / (RAND_MAX));
-    std::cout << "RANDON EQUALS " << r << std::endl;
+    std::cout << "RANDOM EQUALS " << r << std::endl;
     return r;
 }
 
@@ -48,4 +48,17 @@ void Fighter::performAction(Weapon *weapon) {
     pickObject(weapon);
 }
 
+
+std::vector<MapObject*> Fighter::kill(){
+    std::vector<MapObject*> objects;
+    if(_weapon != nullptr) objects.emplace_back(_weapon);
+    if(_shield != nullptr) objects.emplace_back(_shield);
+    if(_weapon != nullptr) objects.emplace_back(_bodyarmor);
+
+    objects.emplace_back(this);
+
+    _isAlive = false;
+
+    return objects;
+}
 

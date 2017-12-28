@@ -9,7 +9,7 @@
 #include "Weapon.h"
 
 #define FISTS_POWER 10
-#define BULLETS_PER_SHOT 1
+#define FISTS_BULLETS_PER_SHOT 1
 
 
 class Fists : public Weapon {

@@ -6,7 +6,7 @@
 
 Medic::Medic(const Point& position, const short army)
 
-        : Soldier(position, MEDIC_HP, MEDIC_SPEED, army), _fists(new Fists){}
+        : Soldier(position, MEDIC_HP, MEDIC_SPEED, army){}
 
 void Medic::heal(Soldier* injured) {
     if (injured->getArmy() == _army)
@@ -15,11 +15,11 @@ void Medic::heal(Soldier* injured) {
 
 Medic::~Medic() {
     std::cout << "Medic dtor" << std::endl;
-    delete _fists;
+    delete _weapon;
 }
 
 void Medic::attack(Soldier *target) {
-    target->defend(_fists);
+    target->defend(_weapon);
 }
 
 void Medic::whoAreYou() {
@@ -49,4 +49,24 @@ std::ostream &Medic::toString(std::ostream &out) {
     out<< "Location: " << getLocation() <<std::endl;
     out<< "HP: " << getHP() <<std::endl;
     return out;
+}
+
+std::vector<MapObject*> Medic::kill(){
+
+    std::vector<MapObject*> objects;
+
+    if(_shield != nullptr){
+        objects.emplace_back(_shield);
+        set_shield(nullptr);
+    }
+
+    if(_bodyarmor != nullptr){
+        objects.emplace_back(_bodyarmor);
+        set_bodyarmor(nullptr);
+    }
+
+    objects.emplace_back(this);
+    _isAlive = false;
+
+    return objects;
 }
