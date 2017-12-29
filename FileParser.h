@@ -13,15 +13,19 @@
 class FileParser {
 
 protected:
+    bool isOpen;
+
     std::ifstream file;
 
 public:
 
-    explicit FileParser(std::string path);
+    explicit FileParser(const std::string &path);
 
     virtual std::vector<std::vector<std::string>> parse() = 0;
 
     virtual ~FileParser() = 0;
+
+    bool isGood();
 };
 
 

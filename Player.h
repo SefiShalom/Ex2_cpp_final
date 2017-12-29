@@ -20,11 +20,15 @@ protected:
 
 public:
 
-    explicit Player(std::string name);
+    Player(const int army, const std::string &name);
+
+    void addSoldier(Soldier* soldier);
 
     virtual void playTurn() = 0;
 
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
+
+    virtual ~Player() = 0;
 };
 
 

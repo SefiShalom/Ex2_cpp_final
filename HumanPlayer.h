@@ -11,7 +11,7 @@
 class HumanPlayer : public Player {
 public:
 
-    HumanPlayer(const std::string &name);
+    HumanPlayer(const int army, const std::string &name);
 
     virtual void playTurn();
 

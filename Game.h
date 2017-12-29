@@ -8,6 +8,7 @@
 #include "MapObject.h"
 #include "Soldier.h"
 #include "Battlefield.h"
+#include "Player.h"
 #include <iostream>
 #include <vector>
 
@@ -23,9 +24,9 @@
 
 class Game {
 
-    std::vector<MapObject*> _gameMap;// contains all of the MapObjects in the game
-
-    Battlefield* _battlefield;
+    std::vector<MapObject *> _gameMap;// contains all of the MapObjects in the game
+    std::vector<Player *> _players;
+    Battlefield *_battlefield;
 
 public:
 
@@ -33,15 +34,18 @@ public:
 
     ~Game();
 
-    std::vector<MapObject*> retrieveObjectsInRadius(Soldier* soldier, double radius);
+    std::vector<MapObject *> retrieveObjectsInRadius(Soldier *soldier, double radius);
 
-    void addMapObject(MapObject* object);
+    void addMapObject(MapObject *object);
 
-    std::vector<MapObject*>& getAllObjects();
+    std::vector<MapObject *> &getAllObjects();
 
-    void initGame(std::string path);
+    void initGame(const std::string &path);
 
-    void killSoldier(Soldier* soldier);
+    void killSoldier(Soldier *soldier);
+
+    Player *generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
+                                       const std::vector<std::vector<std::string>> &csv, bool isComputer = false);
 };
 
 

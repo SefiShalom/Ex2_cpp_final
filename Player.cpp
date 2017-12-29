@@ -9,15 +9,26 @@
 int Player::_armyCounter = 0;
 
 
-Player::Player(std::string name)
-        : _army(_armyCounter++), _name(name) {}
+Player::Player(const int army, const std::string &name)
+        : _army(army), _name(name) {}
 
 
 std::ostream& operator<<(std::ostream& os, const Player& player) {
-    os << "Printing player " << player._name << std::endl;
+    os << "Player: " << player._name << std::endl;
     os << "Army: " << player._army << std::endl;
     for (auto& soldier : player._soldiers) {
         std::cout << soldier << std::endl;
+    }
+    return os;
+}
+
+void Player::addSoldier(Soldier *soldier) {
+    _soldiers.emplace_back(soldier);
+}
+
+Player::~Player() {
+    for (auto &it : _soldiers) {
+        delete it;
     }
 }
 

@@ -3,12 +3,13 @@
 //
 
 #include <sstream>
+#include <utility>
 #include "GameFileParser.h"
 #include "FileTokenizer.h"
 
 
-GameFileParser::GameFileParser(std::string path)
-        : FileParser(path) {}
+GameFileParser::GameFileParser(const std::string &path)
+        : FileParser(std::move(path)) {}
 
 std::vector<std::vector<std::string>> GameFileParser::parse() {
 

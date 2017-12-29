@@ -16,12 +16,11 @@
 
 class GameFileParser : public FileParser {
 
-
     bool checkLineNumber(int &number, std::string &str);
 
 public:
 
-    explicit GameFileParser(std::string path);
+    explicit GameFileParser(const std::string &path);
 
     virtual std::vector<std::vector<std::string>> parse();
 

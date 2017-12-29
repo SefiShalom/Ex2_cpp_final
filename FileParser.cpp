@@ -4,13 +4,20 @@
 
 #include "FileParser.h"
 
-FileParser::FileParser(std::string path) {
+FileParser::FileParser(const std::string &path) {
     file.open(path);
     if (!file.is_open()) {
+        isOpen = false;
         std::cout << "ERROR OPENING THE FILE " << path << std::endl;
+    } else {
+        isOpen = true;
     }
 }
 
 FileParser::~FileParser() {
     file.close();
+}
+
+bool FileParser::isGood() {
+    return isOpen;
 }

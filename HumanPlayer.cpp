@@ -4,7 +4,7 @@
 
 #include "HumanPlayer.h"
 
-HumanPlayer::HumanPlayer(const std::string &name) : Player(name) {}
+HumanPlayer::HumanPlayer(const int army, const std::string &name) : Player(army, name) {}
 
 void HumanPlayer::initSteps(std::vector<std::vector<Point*>> points) {
     size_t index = 0;
@@ -16,6 +16,6 @@ void HumanPlayer::initSteps(std::vector<std::vector<Point*>> points) {
 
 void HumanPlayer::playTurn() {
 
-
+    // TODO
 
 }

@@ -128,6 +128,10 @@ int main() {
 //
 
 
+    cout << "\n\n\n" << endl;
+    game.initGame("csvs/init_file_example2.csv");
+
+
 
 
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
