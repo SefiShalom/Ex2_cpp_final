@@ -24,7 +24,7 @@ void Fighter::pickObject(Weapon *weapon) {
     if (weapon->isCarried()) return;
     if (_weapon != nullptr){
         _weapon->drop(this);
-        set_weapon(nullptr);
+//        set_weapon(nullptr);
     }
     _weapon = weapon;
     weapon->setCarried(true);
@@ -32,7 +32,9 @@ void Fighter::pickObject(Weapon *weapon) {
 }
 
 Fighter::~Fighter() {
-
+//    if (_weapon != nullptr) {
+//        delete _weapon;
+//    }
 }
 
 void Fighter::set_weapon(Weapon *weapon) {

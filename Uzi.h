@@ -12,6 +12,8 @@
 #define UZI_BULLETS_PER_SHOT 3
 
 class Uzi: public Rifle{
+
+public:
     Uzi(const Point& position);
     ~Uzi();
     void useObject(Fighter* fighter);
