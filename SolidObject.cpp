@@ -14,10 +14,10 @@ void SolidObject::acceptAction(Soldier* soldier) {
     soldier->performAction(this);
 }
 
-std::ostream &SolidObject::toString(std::ostream &out) {
-    out<< "SolidObject:" <<std::endl;
-    out<< "Location: " << getLocation() <<std::endl;
-    out<< "Length: " << _length <<std::endl;
-    out<< "Width: " << _width <<std::endl;
-    return out;
+double SolidObject::getLength() {
+    return _length;
+}
+
+double SolidObject::getWidth() {
+    return _width;
 }

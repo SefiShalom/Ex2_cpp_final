@@ -109,8 +109,6 @@ void Game::killSoldier(Soldier *soldier) {
 
     std::vector<MapObject *> objects = soldier->kill();
 
-//    std::vector<MapObject*>::iterator i,j;
-
     auto i = objects.begin();
     auto j = _gameMap.begin();
 
@@ -120,6 +118,10 @@ void Game::killSoldier(Soldier *soldier) {
                 delete *i;
                 _gameMap.erase(j);
             }
+}
+
+void Game::attack(Soldier *attacker, Soldier *target) {
+    if(attacker->attack(target)) killSoldier(target);
 }
 
 

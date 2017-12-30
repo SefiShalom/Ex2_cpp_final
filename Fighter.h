@@ -16,7 +16,7 @@ public:
 
     virtual ~Fighter();
 
-    virtual void attack(Soldier *target);
+    virtual bool attack(Soldier *target);
 
     virtual void pickObject(Weapon *weapon);
 

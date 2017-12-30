@@ -51,11 +51,12 @@ void Soldier::feedMeWithDestinations(std::vector<Point *> points) {
 }
 
 
-void Soldier::reduceHP(double hp) {
+bool Soldier::reduceHP(double hp) {
     _hp -= hp;
 
-//    if(_hp <= 0)
+    if(_hp <= 0) return true;
 
+    return false;
 }
 
 void Soldier::set_bodyarmor(BodyArmor *bodyarmor) {
@@ -73,7 +74,7 @@ void Soldier::refillHP(double refill) {
 
 
 
-void Soldier::defend(Weapon *weapon) {
+bool Soldier::defend(Weapon *weapon) {
 
     double damage = 1;
 
@@ -97,9 +98,9 @@ void Soldier::defend(Weapon *weapon) {
     std::cout << "The attack power was reduced by " << weapon->getPower() - damage << ".\n"
             "The original damage was supposed to be " << weapon->getPower() << ".\nTotal damage: " << damage
               << std::endl;
-    reduceHP(damage);
 
-//    if(getHP() <= 0) kill();
+    return reduceHP(damage);
+
 }
 
 

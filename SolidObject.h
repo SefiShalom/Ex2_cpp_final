@@ -14,11 +14,10 @@ class SolidObject : public MapObject, public std::enable_shared_from_this<SolidO
 public:
 
     SolidObject(const Point& position, double len, double width);
-    virtual ~SolidObject();
-    void acceptAction(Soldier* soldier);
-    std::ostream& toString(std::ostream& out);
-
-
+    virtual ~SolidObject() = 0;
+    double getLength();
+    double getWidth();
+    virtual void acceptAction(Soldier* soldier);
 };
 
 

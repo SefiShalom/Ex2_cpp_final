@@ -44,6 +44,8 @@ public:
 
     void killSoldier(Soldier *soldier);
 
+    void attack(Soldier* attacker, Soldier* target);
+
     Player *generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
                                        const std::vector<std::vector<std::string>> &csv, bool isComputer = false);
 };
