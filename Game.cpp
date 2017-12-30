@@ -32,6 +32,39 @@ std::vector<MapObject *> Game::retrieveObjectsInRadius(Soldier *soldier, double 
     return objectInRadius;
 }
 
+
+std::vector<MapObject *> Game::retrieveObjectsWithinRadiusByPoint(const Point& point, double radius) {
+    std::vector<MapObject *> objectInRadius;
+    std::vector<MapObject *>::iterator it;
+    for (it = _gameMap.begin(); it != _gameMap.end(); it++) {
+        if ((*it)->getLocation().distance(point) <= radius)
+            objectInRadius.emplace_back(*it);
+    }
+    return objectInRadius;
+}
+
+
+MapObject *Game::getClosestObject(const Point& point, double radius) {
+    double minDistance = Point(0,0).distance(Point(_battlefield->getWidth(), _battlefield->getHeight())); // Max distance
+    MapObject *ret = nullptr;
+//    std::cout << "Point to look for is " << point << "\n" << std::endl;
+    for (auto &it : _gameMap) {
+
+//        std::cout << "Checking mapObj at point " << it->getLocation() << std::endl;
+
+        double possibleMin = point.distance(it->getLocation());
+        if (possibleMin < minDistance) {
+            minDistance = possibleMin;
+            if (minDistance <= radius) {
+                ret = it;
+            }
+        }
+    }
+
+    return ret;
+}
+
+
 void Game::addMapObject(MapObject *object) {
     _gameMap.emplace_back(object);
 }
@@ -152,6 +185,10 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
 void Game::attack(Soldier *attacker, Soldier *target) {
     if (attacker->attack(target)) killSoldier(target);
 
+}
+
+Battlefield Game::getBattlefield() {
+    return *_battlefield;
 }
 
 

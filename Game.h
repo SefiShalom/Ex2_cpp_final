@@ -50,6 +50,12 @@ public:
                                        const std::vector<std::vector<std::string>> &csv, bool isComputer = false);
 
     bool addAllMapObject(int from, const std::vector<std::vector<std::string>> &csv);
+
+    Battlefield getBattlefield();
+
+    std::vector<MapObject *> retrieveObjectsWithinRadiusByPoint(const Point &point, double radius);
+
+    MapObject * getClosestObject(const Point &point, double radius);
 };
 
 

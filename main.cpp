@@ -14,6 +14,7 @@
 #include "SniperSoldier.h"
 #include "Game.h"
 #include "GameFileParser.h"
+#include "StatePrinter.h"
 
 using namespace std;
 
@@ -49,7 +50,7 @@ int main() {
     game.initGame("csvs/init_file_example.csv");
 
 
-
+//    StatePrinter::print(game);
 
 
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
