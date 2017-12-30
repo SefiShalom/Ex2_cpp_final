@@ -69,7 +69,10 @@ int PointsFactory::checkLineCorrectness(std::string& toCheck) {
     return points;
 }
 
-Point PointsFactory::makeSinglePoint(std::string &input) {
+Point PointsFactory::makeSinglePoint(const std::string &input) {
+    if (input.empty()) {
+        std::cerr << "Wrong input at single point factory!" << std::endl;
+    }
     FileTokenizer ft(input);
     std::vector<std::string> strings = ft.tokenizeBy("[], ");
     if (strings.size() != 2) {

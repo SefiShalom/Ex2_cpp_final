@@ -17,7 +17,7 @@ public:
 
     static std::vector<Point> makePoints(std::string& input);
 
-    static Point makeSinglePoint(std::string& input);
+    static Point makeSinglePoint(const std::string& input);
 
     static int checkLineCorrectness(std::string& toCheck);
 };

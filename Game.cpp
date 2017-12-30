@@ -8,6 +8,7 @@
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 #include "SoldierFactory.h"
+#include "ObjectFactory.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
@@ -53,23 +54,14 @@ void Game::initGame(const std::string &path) {
 
     int startSearchingObjectsFrom = 4 + (numOfPlayers * (numOfSoldiersPerPlayer + 1));
 
-    // Player p_i = GenerateSoldiersForPlayer(int playerNumber, int startReadingFrom, int numOfSoldiers, bool isComputer = false);
-
-//    for (int i = 0; i < csv.size(); ++i) {
-//        for (int j = 0; j < csv[i].size(); ++j) {
-//            std::cout << "i = " << i << ", j = " << j << "\ncsv[i][j] = " << csv[i][j] << std::endl;
-//        }
-//    }
+    if (! addAllMapObject(startSearchingObjectsFrom, csv)) {
+        std::cout << "Error parsing objects!" << std::endl;
+    }
 
     for (int i = 0; i < numOfPlayers; ++i) {
         int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
 
-//        for (const auto &j : csv[startReadingPlayerInfoFrom]) {
-//            std::cout << j << std::endl;
-//        }
         bool isComputer = csv[4 + (numOfSoldiersPerPlayer  + 1) * i][1] == "computer";
-
-//        std::cout << csv[4 + numOfSoldiersPerPlayer *i][1] << std::endl;
 
         Player *p_i = generatePlayerWithSoldiers(i, startReadingPlayerInfoFrom, numOfSoldiersPerPlayer, csv, isComputer);
 
@@ -81,8 +73,6 @@ void Game::initGame(const std::string &path) {
 
         _players.emplace_back(p_i);
     }
-
-    // CONTINUE FROM HERE
 
 }
 
@@ -112,10 +102,6 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         ++startReadingFrom;
     }
 
-//    std::cout << "Created player:"
-    //CONTINUE FROM HERE!
-
-
     return player;
 
 
@@ -136,6 +122,33 @@ void Game::killSoldier(Soldier *soldier) {
                 delete *i;
                 _gameMap.erase(j);
             }
+}
+
+bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>> &csv) {
+
+    if (csv[from][0] != "Objects")
+        return false;
+
+    for (int i = from + 1; i < csv.size(); ++i) {
+        if (csv[i][0] == "weapon") {
+            Weapon *weapon = ObjectFactory::makeWeapon(csv[i]);
+            addMapObject(weapon);
+
+        }
+        else if (csv[i][0] == "Armor") {
+            Armor *armor = ObjectFactory::makeArmor(csv[i]);
+            addMapObject(armor);
+        }
+        else if (csv[i][0] == "solid") {
+            SolidObject *solidObject = ObjectFactory::makeSolidObject(csv[i]);
+            addMapObject(solidObject);
+        }
+        else {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
