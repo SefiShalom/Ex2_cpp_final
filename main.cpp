@@ -50,7 +50,7 @@ int main() {
     game.initGame("csvs/init_file_example.csv");
 
 
-//    StatePrinter::print(game);
+    StatePrinter::print(game);
 
 
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;

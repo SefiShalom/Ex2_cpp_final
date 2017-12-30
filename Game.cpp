@@ -108,6 +108,15 @@ void Game::initGame(const std::string &path) {
         _players.emplace_back(p_i);
     }
 
+    for (int i = 0; i < numOfPlayers; ++i) {
+        std::vector<Soldier*> vec = _players[i]->_soldiers;
+
+        for (auto &it : vec) {
+            addMapObject(it);
+        }
+
+    }
+
 }
 
 Player *
@@ -133,6 +142,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
             return nullptr;
         }
         player->addSoldier(newSoldier);
+//        addMapObject(newSoldier);
         ++startReadingFrom;
     }
 

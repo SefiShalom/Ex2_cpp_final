@@ -6,7 +6,7 @@
 #include "StatePrinter.h"
 
 void StatePrinter::print(Game &game) {
-//    std::map<MapObject, bool> hashMap;
+    std::map<long, bool> hashMap;
 
     const std::vector<MapObject *> &map = game.getAllObjects();
 
@@ -15,24 +15,36 @@ void StatePrinter::print(Game &game) {
     double height = battlefield.getHeight();
     double width  = battlefield.getWidth();
 
-    for (int i = 0; i < height; ++i) {
 
+    for (int k = 0; k < width; ++k) {
+        std::cout << "--";
+    }
+    std::cout << std::endl;
+
+    for (int i = (int)height; i >= 0; --i) {
+        std::cout << "|";
         for (int j = 0; j < width; ++j) {
 
 //            std::vector<MapObject *> around = game.retrieveObjectsWithinRadiusByPoint(Point(i,j), 1);
             MapObject *around = game.getClosestObject(Point(i,j), 1);
-//            hashMap.insert(around, true);
-            if (around != nullptr)
-                std::cout << around->getLocation();
-//                std::cout << "K";
-//                std::cout << around;
+
+            if (around != nullptr && ! hashMap.find(around->getID())->second) {
+//                std::cout << around->getLocation();
+                std::cout << *around;
+                std::pair<long, bool> p = std::make_pair<long, bool>(around->getID(), true);
+                hashMap.insert( p );
+            }
             else
                 std::cout << "  ";
+//                std::cout << "K";
+//                std::cout << around;
 
         }
-
+//        std::cout << "|";
         std::cout << std::endl;
-
+    }
+    for (int k = 0; k < width; ++k) {
+        std::cout << "--";
     }
 
 }

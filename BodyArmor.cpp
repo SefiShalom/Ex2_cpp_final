@@ -27,7 +27,10 @@ void BodyArmor::acceptAction(Soldier* soldier) {
 }
 
 std::ostream& BodyArmor::toString(std::ostream& out){
-    out << "BodyArmor:\nPoint: " << getLocation() <<
-       "\nDefense Power: "<< getDefensePower() << std::endl;
+//    out << "BodyArmor:\nPoint: " << getLocation() <<
+//       "\nDefense Power: "<< getDefensePower() << std::endl;
+    double x = getLocation().get_x();
+    double y = getLocation().get_y();
+    out << "BA(" << getDefensePower() << ")(" << x << "," << y << ")";
     return out;
 }

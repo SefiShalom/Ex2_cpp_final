@@ -14,6 +14,9 @@ class Soldier;
 
 class MapObject {
 
+    static long ID;
+
+    const long _id;
 
 protected:
     Point _position;
@@ -32,6 +35,7 @@ public:
 
     friend std::ostream& operator << (std::ostream& out,MapObject& object);
 
+    long getID() const;
 };
 
 #endif //EX2_CPP_OBJECT_H

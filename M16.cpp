@@ -15,9 +15,14 @@ void M16::useObject(Fighter *fighter) {
 }
 
 std::ostream &M16::toString(std::ostream &out) {
-    out<< "M16:" <<std::endl;
-    out << "Location: " << getLocation() <<std::endl;
-    out<< "Power: " << getPower() <<std::endl;
-    out<< "Bullets per shot: " << M16_BULLETSPERSHOT <<std::endl;
+//    out<< "M16:" <<std::endl;
+//    out << "Location: " << getLocation() <<std::endl;
+//    out<< "Power: " << getPower() <<std::endl;
+//    out<< "Bullets per shot: " << M16_BULLETSPERSHOT <<std::endl;
+
+    double x = getLocation().get_x();
+    double y = getLocation().get_y();
+    out << "M16" << "(" << x << "," << y << ")";
+
     return out;
 }

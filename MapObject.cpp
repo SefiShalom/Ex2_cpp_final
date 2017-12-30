@@ -4,8 +4,9 @@
 
 #include "MapObject.h"
 
+long MapObject::ID = 1;
 
-MapObject::MapObject(const Point& position): _position(position){}
+MapObject::MapObject(const Point& position): _id(ID++), _position(position){}
 
 MapObject::~MapObject(){
 //    std::cout << "MapObject dtor" << std::endl;
@@ -19,6 +20,10 @@ void MapObject::setLocation(const Point &newPoint) {
 
 std::ostream& operator<<(std::ostream &out, MapObject &object) {
     return object.toString(out);
+}
+
+long MapObject::getID() const {
+    return _id;
 }
 
 

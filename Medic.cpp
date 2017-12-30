@@ -44,10 +44,15 @@ void Medic::walk() {
 }
 
 std::ostream &Medic::toString(std::ostream &out) {
-    out<< "Medic:" <<std::endl;
-    out<< "Army: " << getArmy() <<std::endl;
-    out<< "Location: " << getLocation() <<std::endl;
-    out<< "HP: " << getHP() <<std::endl;
+//    out<< "Medic" <<std::endl;
+//    out<< "Army: " << getArmy() <<std::endl;
+//    out<< "Location: " << getLocation() <<std::endl;
+//    out<< "HP: " << getHP() <<std::endl;
+
+    double x = getLocation().get_x();
+    double y = getLocation().get_y();
+    out << "Medic" << getArmy() << "(" << x << "," << y << ")";
+
     return out;
 }
 
@@ -70,3 +75,7 @@ std::vector<MapObject*> Medic::kill(){
 
     return objects;
 }
+
+
+
+

@@ -31,7 +31,7 @@ void Player::addSoldier(Soldier *soldier) {
 
 Player::~Player() {
     for (auto &it : _soldiers) {
-        delete it;
+//        delete it;
     }
 }
 
