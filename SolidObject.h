@@ -15,10 +15,10 @@ public:
 
     SolidObject(const Point& position, double len, double width);
     virtual ~SolidObject();
-    void acceptAction(Soldier* soldier);
-    std::ostream& toString(std::ostream& out);
-
-
+    double getLength();
+    double getWidth();
+    virtual void acceptAction(Soldier* soldier);
+    virtual std::ostream& toString(std::ostream& out);
 };
 
 

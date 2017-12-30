@@ -7,10 +7,13 @@
 Fighter::Fighter(const Point &position, size_t hp, double speed, const int army)
         : Soldier(position, hp, speed, army){}
 
-void Fighter::attack(Soldier* target) {
+bool Fighter::attack(Soldier* target) {
     if(getRandom() <= calculateHitChance(target))
-        target->defend(_weapon);
-    else std::cout << "Missed" << std::endl;
+        return target->defend(_weapon);
+
+        std::cout << "Missed" << std::endl;
+
+        return false;
 }
 
 float Fighter::getRandom(){

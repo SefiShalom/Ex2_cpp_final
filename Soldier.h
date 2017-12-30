@@ -61,15 +61,15 @@ public:
 
     virtual ~Soldier();
 
-    virtual void attack(Soldier* target) = 0;
+    virtual bool attack(Soldier* target) = 0;
 
     virtual void walk() = 0;
 
     virtual double getHP() const;
 
-    virtual void defend(Weapon* weapon);
+    virtual bool defend(Weapon* weapon);
 
-    void reduceHP(double hp);
+    bool reduceHP(double hp);
 
     void refillHP(double refill);
 

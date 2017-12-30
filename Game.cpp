@@ -18,7 +18,7 @@ Game::~Game() {
     for (it = _gameMap.begin(); it != _gameMap.end(); it++) delete *it;
     delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
     for (auto &p : _players) {
-        delete(p);
+        delete (p);
     }
 }
 
@@ -54,16 +54,17 @@ void Game::initGame(const std::string &path) {
 
     int startSearchingObjectsFrom = 4 + (numOfPlayers * (numOfSoldiersPerPlayer + 1));
 
-    if (! addAllMapObject(startSearchingObjectsFrom, csv)) {
+    if (!addAllMapObject(startSearchingObjectsFrom, csv)) {
         std::cout << "Error parsing objects!" << std::endl;
     }
 
     for (int i = 0; i < numOfPlayers; ++i) {
         int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
 
-        bool isComputer = csv[4 + (numOfSoldiersPerPlayer  + 1) * i][1] == "computer";
+        bool isComputer = csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] == "computer";
 
-        Player *p_i = generatePlayerWithSoldiers(i, startReadingPlayerInfoFrom, numOfSoldiersPerPlayer, csv, isComputer);
+        Player *p_i = generatePlayerWithSoldiers(i, startReadingPlayerInfoFrom, numOfSoldiersPerPlayer, csv,
+                                                 isComputer);
 
         if (p_i == nullptr) {
             std::cout << "Error creating player!" << std::endl;
@@ -80,7 +81,7 @@ Player *
 Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
                                  const std::vector<std::vector<std::string>> &csv, bool isComputer) {
 
-    std::string pc    = "Computer";
+    std::string pc = "Computer";
     std::string human = "Human";
 
     Player *player;
@@ -111,8 +112,6 @@ void Game::killSoldier(Soldier *soldier) {
 
     std::vector<MapObject *> objects = soldier->kill();
 
-//    std::vector<MapObject*>::iterator i,j;
-
     auto i = objects.begin();
     auto j = _gameMap.begin();
 
@@ -124,6 +123,7 @@ void Game::killSoldier(Soldier *soldier) {
             }
 }
 
+
 bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>> &csv) {
 
     if (csv[from][0] != "Objects")
@@ -134,21 +134,24 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
             Weapon *weapon = ObjectFactory::makeWeapon(csv[i]);
             addMapObject(weapon);
 
-        }
-        else if (csv[i][0] == "Armor") {
+        } else if (csv[i][0] == "Armor") {
             Armor *armor = ObjectFactory::makeArmor(csv[i]);
             addMapObject(armor);
-        }
-        else if (csv[i][0] == "solid") {
+        } else if (csv[i][0] == "solid") {
             SolidObject *solidObject = ObjectFactory::makeSolidObject(csv[i]);
             addMapObject(solidObject);
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     return true;
+}
+
+
+void Game::attack(Soldier *attacker, Soldier *target) {
+    if (attacker->attack(target)) killSoldier(target);
+
 }
 
 

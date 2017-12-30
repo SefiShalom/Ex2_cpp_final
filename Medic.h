@@ -22,7 +22,7 @@ public:
     Medic(const Point& position, const short army);
     virtual ~Medic();
     void heal(Soldier* injured);
-    virtual void attack(Soldier *target);
+    virtual bool attack(Soldier *target);
     void healMe();
     void whoAreYou();
     void walk();

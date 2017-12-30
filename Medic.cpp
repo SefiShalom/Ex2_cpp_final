@@ -18,8 +18,8 @@ Medic::~Medic() {
     delete _weapon;
 }
 
-void Medic::attack(Soldier *target) {
-    target->defend(_weapon);
+bool Medic::attack(Soldier *target) {
+    return target->defend(_weapon);
 }
 
 void Medic::whoAreYou() {
@@ -28,7 +28,7 @@ void Medic::whoAreYou() {
 
 
 void Medic::healMe() {
-//    setHP(MEDIC_HP);
+   refillHP(MEDIC_HP);
 }
 
 
