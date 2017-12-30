@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
+#include "SoldierFactory.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
@@ -72,6 +73,10 @@ void Game::initGame(const std::string &path) {
 
         Player *p_i = generatePlayerWithSoldiers(i, startReadingPlayerInfoFrom, numOfSoldiersPerPlayer, csv, isComputer);
 
+        if (p_i == nullptr) {
+            std::cout << "Error creating player!" << std::endl;
+        }
+
         std::cout << "Created a player: " << *p_i << std::endl;
 
         _players.emplace_back(p_i);
@@ -95,8 +100,19 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         player = new HumanPlayer(playerNumber, human + std::to_string(playerNumber));
     }
 
-    int i = 0;
+    int ind = 0;
 
+    for (int i = 0; i < numOfSoldiers; ++i) {
+        Soldier *newSoldier = SoldierFactory::makeSoldier(csv[startReadingFrom], playerNumber);
+        if (newSoldier == nullptr) {
+            std::cout << "Error creating a soldier for player number " << playerNumber << std::endl;
+            return nullptr;
+        }
+        player->addSoldier(newSoldier);
+        ++startReadingFrom;
+    }
+
+//    std::cout << "Created player:"
     //CONTINUE FROM HERE!
 
 

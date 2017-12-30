@@ -15,7 +15,6 @@
 class SniperSoldier : public Fighter {
 
 public:
-    static std::string identifier;
 
     SniperSoldier(const Point &location, short army);
 

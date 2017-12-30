@@ -16,8 +16,11 @@ Player::Player(const int army, const std::string &name)
 std::ostream& operator<<(std::ostream& os, const Player& player) {
     os << "Player: " << player._name << std::endl;
     os << "Army: " << player._army << std::endl;
+    os << "Soldiers: " << std::endl;
+    int i = 1;
     for (auto& soldier : player._soldiers) {
-        std::cout << soldier << std::endl;
+        std::cout << i << ") " << *soldier << std::endl;
+        ++i;
     }
     return os;
 }

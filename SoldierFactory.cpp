@@ -8,6 +8,8 @@
 #include "Medic.h"
 #include "PointsFactory.h"
 #include "M16.h"
+#include "Missile.h"
+#include "Uzi.h"
 
 #define REGULAR_SOLDIER 1
 #define SNIPER_SOLDIER 2
@@ -32,11 +34,11 @@ SoldierFactory::makeSoldier(const long id, const Point &currPosition, double hp,
     }
 }
 
-Soldier *SoldierFactory::makeSoldier(std::vector<std::string> &string, const int army) {
+Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &string, const int army) {
 
     std::string type      = string[0];
     std::string pointStr  = string[1];
-    std::string weaponStr    = string[2];
+
 
     RegularSoldier *reg;
     SniperSoldier *sniper;
@@ -72,14 +74,16 @@ Soldier *SoldierFactory::makeSoldier(std::vector<std::string> &string, const int
         return medic;
     }
 
+    std::string weaponStr    = string[2];
+
     if (weaponStr == "M16") {
         weapon = new M16(point);
     }
     else if (weaponStr == "Missile") {
-
+        weapon = new Missile(point);
     }
     else if (weaponStr == "UZI") {
-
+        weapon = new Uzi(point);
     }
     else {
 
