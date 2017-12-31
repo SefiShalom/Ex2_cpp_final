@@ -3,6 +3,7 @@
 //
 
 #include "Medic.h"
+#include "MedicStrategy.h"
 
 Medic::Medic(const Point& position, const short army)
 
@@ -56,24 +57,8 @@ std::ostream &Medic::toString(std::ostream &out) {
     return out;
 }
 
-std::vector<MapObject*> Medic::kill(){
-
-    std::vector<MapObject*> objects;
-
-    if(_shield != nullptr){
-        objects.emplace_back(_shield);
-        set_shield(nullptr);
-    }
-
-    if(_bodyarmor != nullptr){
-        objects.emplace_back(_bodyarmor);
-        set_bodyarmor(nullptr);
-    }
-
-    objects.emplace_back(this);
-    _isAlive = false;
-
-    return objects;
+SoldierStrategy *Medic::getStrategy() {
+    return new MedicStrategy;
 }
 
 

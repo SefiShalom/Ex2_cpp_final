@@ -5,7 +5,7 @@
 #include "PointsFactory.h"
 
 
-std::vector<Point> PointsFactory::makePoints(std::string& input) {
+std::vector<Point> PointsFactory::makePoints(std::string& input, double h, double w) {
     std::vector<Point> ret;
 
     int checkCorrectness = checkLineCorrectness(input);
@@ -23,11 +23,14 @@ std::vector<Point> PointsFactory::makePoints(std::string& input) {
 
     for (int i = 0; i < nums.size(); ++i) {
         double left = nums[i++];
+        if(left > w ) left = w;
+        else if(left < 0) left = 0;
         if (i == nums.size()) {
             std::cout << "\t\t\t\tERROR IN POINT FACTORY!!!" << std::endl;
         }
         double right = nums[i];
-
+        if(right > h ) right = h;
+        else if(right < 0) right = 0;
         ret.emplace_back(Point(left, right));
 
     }

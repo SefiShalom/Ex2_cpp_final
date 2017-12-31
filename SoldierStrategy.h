@@ -6,18 +6,18 @@
 #define EX2_CPP_SEFI_SOLDIERSTRATEGY_H
 
 
-#include "Soldier.h"
+#include "MapObject.h"
 
-#define WEAPON_RET 1
-#define ARMOR_RET 2
-#define ENEMY_RET 3
-#define FRIENDLY_RET 4
+class Game;
+
+#define NON_ATTACK_RET 1
+#define ATTACK_RET 2
 
 class SoldierStrategy {
 
 public:
-
-    virtual int applyStrategy(Soldier* soldier) = 0;
+   virtual ~SoldierStrategy() = 0;
+    virtual MapObject* applyStrategy(Soldier* soldier, Game* game) = 0;
 
 };
 

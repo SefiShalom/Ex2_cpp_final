@@ -28,8 +28,6 @@ public:
 
     void performAction(Weapon* weapon);
 
-    virtual std::vector<MapObject*> kill();
-
     float getRandom();
 };
 

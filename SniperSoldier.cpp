@@ -3,6 +3,7 @@
 //
 
 #include "SniperSoldier.h"
+#include "SniperStrategy.h"
 
 
 SniperSoldier::SniperSoldier(const Point &location, short army)
@@ -25,6 +26,7 @@ int SniperSoldier::getType() {
 
 double SniperSoldier::calculateHitChance(Soldier* enemy) const{
     double dist = getLocation().distance(enemy->getLocation());
+    if(dist == 0) return 0;
     double hitChance = (dist-1)/dist;
     std::cout<< "Enemy is " << dist << " meters away" <<std::endl;
     std::cout<< "HitChance: " << hitChance <<std::endl;
@@ -36,14 +38,12 @@ void SniperSoldier::healMe() {
 }
 
 std::ostream &SniperSoldier::toString(std::ostream &out) {
-//    out<< "SniperSoldier:" <<std::endl;
-//    out<< "Army: " << getArmy() <<std::endl;
-//    out<< "Location: " << getLocation() <<std::endl;
-//    out<< "HP: " << getHP() <<std::endl;
-
     double x = getLocation().get_x();
     double y = getLocation().get_y();
     out << "Sniper" << getArmy() << "(" << x << "," << y << ")";
-
     return out;
+}
+
+SoldierStrategy* SniperSoldier::getStrategy() {
+    return new SniperStrategy;
 }

@@ -14,10 +14,12 @@
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
 #include "SolidObject.h"
+#include "SoldierStrategy.h"
 //////END
 
 class Weapon;
 class Fists;
+class SoldierStrategy;
 //class ShieldArmor;
 //class BodyArmor;
 
@@ -27,6 +29,7 @@ class Soldier: public MapObject {
     friend class Player;
     friend class HumanPlayer;
     friend class Medic;
+
 
 protected:
     double _hp;
@@ -105,8 +108,6 @@ public:
 
     void performAction(SolidObject* solidObject);
 
-    virtual std::vector<MapObject*> kill() = 0;
-
 
     Weapon *get_weapon() const;
 
@@ -117,6 +118,8 @@ public:
     bool loadNextDest();
 
     std::ostream& info(std::ostream& os);
+
+    virtual SoldierStrategy* getStrategy() = 0;
 
 };
 

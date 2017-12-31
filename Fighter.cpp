@@ -54,16 +54,3 @@ void Fighter::performAction(Weapon *weapon) {
 }
 
 
-std::vector<MapObject*> Fighter::kill(){
-    std::vector<MapObject*> objects;
-    if(_weapon != nullptr) objects.emplace_back(_weapon);
-    if(_shield != nullptr) objects.emplace_back(_shield);
-    if(_weapon != nullptr) objects.emplace_back(_bodyarmor);
-
-    objects.emplace_back(this);
-
-    _isAlive = false;
-
-    return objects;
-}
-

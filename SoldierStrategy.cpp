@@ -3,3 +3,5 @@
 //
 
 #include "SoldierStrategy.h"
+
+SoldierStrategy::~SoldierStrategy() {}

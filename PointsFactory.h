@@ -15,7 +15,7 @@ class PointsFactory {
 
 public:
 
-    static std::vector<Point> makePoints(std::string& input);
+    static std::vector<Point> makePoints(std::string& input, double h, double w);
 
     static Point makeSinglePoint(const std::string& input);
 

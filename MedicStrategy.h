@@ -11,8 +11,8 @@
 class MedicStrategy : public SoldierStrategy{
 
 public:
-
-    virtual int applyStrategy(Soldier* soldier);
+    ~MedicStrategy();
+    MapObject* applyStrategy(Soldier* soldier, Game* game);
 
 };
 

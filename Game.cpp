@@ -26,14 +26,27 @@ Game::~Game() {
     }
 }
 
-std::vector<MapObject *> Game::retrieveObjectsInRadius(Soldier *soldier, double radius) {
-    std::vector<MapObject *> objectInRadius;
-    std::vector<MapObject *>::iterator it;
-    for (it = _gameMap.begin(); it != _gameMap.end(); it++) {
-        if (*it != soldier && (*it)->getLocation().distance(soldier->getLocation()) <= radius)
-            objectInRadius.emplace_back(*it);
+std::vector<CollectableObject *> Game::retrieveCollectablesInRadius(Soldier *soldier) {
+    std::vector<CollectableObject *> objectInRadius;
+    for (auto & it : _gameMap) {
+        if (dynamic_cast<CollectableObject*>(it) && (it)->getLocation().distance(soldier->getLocation()) <= PICKABLE_RADIUS){
+            objectInRadius.emplace_back(dynamic_cast<CollectableObject*>(it));
+        }
     }
     return objectInRadius;
+}
+
+std::vector<Soldier *> Game::retrieveEnemySoldiers(Soldier *soldier) {
+    std::vector<Soldier *> enemySoldiers;
+    for (auto & it : _gameMap) {
+        if (Soldier* t = dynamic_cast<Soldier*>(it)) {
+            if(t->getArmy() != soldier->getArmy() && t->isAlive()){
+                enemySoldiers.emplace_back(t);
+            }
+
+        }
+    }
+    return enemySoldiers;
 }
 
 
@@ -64,7 +77,6 @@ MapObject *Game::getClosestObject(const Point& point, double radius) {
             }
         }
     }
-
     return ret;
 }
 
@@ -171,7 +183,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
             if (index >= pointStr.size()) {
                 std::cout << "ERROR IN PLAYER_INIT FILE! ERROR IN PLAYER NUMBER " << playerNumber << std::endl;
             }
-            sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index]));
+            sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index],_battlefield->getHeight(),_battlefield->getWidth()));
             index++;
         }
 
@@ -182,21 +194,6 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
 
     return player;
-}
-
-void Game::killSoldier(Soldier *soldier) {
-
-    std::vector<MapObject *> objects = soldier->kill();
-
-    auto i = objects.begin();
-    auto j = _gameMap.begin();
-
-    while (i != objects.end())
-        while (j != _gameMap.end())
-            if (*i != *j) {
-                delete *i;
-                _gameMap.erase(j);
-            }
 }
 
 
@@ -222,7 +219,10 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
 
 
 void Game::attack(Soldier *attacker, Soldier *target) {
-    if (attacker->attack(target)) killSoldier(target);
+    if (attacker->attack(target)){
+        killSoldier(target);
+        std::cout << "\t\t\t\t" << *attacker << " killed " << *target << std::endl;
+    }
 }
 
 Battlefield Game::getBattlefield() {
@@ -231,4 +231,13 @@ Battlefield Game::getBattlefield() {
 
 std::vector<Player *> Game::getAllPlayers(){
     return _players;
+}
+
+Point Game::getBattlefieldLimits() {
+    return Point(_battlefield->getWidth(),_battlefield->getHeight());
+}
+
+void Game::killSoldier(Soldier *soldier) {
+    soldier->_isAlive = false;
+    soldier->setLocation(UNREACHABLE_POINT);
 }

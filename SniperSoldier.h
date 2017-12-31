@@ -27,6 +27,8 @@ public:
     double calculateHitChance(Soldier *enemy) const;
 
     std::ostream& toString (std::ostream& out);
+
+    SoldierStrategy* getStrategy();
 };
 
 

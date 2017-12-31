@@ -20,11 +20,11 @@ void HumanPlayer::playTurn(Game *game) {
     for (auto &soldier : _soldiers) {
         while (soldier->isWalking()) {
             soldier->walk();
-            std::vector<MapObject *> objects = game->retrieveObjectsInRadius(soldier, 2);
-            for (auto &object: objects) {
-                std::cout << *object << std::endl;
-                object->acceptAction(soldier);
-            }
+//            std::vector<MapObject *> objects = game->retrieveObjectsInRadius(soldier);
+//            for (auto &object: objects) {
+//                std::cout << *object << std::endl;
+//                object->acceptAction(soldier);
+//            }
         }
     }
 }

@@ -28,8 +28,8 @@ public:
     void walk();
     void performAction(Soldier* soldier);
     void performAction(Weapon* weapon);
-    virtual std::vector<MapObject*> kill();
     std::ostream& toString (std::ostream& out);
+    SoldierStrategy* getStrategy();
 
 };
 

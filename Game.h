@@ -16,6 +16,8 @@
 #define BATTLEFIELD_LINE 1
 #define PLAYERS_LINE 2
 #define NUM_OF_SOLDIERS_LINE 3
+#define PICKABLE_RADIUS 2
+
 #define INDEX_OF_POINT_FOR_SOLDIER 1
 #define INDEX_OF_POINT_FOR_WEAPON 2
 #define INDEX_OF_POINT_FOR_ARMOR 3
@@ -34,7 +36,7 @@ public:
 
     ~Game();
 
-    std::vector<MapObject *> retrieveObjectsInRadius(Soldier *soldier, double radius);
+    std::vector<CollectableObject *> retrieveCollectablesInRadius(Soldier *soldier);
 
     void addMapObject(MapObject *object);
 
@@ -42,7 +44,6 @@ public:
 
     void initGame(const std::string &path);
 
-    void killSoldier(Soldier *soldier);
 
     void attack(Soldier* attacker, Soldier* target);
 
@@ -58,6 +59,14 @@ public:
     MapObject * getClosestObject(const Point &point, double radius);
 
     std::vector<Player* > getAllPlayers();
+
+    Point getBattlefieldLimits();
+
+    void killSoldier(Soldier *pSoldier);
+
+    void applyStrategy(Player *p);
+
+    std::vector<Soldier *> retrieveEnemySoldiers(Soldier *soldier);
 };
 
 

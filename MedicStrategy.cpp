@@ -4,6 +4,13 @@
 
 #include "MedicStrategy.h"
 
-int MedicStrategy::applyStrategy(Soldier *soldier) {
-    return 0;
+
+
+
+MapObject *MedicStrategy::applyStrategy(Soldier *soldier, Game *game) {
+    return nullptr;
+}
+
+MedicStrategy::~MedicStrategy() {
+
 }

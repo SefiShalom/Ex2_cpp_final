@@ -18,6 +18,7 @@ RegularSoldier::~RegularSoldier() {
 
 double RegularSoldier::calculateHitChance(Soldier* enemy) const{
     double dist = getLocation().distance(enemy->getLocation());
+    if(dist == 0) return 0;
     std::cout<< "Enemy is " << dist << " meters away" <<std::endl;
     return 1/dist;
 }
@@ -55,4 +56,8 @@ std::ostream &RegularSoldier::toString(std::ostream &out) {
     out << "Regular" << getArmy() << "(" << x << "," << y << ")";
 
     return out;
+}
+
+SoldierStrategy* RegularSoldier::getStrategy() {
+    return nullptr;
 }
