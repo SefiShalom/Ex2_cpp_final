@@ -6,9 +6,10 @@
 #define EX2_CPP_POINT_H
 
 #include <cmath>
+#include <limits>
 #include <iostream>
 
-#define OUT_OF_RANGE -1
+#define OUT_OF_RANGE -INFINITY
 #define UNREACHABLE_POINT Point(OUT_OF_RANGE,OUT_OF_RANGE)
 
 class Point {

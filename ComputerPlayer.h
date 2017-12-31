@@ -13,7 +13,7 @@ class ComputerPlayer : public Player {
 public:
     ComputerPlayer(const int army, const std::string &name);
 
-    virtual void playTurn();
+    virtual void playTurn(Game* game);
 };
 
 

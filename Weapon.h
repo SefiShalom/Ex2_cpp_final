@@ -29,6 +29,8 @@ public:
     void acceptAction(Soldier* soldier);
 
     virtual void useObject(Fighter* fighter);
+
+    virtual bool isFireArm() = 0;
 };
 
 

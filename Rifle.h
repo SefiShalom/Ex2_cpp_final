@@ -25,6 +25,8 @@ class Rifle: public Weapon {
     double attackArmor(std::shared_ptr<BodyArmor> bodyarmor);
 
     void drop(std::shared_ptr<Fighter> fighter);
+
+    virtual bool isFireArm();
 };
 
 

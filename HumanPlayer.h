@@ -13,9 +13,9 @@ public:
 
     HumanPlayer(const int army, const std::string &name);
 
-    virtual void playTurn();
+    virtual void playTurn(Game* game);
 
-    void initSteps(std::vector<std::vector<Point *>> points);
+    void initSteps(std::vector<std::vector<Point>> points);
 };
 
 

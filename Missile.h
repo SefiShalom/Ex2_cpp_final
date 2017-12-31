@@ -36,6 +36,8 @@ public:
     virtual void drop(std::shared_ptr<Fighter> soldier);
 
     std::ostream& toString(std::ostream& out);
+
+    virtual bool isFireArm();
 };
 
 

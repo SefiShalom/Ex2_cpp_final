@@ -8,6 +8,8 @@
 #include <vector>
 #include "Soldier.h"
 
+class Game;
+
 class Player {
 
     friend class Game;
@@ -24,7 +26,7 @@ public:
 
     void addSoldier(Soldier* soldier);
 
-    virtual void playTurn() = 0;
+    virtual void playTurn(Game* game) = 0;
 
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
 

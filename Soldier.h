@@ -23,6 +23,7 @@ class Fists;
 
 class Soldier: public MapObject {
 
+    friend class Game;
     friend class Player;
     friend class HumanPlayer;
     friend class Medic;
@@ -32,8 +33,9 @@ protected:
     double _speed;
     const short _army;
     Point _nextDestination;
+    int currDestinationIndex;
     // We should think about switching to independent soldiers:
-    std::vector<Point*> allDestinations;
+    std::vector<Point> allDestinations;
 
     bool _walking;
     bool _isAlive;
@@ -43,7 +45,7 @@ protected:
     virtual void healMe() = 0;
 
     // For Player
-    void feedMeWithDestinations(std::vector<Point*> points);
+    void feedMeWithDestinations(std::vector<Point> points);
 
     // For CollectableObject handling
 
@@ -104,6 +106,18 @@ public:
     void performAction(SolidObject* solidObject);
 
     virtual std::vector<MapObject*> kill() = 0;
+
+
+    Weapon *get_weapon() const;
+
+    BodyArmor *get_bodyarmor() const;
+
+    ShieldArmor *get_shield() const;
+
+    bool loadNextDest();
+
+    std::ostream& info(std::ostream& os);
+
 };
 
 

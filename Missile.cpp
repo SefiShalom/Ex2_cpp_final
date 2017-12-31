@@ -61,3 +61,7 @@ std::ostream &Missile::toString(std::ostream &out) {
     return out;
 }
 
+bool Missile::isFireArm() {
+    return true;
+}
+

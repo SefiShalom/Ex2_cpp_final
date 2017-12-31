@@ -22,7 +22,7 @@ public:
     void useObject(Soldier* soldier);
     void drop(Fighter* figter);
     std::ostream& toString(std::ostream& out);
-
+    virtual bool isFireArm();
 };
 
 

@@ -35,8 +35,8 @@ void Fighter::pickObject(Weapon *weapon) {
 }
 
 Fighter::~Fighter() {
-    if (_weapon != nullptr) {
-        delete _weapon;
+    if (_weapon !=nullptr) {
+//        delete _weapon;
     }
 }
 

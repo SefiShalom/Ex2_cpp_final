@@ -44,3 +44,7 @@ double Rifle::attackArmor(std::shared_ptr<BodyArmor> bodyarmor) {
 void Rifle::drop(std::shared_ptr<Fighter> fighter) {
 
 }
+
+bool Rifle::isFireArm() {
+    return true;
+}

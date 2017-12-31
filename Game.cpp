@@ -9,13 +9,17 @@
 #include "ComputerPlayer.h"
 #include "SoldierFactory.h"
 #include "ObjectFactory.h"
+#include "FileReader.h"
+#include "FileTokenizer.h"
+#include "PointsFactory.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
 
 Game::~Game() {
     std::vector<MapObject *>::iterator it;
-    for (it = _gameMap.begin(); it != _gameMap.end(); it++) delete *it;
+    for (it = _gameMap.begin(); it != _gameMap.end(); it++)
+        delete *it;
     delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
     for (auto &p : _players) {
         delete (p);
@@ -113,6 +117,14 @@ void Game::initGame(const std::string &path) {
 
         for (auto &it : vec) {
             addMapObject(it);
+
+            if(it->get_weapon()/* && it->get_weapon()->isFireArm()*/){
+                std::cout << "Added " << *it->get_weapon() << std::endl;
+                addMapObject(it->get_weapon());
+            }
+            if(it->get_shield()) addMapObject(it->get_shield());
+            if(it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
+
         }
 
     }
@@ -135,6 +147,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
     int ind = 0;
 
+
     for (int i = 0; i < numOfSoldiers; ++i) {
         Soldier *newSoldier = SoldierFactory::makeSoldier(csv[startReadingFrom], playerNumber);
         if (newSoldier == nullptr) {
@@ -146,9 +159,29 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         ++startReadingFrom;
     }
 
+    if(!isComputer){
+
+        FileReader fr("csvs/player" + std::to_string(playerNumber) + "_file.csv");
+        std::string file = fr.getText();
+        FileTokenizer ft(file);
+        std::vector<std::string> pointStr = ft.tokenizeBy("\n");
+
+        int index = 1;
+        for (auto &sol : player->_soldiers) {
+            if (index >= pointStr.size()) {
+                std::cout << "ERROR IN PLAYER_INIT FILE! ERROR IN PLAYER NUMBER " << playerNumber << std::endl;
+            }
+            sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index]));
+            index++;
+        }
+
+        for(auto &iter : pointStr) std::cout << iter << std::endl;
+
+    }
+
+
+
     return player;
-
-
 }
 
 void Game::killSoldier(Soldier *soldier) {
@@ -168,15 +201,12 @@ void Game::killSoldier(Soldier *soldier) {
 
 
 bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>> &csv) {
-
     if (csv[from][0] != "Objects")
         return false;
-
     for (int i = from + 1; i < csv.size(); ++i) {
         if (csv[i][0] == "weapon") {
             Weapon *weapon = ObjectFactory::makeWeapon(csv[i]);
             addMapObject(weapon);
-
         } else if (csv[i][0] == "Armor") {
             Armor *armor = ObjectFactory::makeArmor(csv[i]);
             addMapObject(armor);
@@ -187,19 +217,18 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
             return false;
         }
     }
-
     return true;
 }
 
 
 void Game::attack(Soldier *attacker, Soldier *target) {
     if (attacker->attack(target)) killSoldier(target);
-
 }
 
 Battlefield Game::getBattlefield() {
     return *_battlefield;
 }
 
-
-
+std::vector<Player *> Game::getAllPlayers(){
+    return _players;
+}

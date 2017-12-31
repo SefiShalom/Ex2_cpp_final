@@ -29,3 +29,7 @@ std::ostream &Fists::toString(std::ostream &out) {
     out << "Fists" << std::endl;
     return out;
 }
+
+bool Fists::isFireArm() {
+    return false;
+}

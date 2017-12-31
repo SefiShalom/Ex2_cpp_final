@@ -7,6 +7,6 @@
 ComputerPlayer::ComputerPlayer(const int army, const std::string &name)
         : Player(army, name) {}
 
-void ComputerPlayer::playTurn() {
+void ComputerPlayer::playTurn(Game* game) {
 
 }

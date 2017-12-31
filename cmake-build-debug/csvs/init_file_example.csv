@@ -1,0 +1,16 @@
+Game,,,
+battlefieldSize,100,200,
+players,2,,
+soldiers,2,,
+p1,human,,
+normal,[20 10],Missile,
+normal,[2 3],M16,
+p2,human,,
+sniper,[30 30],Missile,
+normal,[20 30],M16,
+Objects,,,
+weapon,Missile,[5 5],
+weapon,M16,[100 100],
+weapon,UZI,[100 0],
+Armor,BodyArmor,0.8,[10 10]
+Armor,ShieldArmor,0.8,[20 20]

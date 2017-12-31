@@ -15,7 +15,7 @@ std::vector<Point> PointsFactory::makePoints(std::string& input) {
     }
 
     FileTokenizer ft(input);
-    std::vector<std::string> strings = ft.tokenizeBy("[], ");
+    std::vector<std::string> strings = ft.tokenizeBy("[], \r");
     std::vector<double> nums;
     for (auto &i : strings) {
         nums.emplace_back(std::stod(i));

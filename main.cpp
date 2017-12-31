@@ -15,6 +15,7 @@
 #include "Game.h"
 #include "GameFileParser.h"
 #include "StatePrinter.h"
+#include "HumanPlayer.h"
 
 using namespace std;
 
@@ -49,11 +50,31 @@ int main() {
     cout << "\n\n\n" << endl;
     game.initGame("csvs/init_file_example.csv");
 
+    StatePrinter::print(game);
+
+
+    vector<Player*> player = game.getAllPlayers();
+    HumanPlayer* h = dynamic_cast<HumanPlayer*>(player[0]);
+    std::vector<std::vector<Point>> points;
+    std::vector<Point> point;
+    point.emplace_back(Point(5.5,5));
+    point.emplace_back(Point(101,101));
+    point.emplace_back(Point(100,0));
+
+    points.emplace_back(point);
+
+    player[0]->playTurn(&game);
+    player[1]->playTurn(&game);
 
     StatePrinter::print(game);
 
 
+
+
+
+
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
+
 
     return 0;
 }

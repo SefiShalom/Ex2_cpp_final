@@ -15,7 +15,7 @@ void Medic::heal(Soldier* injured) {
 
 Medic::~Medic() {
     std::cout << "Medic dtor" << std::endl;
-    delete _weapon;
+    _weapon->drop(this);
 }
 
 bool Medic::attack(Soldier *target) {

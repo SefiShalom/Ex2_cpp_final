@@ -56,6 +56,8 @@ public:
     std::vector<MapObject *> retrieveObjectsWithinRadiusByPoint(const Point &point, double radius);
 
     MapObject * getClosestObject(const Point &point, double radius);
+
+    std::vector<Player* > getAllPlayers();
 };
 
 

@@ -10,7 +10,7 @@ Soldier::Soldier(const Point &currPosition, double hp, double speed, const short
           _speed(speed), _army(army),
           _bodyarmor(nullptr), _shield(nullptr), _weapon(new Fists),
           _walking(false), _hp(hp), _isAlive(true),
-          _nextDestination(UNREACHABLE_POINT) {}
+          _nextDestination(UNREACHABLE_POINT), currDestinationIndex(0){}
 
 
 Soldier::~Soldier() {
@@ -24,11 +24,15 @@ void Soldier::setNextDestination(const Point &nextPoint) {
 }
 
 void Soldier::walk(double speed) {
+
     if (getLocation().distance(_nextDestination) <= speed) {
         setLocation(_nextDestination);
-        _walking = false;
-        return;
+        if(!loadNextDest()) {
+            _walking = false;
+            return;
+        }
     }
+
     Point nextPoint = getLocation().nextPoint(speed, _nextDestination);
     setLocation(nextPoint);
 }
@@ -42,12 +46,13 @@ const int Soldier::getArmy() const {
     return _army;
 }
 
-void Soldier::feedMeWithDestinations(std::vector<Point *> points) {
-    allDestinations = std::vector<Point*>(points);
+void Soldier::feedMeWithDestinations(std::vector<Point> points) {
+    allDestinations = std::vector<Point>(points);
     std::cout << "I got a point vector: " << std::endl;
     for (auto &i : allDestinations) {
         std::cout << i << std::endl;
     }
+    loadNextDest();
 }
 
 
@@ -153,6 +158,37 @@ void Soldier::pickObject(ShieldArmor *sa) {
 
 bool Soldier::isAlive() {
     return _isAlive;
+}
+
+Weapon *Soldier::get_weapon() const {
+    return _weapon;
+}
+
+BodyArmor *Soldier::get_bodyarmor() const {
+    return _bodyarmor;
+}
+
+ShieldArmor *Soldier::get_shield() const {
+    return _shield;
+}
+
+bool Soldier::loadNextDest() {
+    if(currDestinationIndex >= allDestinations.size()) {
+        return false;
+    }
+    _nextDestination = allDestinations[currDestinationIndex++];
+    _walking = true;
+    return true;
+}
+
+std::ostream& Soldier::info(std::ostream& os) {
+
+    os << "Soldier: " << *this << std::endl;
+    os << "HP: " << _hp << std::endl;
+    if(_weapon)os << "Weapon: " << *_weapon << std::endl;
+    if(_shield) os << "Shield: " << *_shield << std::endl;
+    if(_bodyarmor) os << "BodyArmor: " << *_bodyarmor << std::endl;
+    return os;
 }
 
 
