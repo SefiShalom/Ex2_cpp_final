@@ -3,11 +3,26 @@
 //
 
 #include "SolidObject.h"
-#include <iostream>
-SolidObject::SolidObject(Point* position, double len, double width)
-        : Object(position), _length(len), _width(width) {
-    std::cout<<"in SolidObject ctor"<<std::endl;
+#include "Soldier.h"
 
-}
+SolidObject::SolidObject(const Point& position, double len, double width)
+        : MapObject(position), _length(len), _width(width) {}
 
 SolidObject::~SolidObject() {}
+
+void SolidObject::acceptAction(Soldier* soldier) {
+    soldier->performAction(this);
+}
+
+double SolidObject::getLength() {
+    return _length;
+}
+
+double SolidObject::getWidth() {
+    return _width;
+}
+
+std::ostream &SolidObject::toString(std::ostream &out) {
+    //TODO
+    return out;
+}

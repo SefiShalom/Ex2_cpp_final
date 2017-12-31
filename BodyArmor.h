@@ -5,16 +5,23 @@
 #ifndef EX2_CPP_SEFI_BODYARMOR_H
 #define EX2_CPP_SEFI_BODYARMOR_H
 
+#include <memory>
 
-#include "Point.h"
 #include "Armor.h"
+#include "Weapon.h"
+#include "Soldier.h"
 
-class BodyArmor: public Armor {
+class BodyArmor : public Armor, public std::enable_shared_from_this<BodyArmor> {
 
-    BodyArmor(Point* position, double defensePower);
+public:
+    BodyArmor(const Point& position, double defensePower);
+
     ~BodyArmor();
-//    double defend(Weapon* weapon);
-
+    void drop(Soldier* soldier);
+    double defend(Weapon *weapon);
+    void useObject(Soldier* soldier);
+    void acceptAction(Soldier* soldier);
+    std::ostream& toString(std::ostream& out);
 };
 
 

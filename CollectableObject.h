@@ -7,15 +7,18 @@
 #ifndef EX2_CPP_COLLECTABLEOBJECT_H
 #define EX2_CPP_COLLECTABLEOBJECT_H
 
-#include "Object.h"
+#include "MapObject.h"
 
-class CollectableObject : public Object{
+class Soldier;
 
+class CollectableObject : public MapObject{
     bool _isCarried;
 
 public:
-    CollectableObject(Point* position);
+    CollectableObject(const Point& position);
     virtual ~CollectableObject();
+    void setCarried(bool is);
+    virtual void drop(Soldier* soldier);
     bool isCarried();
 };
 

@@ -1,0 +1,111 @@
+//
+// Created by damir on 26-Dec-17.
+//
+
+#include "SoldierFactory.h"
+#include "RegularSoldier.h"
+#include "SniperSoldier.h"
+#include "Medic.h"
+#include "PointsFactory.h"
+#include "M16.h"
+#include "Missile.h"
+#include "Uzi.h"
+
+#define REGULAR_SOLDIER 1
+#define SNIPER_SOLDIER 2
+#define MEDIC_SOLDIER 3
+
+long SoldierFactory::id = 1;
+
+std::shared_ptr<Soldier>
+SoldierFactory::makeSoldier(const long id, const Point &currPosition, double hp, double speed, const short army,
+                            const short type) {
+    switch (type) {
+
+        case REGULAR_SOLDIER:
+            return std::make_shared<RegularSoldier>(RegularSoldier(/*id++,*/currPosition, army));
+        case SNIPER_SOLDIER:
+//            return std::make_shared<SniperSoldier>(SniperSoldier(/*id++,*/currPosition, army));
+        case MEDIC_SOLDIER:
+//            return std::make_shared<Medic>(Medic(/*id++,*/currPosition, army));
+        default:
+            return nullptr;
+
+    }
+}
+
+Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &string, const int army) {
+
+    std::string type      = string[0];
+    std::string pointStr  = string[1];
+
+
+    RegularSoldier *reg;
+    SniperSoldier *sniper;
+    Medic *medic;
+
+    bool isRegular = false;
+    bool isSniper = false;
+    bool isMedic = false;
+
+    Weapon *weapon;
+
+    Point point = PointsFactory::makeSinglePoint(pointStr);
+
+
+    if (type == "normal") {
+        reg = new RegularSoldier(point, army);
+        isRegular = true;
+    }
+    else if (type == "sniper") {
+        sniper = new SniperSoldier(point, army);
+        isSniper = true;
+    }
+    else if (type == "paramedic") {
+        medic = new Medic(point, army);
+        isMedic = true;
+    }
+    else {
+        std::cerr << "ERROR IN SOLDIER FACTORY! GOT TYPE = " << type << std::endl;
+        return nullptr;
+    }
+
+    if (isMedic) {
+        return medic;
+    }
+
+    std::string weaponStr    = string[2];
+
+    if (weaponStr == "M16") {
+        weapon = new M16(point);
+    }
+    else if (weaponStr == "Missile") {
+        weapon = new Missile(point);
+    }
+    else if (weaponStr == "UZI") {
+        weapon = new Uzi(point);
+    }
+    else {
+
+        if (isRegular)
+            delete(reg);
+
+        if (isSniper)
+            delete(sniper);
+
+        std::cerr << "ERROR IN SOLDIER FACTORY! GOT TYPE = " << type << std::endl;
+        return nullptr;
+    }
+
+    if (isRegular) {
+        reg->pickObject(weapon);
+        return reg;
+    }
+
+    if (isSniper) {
+        sniper->pickObject(weapon);
+        return sniper;
+    }
+
+
+}

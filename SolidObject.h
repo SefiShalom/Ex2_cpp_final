@@ -6,16 +6,19 @@
 #define EX2_CPP_SOLIDOBJECT_H
 
 #include "Point.h"
-#include "Object.h"
+#include "MapObject.h"
 
-class SolidObject : public Object {
+class SolidObject : public MapObject, public std::enable_shared_from_this<SolidObject> {
 
     double _length, _width;
 public:
 
-    SolidObject(Point* position, double len, double width);
+    SolidObject(const Point& position, double len, double width);
     virtual ~SolidObject();
-
+    double getLength();
+    double getWidth();
+    virtual void acceptAction(Soldier* soldier);
+    virtual std::ostream& toString(std::ostream& out);
 };
 
 
