@@ -97,6 +97,15 @@ void Game::initGame(const std::string &path) {
     }
     std::vector<std::vector<std::string>> csv = gfp.parse();
 
+    if (csv[0][0] != "Game" || csv[0].size() != 1) {
+        std::cerr << "Error in game-csv in first line" << std::endl;
+        return;
+    }
+
+    if (csv.size() < 2) {
+        std::cerr << "Error in game-csv. No battlefield!" << std::endl;
+    }
+
     if (csv[BATTLEFIELD_LINE].size() != 3) {
         std::cerr << "Error in game-csv in line " << BATTLEFIELD_LINE << " in file " << path << std::endl;
         return;
@@ -114,6 +123,16 @@ void Game::initGame(const std::string &path) {
 
     for (int i = 0; i < numOfPlayers; ++i) {
         int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
+
+        if (csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer" && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human") {
+            std::cerr << "Player p" << (i + 1) << " is not a computer nor a human? Impossible!" << std::endl;
+            return;
+        }
+        if ((csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 2 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human")
+            || (csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 3 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer")) {
+            std::cerr << "Error found in player number " << (i + 1) << std::endl;
+            return;
+        }
 
         bool isComputer = csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] == "computer";
         int strat = -1;
@@ -161,9 +180,9 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
     Player *player;
     if (isComputer) {
-        player = new ComputerPlayer(playerNumber, pc + std::to_string(playerNumber), strat, _battlefield);
+        player = new ComputerPlayer(playerNumber, csv[startReadingFrom -1][0] + " | PC"/*pc + std::to_string(playerNumber)*/, strat, _battlefield);
     } else {
-        player = new HumanPlayer(playerNumber, human + std::to_string(playerNumber));
+        player = new HumanPlayer(playerNumber, csv[startReadingFrom -1][0] + " | HUMAN"/*human + std::to_string(playerNumber)*/);
     }
 
     int ind = 0;
