@@ -34,11 +34,18 @@ SoldierFactory::makeSoldier(const long id, const Point &currPosition, double hp,
     }
 }
 
-Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &string, const int army) {
+Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &strings, const int army) {
 
-    std::string type      = string[0];
-    std::string pointStr  = string[1];
+    if (strings.size() < 2) {
+        return nullptr;
+    }
 
+    std::string type      = strings[0];
+    std::string pointStr  = strings[1];
+
+    if (type != "paramedic" && strings.size() < 3) {
+        return nullptr;
+    }
 
     RegularSoldier *reg;
     SniperSoldier *sniper;
@@ -66,7 +73,7 @@ Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &string, con
         isMedic = true;
     }
     else {
-        std::cerr << "ERROR IN SOLDIER FACTORY! GOT TYPE = " << type << std::endl;
+        std::cerr << "Error in SoldierFactory! GOT TYPE = " << type << std::endl;
         return nullptr;
     }
 
@@ -74,7 +81,7 @@ Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &string, con
         return medic;
     }
 
-    std::string weaponStr    = string[2];
+    std::string weaponStr    = strings[2];
 
     if (weaponStr == "M16") {
         weapon = new M16(point);
@@ -93,7 +100,7 @@ Soldier *SoldierFactory::makeSoldier(const std::vector<std::string> &string, con
         if (isSniper)
             delete(sniper);
 
-        std::cerr << "ERROR IN SOLDIER FACTORY! GOT TYPE = " << type << std::endl;
+        std::cerr << "Error in SoldierFactory! Got invalid weapon: " << weaponStr << std::endl;
         return nullptr;
     }
 

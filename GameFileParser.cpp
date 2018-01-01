@@ -28,9 +28,9 @@ std::vector<std::vector<std::string>> GameFileParser::parse() {
 
         if (lineNumber < OBJECTS_NO && lineNumber > 0) {
             if (!checkLineNumber(lineNumber, line[0])) {
-                std::cout << std::endl;
-                std::cout << "Error on game.csv. Error line: " << lineNumber << std::endl;
-                std::cout << "Found the word " << line[0].c_str() << std::endl;
+                std::cerr << std::endl;
+                std::cerr << "Error on game.csv. Error line: " << lineNumber << std::endl;
+                std::cerr << "Found the word " << line[0].c_str() << std::endl;
 
                 return std::vector<std::vector<std::string>>();
             }

@@ -17,7 +17,7 @@ public:
     static std::shared_ptr<Soldier>
     makeSoldier(const long id, const Point &currPosition, double hp, double speed, const short army, const short type);
 
-    static Soldier* makeSoldier(const std::vector<std::string> &info, const int army);
+    static Soldier* makeSoldier(const std::vector<std::string> &strings, const int army);
 
 };
 

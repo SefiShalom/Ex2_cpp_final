@@ -7,8 +7,10 @@
 FileReader::FileReader(std::string path) {
     file.open(path);
     if (!file.is_open()) {
-        std::cout << "ERROR OPENING THE FILE " << path << std::endl;
+        std::cerr << "Error opening the file " << path << std::endl;
+        _isOpen = false;
     }
+    _isOpen = true;
 }
 
 std::string FileReader::getText() {
@@ -21,4 +23,8 @@ std::string FileReader::getText() {
 
 FileReader::~FileReader() {
     file.close();
+}
+
+bool FileReader::isOpen() {
+    return _isOpen;
 }

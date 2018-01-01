@@ -6,6 +6,10 @@
 #include "StatePrinter.h"
 
 void StatePrinter::print(Game &game) {
+
+    if (!game.isReadyToGo()) {
+        return;
+    }
     std::map<long, bool> hashMap;
 
     const std::vector<MapObject *> &map = game.getAllObjects();

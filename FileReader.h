@@ -15,6 +15,8 @@ class FileReader {
 
     std::string text;
 
+    bool _isOpen;
+
 public:
 
     explicit FileReader(std::string path);
@@ -22,6 +24,8 @@ public:
     std::string getText();
 
     ~FileReader();
+
+    bool isOpen();
 };
 
 

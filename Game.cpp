@@ -21,7 +21,7 @@ Game::~Game() {
     std::vector<MapObject *>::iterator it;
     for (it = _gameMap.begin(); it != _gameMap.end(); it++)
         delete *it;
-    delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
+    if (_battlefield) delete _battlefield;      // CAUSES SEGMENTATION FAULT FOR SOME REASON!
     for (auto &p : _players) {
         delete (p);
     }
@@ -65,10 +65,8 @@ std::vector<MapObject *> Game::retrieveObjectsWithinRadiusByPoint(const Point& p
 MapObject *Game::getClosestObject(const Point& point, double radius) {
     double minDistance = Point(0,0).distance(Point(_battlefield->getWidth(), _battlefield->getHeight())); // Max distance
     MapObject *ret = nullptr;
-//    std::cout << "Point to look for is " << point << "\n" << std::endl;
-    for (auto &it : _gameMap) {
 
-//        std::cout << "Checking mapObj at point " << it->getLocation() << std::endl;
+    for (auto &it : _gameMap) {
 
         double possibleMin = point.distance(it->getLocation());
         if (possibleMin < minDistance) {
@@ -93,11 +91,16 @@ std::vector<MapObject *> &Game::getAllObjects() {
 void Game::initGame(const std::string &path) {
 
     GameFileParser gfp(path);
-    if (!gfp.isGood()) {
+    if (!gfp.isOpen()) {
+        std::cerr << "Error opening the file " << path << std::endl;
         return;
     }
     std::vector<std::vector<std::string>> csv = gfp.parse();
 
+    if (csv[BATTLEFIELD_LINE].size() != 3) {
+        std::cerr << "Error in game-csv in line " << BATTLEFIELD_LINE << " in file " << path << std::endl;
+        return;
+    }
     _battlefield = new Battlefield(std::stoi(csv[BATTLEFIELD_LINE][1]), std::stoi(csv[BATTLEFIELD_LINE][2]));
     int numOfPlayers = std::stoi(csv[PLAYERS_LINE][1]);
     int numOfSoldiersPerPlayer = std::stoi(csv[NUM_OF_SOLDIERS_LINE][1]);
@@ -105,7 +108,8 @@ void Game::initGame(const std::string &path) {
     int startSearchingObjectsFrom = 4 + (numOfPlayers * (numOfSoldiersPerPlayer + 1));
 
     if (!addAllMapObject(startSearchingObjectsFrom, csv)) {
-        std::cout << "Error parsing objects!" << std::endl;
+        std::cerr << "Error parsing objects!" << std::endl;
+        return;
     }
 
     for (int i = 0; i < numOfPlayers; ++i) {
@@ -121,7 +125,8 @@ void Game::initGame(const std::string &path) {
                                                  strat, isComputer);
 
         if (p_i == nullptr) {
-            std::cout << "Error creating player!" << std::endl;
+            std::cerr << "Error creating player!" << std::endl;
+            return;
         }
 
         std::cout << "Created a player: " << *p_i << std::endl;
@@ -141,11 +146,10 @@ void Game::initGame(const std::string &path) {
             }
             if(it->get_shield()) addMapObject(it->get_shield());
             if(it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
-
         }
-
     }
 
+    _readyToGo = true;
 }
 
 Player *
@@ -168,17 +172,23 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
     for (int i = 0; i < numOfSoldiers; ++i) {
         Soldier *newSoldier = SoldierFactory::makeSoldier(csv[startReadingFrom], playerNumber);
         if (newSoldier == nullptr) {
-            std::cout << "Error creating a soldier for player number " << playerNumber << std::endl;
+            std::cerr << "Invalid soldier input!" << std::endl;
+            std::cerr << "Error creating a soldier for player number " << (playerNumber + 1) << std::endl;
             return nullptr;
         }
         player->addSoldier(newSoldier);
-//        addMapObject(newSoldier);
         ++startReadingFrom;
     }
 
     if(!isComputer){
 
         FileReader fr("csvs/player" + std::to_string(playerNumber) + "_file.csv");
+
+        if (!fr.isOpen()) {
+            std::cerr << "Error opening the file " << "csvs/player" << std::to_string(playerNumber) << "_file.csv" << std::endl;
+            return nullptr;
+        }
+
         std::string file = fr.getText();
         FileTokenizer ft(file);
         std::vector<std::string> pointStr = ft.tokenizeBy("\n");
@@ -192,7 +202,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
             index++;
         }
 
-        for(auto &iter : pointStr) std::cout << iter << std::endl;
+//        for(auto &iter : pointStr) std::cout << iter << std::endl;
 
     }
 
@@ -276,6 +286,11 @@ void Game::applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy) {
 
 bool Game::play() {
 
+    if (!_readyToGo) {
+        std::cerr << "Cannot play! See errors above." << std::endl;
+        return false;
+    }
+
     long numOfArmies = _players.size();
 
     while (numOfArmies >= 2) {
@@ -296,4 +311,8 @@ bool Game::play() {
     }
 
     return true;
+}
+
+bool Game::isReadyToGo() {
+    return _readyToGo;
 }

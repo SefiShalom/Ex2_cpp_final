@@ -7,10 +7,10 @@
 FileParser::FileParser(const std::string &path) {
     file.open(path);
     if (!file.is_open()) {
-        isOpen = false;
-        std::cout << "ERROR OPENING THE FILE " << path << std::endl;
+        _isOpen = false;
+        std::cerr << "ERROR OPENING THE FILE " << path << std::endl;
     } else {
-        isOpen = true;
+        _isOpen = true;
     }
 }
 
@@ -18,6 +18,6 @@ FileParser::~FileParser() {
     file.close();
 }
 
-bool FileParser::isGood() {
-    return isOpen;
+bool FileParser::isOpen() {
+    return _isOpen;
 }

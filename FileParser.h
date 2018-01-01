@@ -13,7 +13,7 @@
 class FileParser {
 
 protected:
-    bool isOpen;
+    bool _isOpen;
 
     std::ifstream file;
 
@@ -25,7 +25,7 @@ public:
 
     virtual ~FileParser() = 0;
 
-    bool isGood();
+    bool isOpen();
 };
 
 

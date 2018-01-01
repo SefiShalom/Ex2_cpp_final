@@ -11,7 +11,7 @@ std::vector<Point> PointsFactory::makePoints(std::string& input, double h, doubl
     int checkCorrectness = checkLineCorrectness(input);
 
     if (checkCorrectness == -1) {
-        std::cout << "ERROR IN POINT FACTORY" << std::endl;
+        std::cerr << "Error in PointFactory" << std::endl;
     }
 
     FileTokenizer ft(input);
@@ -26,7 +26,7 @@ std::vector<Point> PointsFactory::makePoints(std::string& input, double h, doubl
         if(left > w ) left = w;
         else if(left < 0) left = 0;
         if (i == nums.size()) {
-            std::cout << "\t\t\t\tERROR IN POINT FACTORY!!!" << std::endl;
+            std::cout << "Error in PointFactory!" << std::endl;
         }
         double right = nums[i];
         if(right > h ) right = h;
@@ -37,7 +37,7 @@ std::vector<Point> PointsFactory::makePoints(std::string& input, double h, doubl
 
 
     if (checkCorrectness != ret.size()) {
-        std::cout << "ERROR IN POINT FACTORY!" << std::endl;
+        std::cout << "Error in PointFactory!" << std::endl;
     }
 
     return ret;
@@ -57,7 +57,7 @@ int PointsFactory::checkLineCorrectness(std::string& toCheck) {
         }
         else if (toCheck[i] == ']') {
             if (chars.empty()) {
-                std::cout << "Unbalanced point string" << std::endl;
+                std::cerr << "Unbalanced point string" << std::endl;
                 return -1;
             }
             chars.pop();
@@ -65,7 +65,7 @@ int PointsFactory::checkLineCorrectness(std::string& toCheck) {
     }
 
     if (! chars.empty()) {
-        std::cout << "Unbalanced point string" << std::endl;
+        std::cerr << "Unbalanced point string" << std::endl;
         return -1;
     }
 
@@ -79,7 +79,7 @@ Point PointsFactory::makeSinglePoint(const std::string &input) {
     FileTokenizer ft(input);
     std::vector<std::string> strings = ft.tokenizeBy("[], ");
     if (strings.size() != 2) {
-        std::cout << "ERROR IN SINGLE POINT FACTORY!" << std::endl;
+        std::cout << "Error in single PointFactory!" << std::endl;
         return Point();
     }
     return Point(std::stoi(strings[0]), std::stoi(strings[1]));

@@ -30,6 +30,8 @@ class Game {
     std::vector<Player *> _players;
     Battlefield *_battlefield;
 
+    bool _readyToGo = false;
+
 public:
 
     Game();
@@ -71,6 +73,8 @@ public:
     std::vector<Soldier *> retrieveFriendlySoldiers(Soldier *soldier);
 
     bool play();
+
+    bool isReadyToGo();
 };
 
 
