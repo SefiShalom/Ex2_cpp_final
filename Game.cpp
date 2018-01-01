@@ -157,7 +157,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
     Player *player;
     if (isComputer) {
-        player = new ComputerPlayer(playerNumber, pc + std::to_string(playerNumber), strat, *_battlefield);
+        player = new ComputerPlayer(playerNumber, pc + std::to_string(playerNumber), strat, _battlefield);
     } else {
         player = new HumanPlayer(playerNumber, human + std::to_string(playerNumber));
     }
@@ -224,6 +224,7 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
 
 
 void Game::attack(Soldier *attacker, Soldier *target) {
+    std::cout << *attacker << attacker->getID() << " attempting to attack " << *target << target->getID() << std::endl;
     if (attacker->attack(target)){
         killSoldier(target);
         std::cout << "\t\t\t\t" << *attacker << " killed " << *target << std::endl;
@@ -252,7 +253,7 @@ std::vector<Soldier *> Game::retrieveFriendlySoldiers(Soldier *soldier) {
     std::vector<Soldier *> friendlySoldiers;
     for (auto & it : _gameMap) {
         if (Soldier* t = dynamic_cast<Soldier*>(it)) {
-            if(t->getArmy() == soldier->getArmy() && t->isAlive()){
+            if(t->getArmy() == soldier->getArmy() && t->isAlive() && soldier->getID() != it->getID()){
                 friendlySoldiers.emplace_back(t);
             }
 

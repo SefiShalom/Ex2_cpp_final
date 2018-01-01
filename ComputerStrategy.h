@@ -12,13 +12,13 @@
 
 class ComputerStrategy {
 
-    Point randomizedStrategy(Battlefield battlefield);
+    Point randomizedStrategy(Battlefield *battlefield);
 
     Point defaultStrategy();
 
 public:
 
-    Point applyStrategy(int strat, Battlefield battlefield);
+    Point applyStrategy(int strat, Battlefield *battlefield);
 };
 
 

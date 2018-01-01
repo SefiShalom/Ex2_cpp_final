@@ -16,7 +16,7 @@ class ComputerPlayer : public Player {
     int _strategy;
     Battlefield *_battlefield;
 public:
-    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield battlefield);
+    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield *battlefield);
 
     virtual void playTurn(Game* game);
 

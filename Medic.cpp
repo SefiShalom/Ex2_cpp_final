@@ -34,7 +34,10 @@ void Medic::healMe() {
 
 
 void Medic::performAction(Soldier* soldier) {
-    if(getArmy() == soldier->getArmy()) soldier->healMe();
+    if(getArmy() == soldier->getArmy()) {
+        std::cout << *this << " healed" << *soldier << std::endl;
+        soldier->healMe();
+    }
     else attack(soldier);
 }
 

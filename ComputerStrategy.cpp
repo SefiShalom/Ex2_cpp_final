@@ -4,7 +4,7 @@
 
 #include "ComputerStrategy.h"
 
-Point ComputerStrategy::applyStrategy(int strat, Battlefield battlefield) {
+Point ComputerStrategy::applyStrategy(int strat, Battlefield *battlefield) {
     switch (strat) {
         case 0:
             return randomizedStrategy(battlefield);
@@ -15,10 +15,10 @@ Point ComputerStrategy::applyStrategy(int strat, Battlefield battlefield) {
     }
 }
 
-Point ComputerStrategy::randomizedStrategy(Battlefield battlefield) {
+Point ComputerStrategy::randomizedStrategy(Battlefield *battlefield) {
 
-    double maxY = battlefield.getHeight();
-    double maxX = battlefield.getWidth();
+    double maxY = battlefield->getHeight();
+    double maxX = battlefield->getWidth();
 
     double randX = rand() % (((int) maxX + 1));
     double randY = rand() % (((int) maxY + 1));

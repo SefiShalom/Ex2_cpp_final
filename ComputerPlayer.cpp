@@ -7,8 +7,8 @@
 #include "SniperSoldier.h"
 #include "Game.h"
 
-ComputerPlayer::ComputerPlayer(const int army, const std::string &name, int strat, Battlefield battlefield)
-        : Player(army, name), _strategy(strat), _battlefield(&battlefield) {
+ComputerPlayer::ComputerPlayer(const int army, const std::string &name, int strat, Battlefield *battlefield)
+        : Player(army, name), _strategy(strat), _battlefield(battlefield) {
 }
 
 void ComputerPlayer::playTurn(Game *game) {
@@ -18,7 +18,10 @@ void ComputerPlayer::playTurn(Game *game) {
         if (soldier->isAlive()) {
 
             if (!soldier->isWalking()) {
-                soldier->setNextDestination(comStrat->applyStrategy(_strategy, *_battlefield));
+                Point p = comStrat->applyStrategy(_strategy, _battlefield);
+                soldier->setNextDestination(/*comStrat->applyStrategy(_strategy, *_battlefield)*/p);
+
+//                std::cout << "\t\t\t\t\t\tGenerated next point " << p << " for " << *soldier << ", " << soldier->getID() << std::endl;
             }
 
             std::cout << "It's " << *soldier << "'s turn" << std::endl;
