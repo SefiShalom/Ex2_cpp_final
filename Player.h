@@ -20,6 +20,10 @@ protected:
     const int _army;
     const std::string _name;
 
+    SoldierStrategy *sniperStrat;
+    SoldierStrategy *medicStrat;
+    SoldierStrategy *regularStrat;
+
 public:
 
     Player(const int army, const std::string &name);
@@ -31,6 +35,8 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
 
     virtual ~Player() = 0;
+
+    virtual bool isPlaying();
 };
 
 

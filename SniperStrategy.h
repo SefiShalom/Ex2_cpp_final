@@ -10,7 +10,7 @@
 #include "Game.h"
 
 class SniperStrategy: public SoldierStrategy {
-    virtual MapObject* applyStrategy(Soldier* soldier, Game* game);
+    virtual std::vector<MapObject*> applyStrategy(Soldier* soldier, Game* game);
 };
 
 

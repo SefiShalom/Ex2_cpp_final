@@ -48,7 +48,7 @@ public:
     void attack(Soldier* attacker, Soldier* target);
 
     Player *generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
-                                       const std::vector<std::vector<std::string>> &csv, bool isComputer = false);
+                                       const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer = false);
 
     bool addAllMapObject(int from, const std::vector<std::vector<std::string>> &csv);
 
@@ -64,9 +64,13 @@ public:
 
     void killSoldier(Soldier *pSoldier);
 
-    void applyStrategy(Player *p);
+    void applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy);
 
     std::vector<Soldier *> retrieveEnemySoldiers(Soldier *soldier);
+
+    std::vector<Soldier *> retrieveFriendlySoldiers(Soldier *soldier);
+
+    bool play();
 };
 
 

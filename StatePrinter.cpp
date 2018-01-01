@@ -46,5 +46,6 @@ void StatePrinter::print(Game &game) {
     for (int k = 0; k < width; ++k) {
         std::cout << "--";
     }
+    std::cout << std::endl;
 
 }

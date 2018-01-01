@@ -7,13 +7,20 @@
 
 
 #include "Player.h"
+#include "ComputerStrategy.h"
+#include "Battlefield.h"
 
 class ComputerPlayer : public Player {
 
+    ComputerStrategy* comStrat;
+    int _strategy;
+    Battlefield *_battlefield;
 public:
-    ComputerPlayer(const int army, const std::string &name);
+    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield battlefield);
 
     virtual void playTurn(Game* game);
+
+    virtual bool isPlaying();
 };
 
 

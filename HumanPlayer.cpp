@@ -4,8 +4,11 @@
 
 #include "HumanPlayer.h"
 #include "Game.h"
+#include "Medic.h"
+#include "SniperSoldier.h"
 
-HumanPlayer::HumanPlayer(const int army, const std::string &name) : Player(army, name) {}
+HumanPlayer::HumanPlayer(const int army, const std::string &name)
+        : Player(army, name) {}
 
 void HumanPlayer::initSteps(std::vector<std::vector<Point>> points) {
     size_t index = 0;
@@ -18,13 +21,22 @@ void HumanPlayer::initSteps(std::vector<std::vector<Point>> points) {
 
 void HumanPlayer::playTurn(Game *game) {
     for (auto &soldier : _soldiers) {
-        while (soldier->isWalking()) {
+        if (soldier->isAlive()) {
+            std::cout << "It's " << *soldier << "'s turn" << std::endl;
             soldier->walk();
-//            std::vector<MapObject *> objects = game->retrieveObjectsInRadius(soldier);
-//            for (auto &object: objects) {
-//                std::cout << *object << std::endl;
-//                object->acceptAction(soldier);
-//            }
+            if (dynamic_cast<Medic *>(soldier)) {
+                game->applyStrategy(soldier, medicStrat);
+            } else if (dynamic_cast<SniperSoldier *>(soldier)) {
+                game->applyStrategy(soldier, sniperStrat);
+            } else {  // Regular soldier
+                game->applyStrategy(soldier, regularStrat);
+            }
         }
     }
 }
+
+HumanPlayer::~HumanPlayer() {
+
+}
+
+

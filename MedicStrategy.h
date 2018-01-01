@@ -12,7 +12,7 @@ class MedicStrategy : public SoldierStrategy{
 
 public:
     ~MedicStrategy();
-    MapObject* applyStrategy(Soldier* soldier, Game* game);
+    std::vector<MapObject*> applyStrategy(Soldier* soldier, Game* game);
 
 };
 

@@ -6,6 +6,7 @@
 #define EX2_CPP_SEFI_SOLDIERSTRATEGY_H
 
 
+#include <vector>
 #include "MapObject.h"
 
 class Game;
@@ -17,7 +18,7 @@ class SoldierStrategy {
 
 public:
    virtual ~SoldierStrategy() = 0;
-    virtual MapObject* applyStrategy(Soldier* soldier, Game* game) = 0;
+    virtual std::vector<MapObject*> applyStrategy(Soldier* soldier, Game* game) = 0;
 
 };
 

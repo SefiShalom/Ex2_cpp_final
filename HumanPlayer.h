@@ -8,14 +8,21 @@
 
 #include "Player.h"
 
+
 class HumanPlayer : public Player {
+
+
+
 public:
 
     HumanPlayer(const int army, const std::string &name);
 
+    virtual ~HumanPlayer();
+
     virtual void playTurn(Game* game);
 
     void initSteps(std::vector<std::vector<Point>> points);
+
 };
 
 

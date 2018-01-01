@@ -12,6 +12,7 @@
 #include "FileReader.h"
 #include "FileTokenizer.h"
 #include "PointsFactory.h"
+#include "Medic.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
@@ -111,9 +112,13 @@ void Game::initGame(const std::string &path) {
         int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
 
         bool isComputer = csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] == "computer";
+        int strat = -1;
+        if (isComputer) {
+            strat = std::stoi(csv[4 + (numOfSoldiersPerPlayer + 1) * i][2]);
+        }
 
         Player *p_i = generatePlayerWithSoldiers(i, startReadingPlayerInfoFrom, numOfSoldiersPerPlayer, csv,
-                                                 isComputer);
+                                                 strat, isComputer);
 
         if (p_i == nullptr) {
             std::cout << "Error creating player!" << std::endl;
@@ -145,14 +150,14 @@ void Game::initGame(const std::string &path) {
 
 Player *
 Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
-                                 const std::vector<std::vector<std::string>> &csv, bool isComputer) {
+                                 const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer) {
 
     std::string pc = "Computer";
     std::string human = "Human";
 
     Player *player;
     if (isComputer) {
-        player = new ComputerPlayer(playerNumber, pc + std::to_string(playerNumber));
+        player = new ComputerPlayer(playerNumber, pc + std::to_string(playerNumber), strat, *_battlefield);
     } else {
         player = new HumanPlayer(playerNumber, human + std::to_string(playerNumber));
     }
@@ -239,5 +244,55 @@ Point Game::getBattlefieldLimits() {
 
 void Game::killSoldier(Soldier *soldier) {
     soldier->_isAlive = false;
+    soldier->_walking = false;
     soldier->setLocation(UNREACHABLE_POINT);
+}
+
+std::vector<Soldier *> Game::retrieveFriendlySoldiers(Soldier *soldier) {
+    std::vector<Soldier *> friendlySoldiers;
+    for (auto & it : _gameMap) {
+        if (Soldier* t = dynamic_cast<Soldier*>(it)) {
+            if(t->getArmy() == soldier->getArmy() && t->isAlive()){
+                friendlySoldiers.emplace_back(t);
+            }
+
+        }
+    }
+    return friendlySoldiers;
+}
+
+void Game::applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy) {
+    std::vector<MapObject*> actions = soldierStrategy->applyStrategy(soldier, this);
+
+    for (auto &it : actions) {
+        if (dynamic_cast<Soldier*>(it) && !dynamic_cast<Medic*>(soldier)) {
+            attack(soldier, dynamic_cast<Soldier*>(it));
+        } else {
+            it->acceptAction(soldier);
+        }
+    }
+}
+
+bool Game::play() {
+
+    long numOfArmies = _players.size();
+
+    while (numOfArmies >= 2) {
+        for (auto &it : _players) {
+            if (it->isPlaying()) {
+                it->playTurn(this);
+            } else {
+                numOfArmies--;
+                std::cout << "Player " << it->_army << " LOST" << std::endl;
+            }
+        }
+    }
+
+    for (auto &it : _players) {
+        if (it->isPlaying()) {
+            std::cout << "Player " << it->_army << " WON!" << std::endl;
+        }
+    }
+
+    return true;
 }

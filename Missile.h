@@ -8,7 +8,7 @@
 #include "Weapon.h"
 #include "BodyArmor.h"
 #include "ShieldArmor.h"
-#include "FIghter.h"
+#include "Fighter.h"
 
 #define MISSILE_POWER 100
 #define MISSILE_BULLETS_PER_SHOT 1

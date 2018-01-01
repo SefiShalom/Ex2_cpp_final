@@ -53,19 +53,10 @@ int main() {
     StatePrinter::print(game);
 
 
-    vector<Player*> player = game.getAllPlayers();
-    HumanPlayer* h = dynamic_cast<HumanPlayer*>(player[0]);
-    std::vector<std::vector<Point>> points;
-    std::vector<Point> point;
-    point.emplace_back(Point(5.5,5));
-    point.emplace_back(Point(101,101));
-    point.emplace_back(Point(100,0));
+//    player[0]->playTurn(&game);
+//    player[1]->playTurn(&game);
 
-    points.emplace_back(point);
-
-    player[0]->playTurn(&game);
-    player[1]->playTurn(&game);
-
+    game.play();
     StatePrinter::print(game);
 
 

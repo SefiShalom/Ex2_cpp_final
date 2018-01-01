@@ -4,17 +4,20 @@
 
 #include "SniperStrategy.h"
 
-MapObject *SniperStrategy::applyStrategy(Soldier *soldier, Game *game) {
+std::vector<MapObject*> SniperStrategy::applyStrategy(Soldier *soldier, Game *game) {
 
-    MapObject *object;
+    std::vector<MapObject*> ret;
+
+    MapObject *retShield = nullptr;
+    MapObject *retBodyArmor = nullptr;
+    MapObject *retWeapon = nullptr;
+    MapObject *retSoldier = nullptr;
 
     std::vector<CollectableObject *> collectables = game->retrieveCollectablesInRadius(soldier);
     std::vector<Soldier *> soldiers = game->retrieveEnemySoldiers(soldier);
 
     float bestArmor = 1;
     float bestShield = 1;
-
-    MapObject *ret = nullptr;
 
     for (auto &it : collectables) {
         if (!soldier->get_bodyarmor() && !soldier->get_shield()) {
@@ -23,12 +26,12 @@ MapObject *SniperStrategy::applyStrategy(Soldier *soldier, Game *game) {
             if (checker = dynamic_cast<ShieldArmor *>(it)) {
                 if (checker->getDefensePower() < bestShield) {
                     bestShield = checker->getDefensePower();
-                    ret = checker;
+                    retShield = checker;
                 }
             } else if ((checker = dynamic_cast<BodyArmor *>(it)) && bestShield == 1) {
                 if (checker->getDefensePower() < bestArmor) {
                     bestArmor = checker->getDefensePower();
-                    ret = checker;
+                    retBodyArmor = checker;
                 }
             }
         }
@@ -36,13 +39,19 @@ MapObject *SniperStrategy::applyStrategy(Soldier *soldier, Game *game) {
 
         if (Weapon *w = dynamic_cast<Weapon*>(it)) {
             if (typeid(w) != typeid(soldier->get_weapon())) {
-                ret = w;
+                retWeapon = w;
             }
         }
     }
 
-    if(ret){
-        return ret;
+    if (retShield) {
+        ret.emplace_back(retShield);
+    }
+    if (retBodyArmor) {
+        ret.emplace_back(retBodyArmor);
+    }
+    if (retWeapon) {
+        ret.emplace_back(retWeapon);
     }
 
 
@@ -51,9 +60,13 @@ MapObject *SniperStrategy::applyStrategy(Soldier *soldier, Game *game) {
     for(auto& it : soldiers){
         double distCheck = soldier->getLocation().distance(it->getLocation());
         if(distCheck > maxDist){
-            ret = it;
+            retSoldier = it;
             maxDist = distCheck;
         }
+    }
+
+    if (retSoldier) {
+        ret.emplace_back(retSoldier);
     }
 
     return ret;
