@@ -30,11 +30,10 @@ void StatePrinter::print(Game &game) {
         std::cout << "|";
         for (int j = 0; j < width; ++j) {
 
-//            std::vector<MapObject *> around = game.retrieveObjectsWithinRadiusByPoint(Point(i,j), 1);
             MapObject *around = game.getClosestObject(Point(j,i), 1);
 
             if (around != nullptr && ! hashMap.find(around->getID())->second) {
-//                std::cout << around->getLocation();
+
                 std::cout << *around;
                 std::pair<long, bool> p = std::make_pair<long, bool>(around->getID(), true);
                 hashMap.insert( p );
@@ -45,9 +44,6 @@ void StatePrinter::print(Game &game) {
 
                     Point toCheck(j,i);
                     if(it->isPointInside(toCheck)) {
-
-//                        std::cerr << "FOUND POINT (" << j << ", " << i << ") IN SOLID" << std::endl;
-
                         std::cout << "**";
                         foundInside = true;
                         break;
@@ -59,7 +55,6 @@ void StatePrinter::print(Game &game) {
             }
 
         }
-//        std::cout << "|";
         std::cout << std::endl;
     }
     for (int k = 0; k < width; ++k) {

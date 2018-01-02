@@ -7,9 +7,7 @@
 Weapon::Weapon(const Point& position, const double power, size_t bulletsPerShot):
         CollectableObject(position),_power(power),_bulletsPerShot(bulletsPerShot){}
 
-Weapon::~Weapon() {
-//    std::cout << "Weapon dtor" << std::endl;
-}
+Weapon::~Weapon() {}
 
 double Weapon::shoot(){
     return _power*_bulletsPerShot;

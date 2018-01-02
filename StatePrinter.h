@@ -12,6 +12,7 @@ class StatePrinter {
 
 public:
 
+    //  A static method which prints a nice map of the current state of the game
     static void print(Game &game);
 
 };
