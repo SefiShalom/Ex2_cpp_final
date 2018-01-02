@@ -9,6 +9,7 @@
 #include "Soldier.h"
 #include "Battlefield.h"
 #include "Player.h"
+#include "FileControl.h"
 #include <iostream>
 #include <vector>
 
@@ -44,7 +45,7 @@ public:
 
     std::vector<MapObject *> &getAllObjects();
 
-    void initGame(const std::string &path);
+    void initGame();
 
     void attack(Soldier* attacker, Soldier* target);
 
@@ -76,6 +77,9 @@ public:
     bool isReadyToGo();
 
     std::vector<SolidObject *> retrieveSolidObjects();
+
+    void initGame();
+
 };
 
 
