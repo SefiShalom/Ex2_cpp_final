@@ -7,16 +7,16 @@
 
 
 class Battlefield {
-
-    const double _height, _width;
+// defines a Game's battlefield. Considered as a two dimension field of non negative coordinates.
+    const double _height, _width; //the field height and width
 
 public:
 
-    Battlefield(double height, double width);
+    Battlefield(double height, double width);//ctor
 
-    const double getHeight() const;
+    const double getHeight() const;//returns the Battlefield's height
 
-    const double getWidth() const;
+    const double getWidth() const;//returns the Battlefield's width
 
 };
 

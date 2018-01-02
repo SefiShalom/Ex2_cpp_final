@@ -27,9 +27,7 @@ public:
     virtual double attackArmor(BodyArmor* armor) = 0;
     const double getPower() const;
     void acceptAction(Soldier* soldier);
-
     virtual void useObject(Fighter* fighter);
-
     virtual bool isFireArm() = 0;
 };
 

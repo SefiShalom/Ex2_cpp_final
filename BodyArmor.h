@@ -5,24 +5,33 @@
 #ifndef EX2_CPP_SEFI_BODYARMOR_H
 #define EX2_CPP_SEFI_BODYARMOR_H
 
-#include <memory>
 
 #include "Armor.h"
 #include "Weapon.h"
 #include "Soldier.h"
 
-class BodyArmor : public Armor, public std::enable_shared_from_this<BodyArmor> {
+class BodyArmor : public Armor {
+
+    //A derived class of Armor
+    //Represents a BodyArmor that a soldier wears upon it's body
 
 public:
-    BodyArmor(const Point& position, double defensePower);
+    BodyArmor(const Point& position, double defensePower);//ctor. gets the initial position and the defense power
 
-    ~BodyArmor();
-    void drop(Soldier* soldier);
-    double defend(Weapon *weapon);
-    void useObject(Soldier* soldier);
-    void acceptAction(Soldier* soldier);
-    std::ostream& toString(std::ostream& out);
-    virtual std::string getType();
+    ~BodyArmor();//dtor
+
+    void drop(Soldier* soldier);//drops the BodyArmor in the given soldier's current position
+
+    double defend(Weapon *weapon);// reduces the given Weapon attack power by the BodyArmor defense power
+
+    void useObject(Soldier* soldier);// invokes the given soldier 'pickObject' method which assigning the BodyArmor to it.
+
+    void acceptAction(Soldier* soldier);// passing the instance to the given Soldier's 'performAction'
+                                        // to perform the relevant action on the instance
+
+    std::ostream& toString(std::ostream& out);//returns an ostreaqm object containing a short description if the BodyArmor
+
+    virtual std::string getType();//returns the type (name) of the class BodyArmor
 };
 
 

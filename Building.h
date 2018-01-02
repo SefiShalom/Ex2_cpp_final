@@ -13,10 +13,11 @@
 
 
 class Building: public SolidObject {
-    Building(const Point& position);
-    ~Building();
-    std::ostream& toString(std::ostream& out);
-    virtual std::string getType();
+    // a derived class of SolidObject. Considered as a 3X3 rectangle
+    Building(const Point& position);//ctor
+    ~Building();//dtor
+    std::ostream& toString(std::ostream& out);//returns an ostreaqm object containing a short description if the Building
+    virtual std::string getType();//returns the type (name) of the class Building
 };
 
 

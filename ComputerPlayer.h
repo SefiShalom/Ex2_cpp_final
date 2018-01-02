@@ -11,12 +11,12 @@
 #include "Battlefield.h"
 
 class ComputerPlayer : public Player {
-
-    ComputerStrategy* comStrat;
-    int _strategy;
-    Battlefield *_battlefield;
+    //A dervied class of Player class
+    ComputerStrategy* comStrat;// a pointer to a ComputerStrategy objects
+    int _strategy;// the identifier number of the strategy
+    Battlefield *_battlefield;// a pointer to the Game's Battlefield instance
 public:
-    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield *battlefield);
+    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield *battlefield);//ctor
 
     virtual void playTurn(Game* game);
 

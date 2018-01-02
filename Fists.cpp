@@ -37,3 +37,4 @@ bool Fists::isFireArm() {
 std::string Fists::getType() {
     return "Fists";
 }
+
