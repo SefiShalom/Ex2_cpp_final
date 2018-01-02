@@ -332,6 +332,18 @@ bool Game::play() {
     return true;
 }
 
+std::vector<SolidObject*> Game::retrieveSolidObjects() {
+    std::vector<SolidObject *> objects;
+    SolidObject* solid;
+    for(auto & it : _gameMap)
+        if(solid = dynamic_cast<SolidObject*>(it) ) objects.emplace_back(solid);
+    return objects;
+}
+
+
+
 bool Game::isReadyToGo() {
     return _readyToGo;
 }
+
+

@@ -57,9 +57,22 @@ std::vector<MapObject*> SniperStrategy::applyStrategy(Soldier *soldier, Game *ga
 
     double maxDist = 0;
 
+    std::vector<SolidObject*> solids = game->retrieveSolidObjects();
+
     for(auto& it : soldiers){
         double distCheck = soldier->getLocation().distance(it->getLocation());
-        if(distCheck > maxDist){
+
+        bool isLineClear = true;
+
+        for(auto& solidIt: solids){
+            if(solidIt->isBetween(soldier->getLocation(),it->getLocation())){
+                isLineClear =  false;
+                std::cout << "\t\t\t\tfound obstacle"<< std::endl;
+                break;
+            }
+        }
+
+        if(distCheck > maxDist && isLineClear){
             retSoldier = it;
             maxDist = distCheck;
         }

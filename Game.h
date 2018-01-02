@@ -46,7 +46,6 @@ public:
 
     void initGame(const std::string &path);
 
-
     void attack(Soldier* attacker, Soldier* target);
 
     Player *generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
@@ -75,6 +74,8 @@ public:
     bool play();
 
     bool isReadyToGo();
+
+    std::vector<SolidObject *> retrieveSolidObjects();
 };
 
 

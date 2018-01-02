@@ -3,6 +3,7 @@
 //
 
 #include "Soldier.h"
+#include "Game.h"
 #include "Fists.h"
 
 Soldier::Soldier(const Point &currPosition, double hp, double speed, const short army)
@@ -24,6 +25,8 @@ void Soldier::setNextDestination(const Point &nextPoint) {
 }
 
 void Soldier::walk(double speed) {
+
+//    std::vector<SolidObject*> solids =
 
     if (getLocation().distance(_nextDestination) <= speed) {
         setLocation(_nextDestination);
@@ -121,11 +124,9 @@ void Soldier::performAction(BodyArmor *bodyarmor) {
 }
 
 void Soldier::performAction(SolidObject *solidObject) {
-    std::cout << "SolidObject Ahead!" << std::endl;
-}
+    if(solidObject->isPointInside(getLocation().nextPoint(_speed,_nextDestination))){
 
-std::vector<MapObject> Soldier::scanRadius() {
-    return std::vector<MapObject>();
+    }
 }
 
 void Soldier::acceptAction(Soldier *soldier) {
@@ -188,6 +189,14 @@ std::ostream &Soldier::info(std::ostream &os) {
     if (_shield) os << "Shield: " << *_shield << std::endl;
     if (_bodyarmor) os << "BodyArmor: " << *_bodyarmor << std::endl;
     return os;
+}
+
+std::vector<SolidObject *> Soldier::retrieveSolidObjectsInRadius(Game* game) {
+    std::vector<SolidObject *> objects;
+    SolidObject* solid;
+//    for(auto & it : game->_gameMap)
+//        if(solid = dynamic_cast<SolidObject*>(it) ) objects.emplace_back(solid);
+    return objects;
 }
 
 

@@ -58,9 +58,21 @@ std::vector<MapObject*> RegularSoldierStrategy::applyStrategy(Soldier *soldier, 
 
     double minDist = INFINITY;
 
+    std::vector<SolidObject*> solids = game->retrieveSolidObjects();
+
     for(auto& it : soldiers){
         double distCheck = soldier->getLocation().distance(it->getLocation());
-        if(distCheck < minDist){
+
+        bool isLineClear = true;
+
+        for(auto& solidIt: solids){
+            if(solidIt->isBetween(soldier->getLocation(),it->getLocation())){
+                isLineClear =  false;
+                break;
+            }
+        }
+
+        if(distCheck < minDist && isLineClear){
             retSoldier = it;
             minDist = distCheck;
         }

@@ -14,3 +14,4 @@ weapon,M16,[100 100],
 weapon,UZI,[100 0],
 Armor,BodyArmor,0.8,[10 10]
 Armor,ShieldArmor,0.8,[20 20]
+solid,Tree,10,10,[10 12]

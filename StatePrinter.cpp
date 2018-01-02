@@ -19,6 +19,7 @@ void StatePrinter::print(Game &game) {
     double height = battlefield.getHeight();
     double width  = battlefield.getWidth();
 
+    std::vector<SolidObject*> solids = game.retrieveSolidObjects();
 
     for (int k = 0; k < width; ++k) {
         std::cout << "--";
@@ -30,7 +31,7 @@ void StatePrinter::print(Game &game) {
         for (int j = 0; j < width; ++j) {
 
 //            std::vector<MapObject *> around = game.retrieveObjectsWithinRadiusByPoint(Point(i,j), 1);
-            MapObject *around = game.getClosestObject(Point(i,j), 1);
+            MapObject *around = game.getClosestObject(Point(j,i), 1);
 
             if (around != nullptr && ! hashMap.find(around->getID())->second) {
 //                std::cout << around->getLocation();
@@ -38,10 +39,24 @@ void StatePrinter::print(Game &game) {
                 std::pair<long, bool> p = std::make_pair<long, bool>(around->getID(), true);
                 hashMap.insert( p );
             }
-            else
-                std::cout << "  ";
-//                std::cout << "K";
-//                std::cout << around;
+            else {
+                bool foundInside = false;
+                for(auto& it : solids){
+
+                    Point toCheck(j,i);
+                    if(it->isPointInside(toCheck)) {
+
+//                        std::cerr << "FOUND POINT (" << j << ", " << i << ") IN SOLID" << std::endl;
+
+                        std::cout << "**";
+                        foundInside = true;
+                        break;
+                    }
+                }
+                if (!foundInside) {
+                    std::cout << "  ";
+                }
+            }
 
         }
 //        std::cout << "|";

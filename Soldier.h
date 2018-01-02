@@ -94,7 +94,7 @@ public:
 
     void set_shield(ShieldArmor* shield);
 
-    std::vector<MapObject> scanRadius();
+    std::vector<SolidObject*> retrieveSolidObjectsInRadius(Game* game);
 
     void acceptAction(Soldier* soldier);
 
@@ -108,7 +108,6 @@ public:
 
     void performAction(SolidObject* solidObject);
 
-
     Weapon *get_weapon() const;
 
     BodyArmor *get_bodyarmor() const;
@@ -120,6 +119,8 @@ public:
     std::ostream& info(std::ostream& os);
 
     virtual SoldierStrategy* getStrategy() = 0;
+
+
 
 };
 
