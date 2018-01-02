@@ -45,7 +45,8 @@ Point Point::nextPoint(double distance, const Point &dest) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Point& p) {
-    os << "(X: " << p.get_x() << ", Y: " << p.get_y() << ")";
+//    os << "(X: " << p.get_x() << ", Y: " << p.get_y() << ")";
+    os << "[" << p.get_x() << " " << p.get_y() << "]";
     return os;
 }
 

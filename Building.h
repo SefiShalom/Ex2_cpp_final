@@ -16,7 +16,7 @@ class Building: public SolidObject {
     Building(const Point& position);
     ~Building();
     std::ostream& toString(std::ostream& out);
-
+    virtual std::string getType();
 };
 
 

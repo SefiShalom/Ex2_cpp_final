@@ -31,6 +31,8 @@ public:
     std::ostream& toString (std::ostream& out);
     SoldierStrategy* getStrategy();
 
+    virtual std::string getType();
+
 };
 
 

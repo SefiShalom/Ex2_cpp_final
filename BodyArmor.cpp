@@ -34,3 +34,7 @@ std::ostream& BodyArmor::toString(std::ostream& out){
     out << "BA(" << getDefensePower() << ")(" << x << "," << y << ")";
     return out;
 }
+
+std::string BodyArmor::getType() {
+    return "BodyArmor";
+}

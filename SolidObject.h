@@ -19,6 +19,7 @@ public:
     double getWidth();
     virtual void acceptAction(Soldier* soldier);
     virtual std::ostream& toString(std::ostream& out);
+    virtual std::string getType();
 };
 
 

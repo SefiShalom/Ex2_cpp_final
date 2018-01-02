@@ -23,6 +23,7 @@ public:
     void drop(Fighter* figter);
     std::ostream& toString(std::ostream& out);
     virtual bool isFireArm();
+    virtual std::string getType();
 };
 
 

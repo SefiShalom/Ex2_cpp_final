@@ -61,3 +61,7 @@ std::ostream &RegularSoldier::toString(std::ostream &out) {
 SoldierStrategy* RegularSoldier::getStrategy() {
     return nullptr;
 }
+
+std::string RegularSoldier::getType() {
+    return "Regular";
+}

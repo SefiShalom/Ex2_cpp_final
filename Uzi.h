@@ -19,6 +19,8 @@ public:
     void useObject(Fighter* fighter);
     void useObject(std::shared_ptr<Fighter> fighter);
     std::ostream& toString(std::ostream& out);
+
+    virtual std::string getType();
 };
 
 

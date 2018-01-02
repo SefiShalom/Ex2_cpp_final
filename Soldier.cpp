@@ -59,7 +59,10 @@ void Soldier::feedMeWithDestinations(std::vector<Point> points) {
 bool Soldier::reduceHP(double hp) {
     _hp -= hp;
 
-    if (_hp <= 0) return true;
+    if (_hp <= 0){
+        _hp = 0;
+        return true;
+    }
 
     return false;
 }

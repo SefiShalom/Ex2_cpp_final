@@ -26,3 +26,7 @@ std::ostream &M16::toString(std::ostream &out) {
 
     return out;
 }
+
+std::string M16::getType() {
+    return "M16";
+}

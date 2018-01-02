@@ -36,6 +36,8 @@ public:
     friend std::ostream& operator << (std::ostream& out,MapObject& object);
 
     long getID() const;
+
+    virtual std::string getType() = 0;
 };
 
 #endif //EX2_CPP_OBJECT_H

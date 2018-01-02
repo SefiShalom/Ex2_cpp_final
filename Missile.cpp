@@ -65,3 +65,7 @@ bool Missile::isFireArm() {
     return true;
 }
 
+std::string Missile::getType() {
+    return "Missile";
+}
+

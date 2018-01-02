@@ -13,6 +13,7 @@
 #include "FileTokenizer.h"
 #include "PointsFactory.h"
 #include "Medic.h"
+#include "Output.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
@@ -180,9 +181,9 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
     Player *player;
     if (isComputer) {
-        player = new ComputerPlayer(playerNumber, csv[startReadingFrom -1][0] + " | PC"/*pc + std::to_string(playerNumber)*/, strat, _battlefield);
+        player = new ComputerPlayer(playerNumber, csv[startReadingFrom -1][0] + " , PC"/*pc + std::to_string(playerNumber)*/, strat, _battlefield);
     } else {
-        player = new HumanPlayer(playerNumber, csv[startReadingFrom -1][0] + " | HUMAN"/*human + std::to_string(playerNumber)*/);
+        player = new HumanPlayer(playerNumber, csv[startReadingFrom -1][0] + " , HUMAN"/*human + std::to_string(playerNumber)*/);
     }
 
     int ind = 0;
@@ -305,6 +306,12 @@ void Game::applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy) {
 
 bool Game::play() {
 
+    Output output;
+    if (!output.isValid()) {
+        std::cerr << "Cannot write output.csv!" << std::endl;
+        _readyToGo = false;
+    }
+
     if (!_readyToGo) {
         std::cerr << "Cannot play! See errors above." << std::endl;
         return false;
@@ -313,6 +320,7 @@ bool Game::play() {
     long numOfArmies = _players.size();
 
     while (numOfArmies >= 2) {
+        output.write(this);
         for (auto &it : _players) {
             if (it->isPlaying()) {
                 it->playTurn(this);
@@ -328,6 +336,10 @@ bool Game::play() {
             std::cout << "Player " << it->_army << " WON!" << std::endl;
         }
     }
+
+    output.write(this);
+
+    output.endGame(this);
 
     return true;
 }

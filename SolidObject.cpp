@@ -26,3 +26,7 @@ std::ostream &SolidObject::toString(std::ostream &out) {
     //TODO
     return out;
 }
+
+std::string SolidObject::getType() {
+    return "SolidObject";
+}
