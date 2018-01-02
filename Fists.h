@@ -24,7 +24,6 @@ public:
     std::ostream& toString(std::ostream& out);
     virtual bool isFireArm();
     virtual std::string getType();
-    void drop(Soldier* soldier);
 };
 
 
