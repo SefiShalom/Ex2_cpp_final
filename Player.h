@@ -13,6 +13,7 @@ class Game;
 class Player {
 
     friend class Game;
+    friend class Output;
 
 protected:
     std::vector<Soldier *> _soldiers;

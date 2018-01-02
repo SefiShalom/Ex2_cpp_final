@@ -35,4 +35,8 @@ std::ostream& ShieldArmor::toString(std::ostream &out) {
     return out;
 }
 
+std::string ShieldArmor::getType() {
+    return "ShieldArmor";
+}
+
 

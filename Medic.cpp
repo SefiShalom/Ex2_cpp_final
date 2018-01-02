@@ -64,6 +64,10 @@ SoldierStrategy *Medic::getStrategy() {
     return new MedicStrategy;
 }
 
+std::string Medic::getType() {
+    return "Medic";
+}
+
 
 
 

@@ -20,8 +20,6 @@ public:
 
     void walk();
 
-    virtual int getType();
-
     void healMe();
 
     double calculateHitChance(Soldier *enemy) const;
@@ -29,6 +27,8 @@ public:
     std::ostream& toString (std::ostream& out);
 
     SoldierStrategy* getStrategy();
+
+    virtual std::string getType();
 };
 
 

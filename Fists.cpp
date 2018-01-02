@@ -33,3 +33,7 @@ std::ostream &Fists::toString(std::ostream &out) {
 bool Fists::isFireArm() {
     return false;
 }
+
+std::string Fists::getType() {
+    return "Fists";
+}

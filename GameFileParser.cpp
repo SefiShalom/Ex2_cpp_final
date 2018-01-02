@@ -59,7 +59,7 @@ bool GameFileParser::checkLineNumber(int &number, std::string &str) {
             return str == "soldiers";
 
         case P_NO:
-            return str[0] == 'p';
+            return true;
 
         case OBJECTS_NO:
             return str == "Objects";

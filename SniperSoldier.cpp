@@ -19,9 +19,6 @@ void SniperSoldier::walk() {
 
 }
 
-int SniperSoldier::getType() {
-    return SNIPER_SOLDIER_IDENTIFIER;
-}
 
 
 double SniperSoldier::calculateHitChance(Soldier* enemy) const{
@@ -46,4 +43,8 @@ std::ostream &SniperSoldier::toString(std::ostream &out) {
 
 SoldierStrategy* SniperSoldier::getStrategy() {
     return new SniperStrategy;
+}
+
+std::string SniperSoldier::getType() {
+    return "Sniper";
 }

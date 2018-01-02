@@ -20,3 +20,7 @@ std::ostream &Building::toString(std::ostream &out) {
     out<< "Width: " << getWidth() <<std::endl;
     return out;
 }
+
+std::string Building::getType() {
+    return "Building";
+}

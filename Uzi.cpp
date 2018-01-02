@@ -30,3 +30,7 @@ std::ostream &Uzi::toString(std::ostream& out) {
 
     return out;
 }
+
+std::string Uzi::getType() {
+    return "UZI";
+}

@@ -21,6 +21,8 @@ public:
     void drop(Soldier* soldier);
     void acceptAction(Soldier* soldier);
     std::ostream& toString(std::ostream& out);
+
+    virtual std::string getType();
 };
 
 
