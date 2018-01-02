@@ -3,8 +3,6 @@
 //
 
 #include "Player.h"
-
-#include "Player.h"
 #include "SniperStrategy.h"
 #include "RegularSoldierStrategy.h"
 #include "MedicStrategy.h"
@@ -42,7 +40,6 @@ Player::~Player() {
 }
 
 bool Player::isPlaying() {
-
     for (auto &it : _soldiers) {
         if (it->isWalking()) {
             return true;

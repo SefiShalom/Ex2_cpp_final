@@ -78,8 +78,6 @@ public:
 
     std::vector<SolidObject *> retrieveSolidObjects();
 
-    void initGame();
-
 };
 
 

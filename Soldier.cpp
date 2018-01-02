@@ -10,7 +10,7 @@ Soldier::Soldier(const Point &currPosition, double hp, double speed, const short
         : MapObject(currPosition),
           _speed(speed), _army(army),
           _bodyarmor(nullptr), _shield(nullptr), _weapon(new Fists),
-          _walking(false), _hp(hp), _isAlive(true),
+          _walking(false), _hp(hp), _isAlive(true),_isBypassingSolidObject(false),
           _nextDestination(UNREACHABLE_POINT), currDestinationIndex(0) {}
 
 
@@ -25,13 +25,13 @@ void Soldier::setNextDestination(const Point &nextPoint) {
 }
 
 void Soldier::walk(double speed) {
-
-//    std::vector<SolidObject*> solids =
-
+    _walking = true;
     if (getLocation().distance(_nextDestination) <= speed) {
         setLocation(_nextDestination);
+        _isBypassingSolidObject = false;
         if (!loadNextDest()) {
-            _walking = false;
+//            _walking = false;
+//            _isBypassingSolidObject = false;
             return;
         }
     }
@@ -55,7 +55,7 @@ void Soldier::feedMeWithDestinations(std::vector<Point> points) {
 //    for (auto &i : allDestinations) {
 //        std::cout << i << std::endl;
 //    }
-    loadNextDest();
+    setNextDestination(allDestinations[currDestinationIndex]);
 }
 
 
@@ -176,10 +176,15 @@ ShieldArmor *Soldier::get_shield() const {
 }
 
 bool Soldier::loadNextDest() {
+
     if (currDestinationIndex >= allDestinations.size()) {
+        _walking = false;
         return false;
     }
-    _nextDestination = allDestinations[currDestinationIndex++];
+
+    _nextDestination = allDestinations[currDestinationIndex];
+    if(!isBypassingSolidObject()) currDestinationIndex++;
+
     _walking = true;
     return true;
 }
@@ -201,6 +206,15 @@ std::vector<SolidObject *> Soldier::retrieveSolidObjectsInRadius(Game* game) {
 //        if(solid = dynamic_cast<SolidObject*>(it) ) objects.emplace_back(solid);
     return objects;
 }
+
+void Soldier::setIsBypassingSolidObject(bool is) {
+    _isBypassingSolidObject  = is;
+}
+
+bool Soldier::isBypassingSolidObject() {
+    return _isBypassingSolidObject;
+}
+
 
 
 

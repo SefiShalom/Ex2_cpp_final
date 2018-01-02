@@ -5,33 +5,46 @@
 #ifndef EX2_CPP_SOLIDOBJECT_H
 #define EX2_CPP_SOLIDOBJECT_H
 
+#include <vector>
 #include "Point.h"
 #include "MapObject.h"
 
-#define EQX1 0
-#define EQY1 1
-#define EQX2 2
-#define EQY2 3
+#define EQUATION_X1 0
+#define EQUATION_Y1 1
+#define EQUATION_X2 2
+#define EQUATION_Y2 3
 #define LIMITS_SIZE 4
 
-class SolidObject : public MapObject, public std::enable_shared_from_this<SolidObject> {
+class SolidObject : public MapObject {
 
     double _length, _width;
-    double _limits[4];
+    double _limits[LIMITS_SIZE];
 
 public:
 
-    SolidObject(const Point& position, double len, double width);
-    virtual ~SolidObject();
-    double getLength();
-    double getWidth();
-    virtual void acceptAction(Soldier* soldier);
-    bool isBetween(const Point& source,const Point& destination);
-    bool isPointInside(const Point& point);
-    virtual std::ostream& toString(std::ostream& out);
-    double* getLimits();
-};
+    SolidObject(const Point &position, double len, double width);
 
+    virtual ~SolidObject();
+
+    double getLength();
+
+    double getWidth();
+
+    virtual void acceptAction(Soldier *soldier);
+
+    bool isBetween(const Point &source, const Point &destination);
+
+    bool isPointInside(const Point &point);
+
+    virtual std::ostream &toString(std::ostream &out);
+
+    Point getClosestBypassPoint(const Point &source);
+
+    std::vector<Point> getLimitsPoints();
+
+    virtual std::string getType();
+
+};
 
 
 #endif //EX2_CPP_SOLIDOBJECT_H

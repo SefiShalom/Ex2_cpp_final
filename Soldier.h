@@ -42,7 +42,7 @@ protected:
 
     bool _walking;
     bool _isAlive;
-
+    bool _isBypassingSolidObject;
 
     // For Medic
     virtual void healMe() = 0;
@@ -120,7 +120,9 @@ public:
 
     virtual SoldierStrategy* getStrategy() = 0;
 
+    void setIsBypassingSolidObject(bool is);
 
+    bool isBypassingSolidObject();
 
 };
 

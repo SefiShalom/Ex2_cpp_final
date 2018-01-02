@@ -1,0 +1,10 @@
+Game,,,
+battlefieldSize,100,200,
+players,2,,
+soldiers,1,,
+p1,human,,
+paramedic,[12 8]
+p2,human,,
+paramedic,[100 100]
+Objects,,,
+solid,Tree,5,5,[5 5]

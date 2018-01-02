@@ -2,16 +2,17 @@
 // Created by damir on 12-Dec-17.
 //
 
+#include <strings.h>
 #include "SolidObject.h"
 #include "Soldier.h"
 
 SolidObject::SolidObject(const Point &position, double len, double width)
         : MapObject(position), _length(len>= width?len:width), _width(width<=len?width:len) {
 
-    _limits[EQX1] = getLocation().get_x();
-    _limits[EQY1] = getLocation().get_y();
-    _limits[EQX2] = getLocation().get_x() + _width;
-    _limits[EQY2] = getLocation().get_y() + _length;
+    _limits[EQUATION_X1] = getLocation().get_x();
+    _limits[EQUATION_Y1] = getLocation().get_y();
+    _limits[EQUATION_X2] = getLocation().get_x() + _width;
+    _limits[EQUATION_Y2] = getLocation().get_y() + _length;
 }
 
 SolidObject::~SolidObject() {}
@@ -32,6 +33,11 @@ std::ostream &SolidObject::toString(std::ostream &out) {
     //TODO
     return out;
 }
+
+std::string SolidObject::getType() {
+    return "SolidObject";
+}
+
 
 bool SolidObject::isBetween(const Point& source, const Point &destination) {
 
@@ -65,7 +71,34 @@ bool SolidObject::isPointInside(const Point &point) {
             (point.get_y() <= getLocation().get_y()+_length);
 }
 
-double *SolidObject::getLimits() {
-    return _limits;
+
+
+std::vector<Point> SolidObject::getLimitsPoints() {
+
+    std::vector<Point> limitsRet;
+    double x = getLocation().get_x();
+    double y = getLocation().get_y();
+
+    limitsRet.emplace_back(Point(x-1,y-1));
+    limitsRet.emplace_back(Point(x,y+_length+1));
+    limitsRet.emplace_back(Point(x+_width,y-1));
+    limitsRet.emplace_back(Point(x+_width+1,y+_length+1));
+
+    return limitsRet;
+}
+
+Point SolidObject::getClosestBypassPoint(const Point &source) {
+
+    std::vector<Point> limitsPoints = getLimitsPoints();
+    double minDist = INFINITY;
+    int index;
+    Point ret;
+    for(auto& it : limitsPoints){
+        if(source.distance(it) < minDist){
+            minDist = source.distance(it);
+            ret = it;
+        }
+    }
+    return ret;
 }
 

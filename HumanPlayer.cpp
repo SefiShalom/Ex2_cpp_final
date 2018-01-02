@@ -20,10 +20,24 @@ void HumanPlayer::initSteps(std::vector<std::vector<Point>> points) {
 }
 
 void HumanPlayer::playTurn(Game *game) {
+
+    std::vector<SolidObject*> solids = game->retrieveSolidObjects();
+
     for (auto &soldier : _soldiers) {
+
         if (soldier->isAlive()) {
             std::cout << "It's " << *soldier << "'s turn" << std::endl;
+
+            for(auto& solid : solids){
+                if(solid->isBetween(soldier->getLocation(),soldier->_nextDestination)){
+                    soldier->setNextDestination(solid->getClosestBypassPoint(soldier->_nextDestination));
+                    soldier->setIsBypassingSolidObject(true);
+                    break;
+                }
+            }
+
             soldier->walk();
+
             if (dynamic_cast<Medic *>(soldier)) {
                 game->applyStrategy(soldier, medicStrat);
             } else if (dynamic_cast<SniperSoldier *>(soldier)) {
