@@ -40,10 +40,6 @@ public:
 
     //  Simply returns the power of the weapon.
     const double getPower() const;
-<<<<<<< HEAD
-    void acceptAction(Soldier* soldier);
-    virtual void useObject(Fighter* fighter);
-=======
 
     //  For Visitor purposes.
     void acceptAction(Soldier *soldier);
@@ -52,7 +48,6 @@ public:
     virtual void useObject(Fighter *fighter);
 
     //  Just for checking if it's Fists (or possibly a knife) or a fire arm.
->>>>>>> origin/damir-work
     virtual bool isFireArm() = 0;
 };
 
