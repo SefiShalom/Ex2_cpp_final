@@ -64,6 +64,7 @@ void Output::write(Game *game) {
 }
 
 Output::~Output() {
+    std::cout << "Wrote a file to csvs/output.csv" << std::endl;
     _output.close();
 }
 

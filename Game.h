@@ -47,10 +47,11 @@ public:
 
     void initGame();
 
-    void attack(Soldier* attacker, Soldier* target);
+    void attack(Soldier *attacker, Soldier *target);
 
     Player *generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
-                                       const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer = false);
+                                       const std::vector<std::vector<std::string>> &csv, int strat,
+                                       bool isComputer = false, std::string filePath = "");
 
     bool addAllMapObject(int from, const std::vector<std::vector<std::string>> &csv);
 
@@ -58,9 +59,9 @@ public:
 
     std::vector<MapObject *> retrieveObjectsWithinRadiusByPoint(const Point &point, double radius);
 
-    MapObject * getClosestObject(const Point &point, double radius);
+    MapObject *getClosestObject(const Point &point, double radius);
 
-    std::vector<Player* > getAllPlayers();
+    std::vector<Player *> getAllPlayers();
 
     Point getBattlefieldLimits();
 
@@ -78,6 +79,7 @@ public:
 
     std::vector<SolidObject *> retrieveSolidObjects();
 
+    void initGame(std::vector<std::string> arguments);
 };
 
 
