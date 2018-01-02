@@ -19,50 +19,51 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
 
-    srand(time(NULL));// getting the current time for the random function at Fighter
-
-
-
-//    GameFileParser gfp("csvs/init_file_example2.csv");
-////    gfp.parse();
-//
-//    vector<vector<string>> parseMat = gfp.parse();
-//
-//    for (auto &i : parseMat) {
-//        cout << "\n--This line is of length " << i.size() << endl;
-//        cout << "The last element is " << i[i.size()-1] << endl;
-//        cout << "Its length is " << i[i.size()-1].size() << endl;
-//        for (auto &j : i) {
-//            cout << j << endl;
-//        }
-//    }
-//
-//    cout << "Battlefield size: (" << stoi(parseMat[1][1]) << ", " << stoi(parseMat[1][2]) << ")" << endl;
-//
-//    cout << "Got a vector of size " << parseMat.size() << endl;
-//
-
+    srand(time(NULL));
 
     Game game;
 
-    cout << "\n\n\n" << endl;
-    game.initGame();
+    if (argc > 1) {
 
-    StatePrinter::print(game);
+        string choice;
 
+        vector<string> arguments;
 
-//    player[0]->playTurn(&game);
-//    player[1]->playTurn(&game);
+        if (((string)argv[1]) == "-help" && argc == 2) {
+            cout << "[initFile] [player1 player2 ...]" << endl;
+        }
+        else {
 
-    game.play();
-    StatePrinter::print(game);
+            if (argc <= 2) {
+                cerr << "Invalid arguments! Exiting." << endl;
+            }
+            else {
 
+                for (int i = 1; i < argc; ++i) {
+                    arguments.emplace_back((string)argv[i]);
+                }
 
+                game.initGame(arguments);
+//                StatePrinter::print(game);
+                game.play();
+//                StatePrinter::print(game);
+            }
 
+        }
 
+    }
+    else {
 
+        cout << "\n\n\n" << endl;
+        game.initGame();
+
+//        StatePrinter::print(game);
+        game.play();
+//        StatePrinter::print(game);
+
+    }
 
     std::cout << "\n\n\n**********MAIN DONE**********" << std::endl;
 

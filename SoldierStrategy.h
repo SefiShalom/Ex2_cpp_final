@@ -11,14 +11,15 @@
 
 class Game;
 
-#define NON_ATTACK_RET 1
-#define ATTACK_RET 2
+//  Interface for various soldier types
 
 class SoldierStrategy {
 
 public:
-   virtual ~SoldierStrategy() = 0;
-    virtual std::vector<MapObject*> applyStrategy(Soldier* soldier, Game* game) = 0;
+
+    virtual ~SoldierStrategy() = 0;
+
+    virtual std::vector<MapObject *> applyStrategy(Soldier *soldier, Game *game) = 0;
 
 };
 

@@ -22,26 +22,36 @@ class SolidObject : public MapObject {
 
 public:
 
+    //  Ctor which receives a point, height and width.
     SolidObject(const Point &position, double len, double width);
 
     virtual ~SolidObject();
 
+    //  Returns the height of the solid object
     double getLength();
 
+    //  Returns the width of the solid object
     double getWidth();
 
+    //  For Visitor purposes
     virtual void acceptAction(Soldier *soldier);
 
+    //  Checks if this SolidObject is placed between source and destination
     bool isBetween(const Point &source, const Point &destination);
 
+    //  Checks if the given point is inside this SolidObjects
     bool isPointInside(const Point &point);
 
+    //  For printing.
     virtual std::ostream &toString(std::ostream &out);
 
+    //  Generates a bypass point so the soldier would be able to find another way around this SolidObject
     Point getClosestBypassPoint(const Point &source);
 
+    //  Helps "getClosestBypassPoint" by finding the vertices of this rectangular SolidObject
     std::vector<Point> getLimitsPoints();
 
+    //  For Output class.
     virtual std::string getType();
 
 };

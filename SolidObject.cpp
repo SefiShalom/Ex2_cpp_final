@@ -2,7 +2,6 @@
 // Created by damir on 12-Dec-17.
 //
 
-#include <strings.h>
 #include "SolidObject.h"
 #include "Soldier.h"
 

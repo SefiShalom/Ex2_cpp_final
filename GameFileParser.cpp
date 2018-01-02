@@ -9,7 +9,9 @@
 
 
 GameFileParser::GameFileParser(const std::string &path)
-        : FileParser(std::move(path)) {}
+        : FileParser(std::move(path)) {
+    std::cout << "GOT PATH = " << path;
+}
 
 std::vector<std::vector<std::string>> GameFileParser::parse() {
 

@@ -11,15 +11,22 @@
 #define UZI_POWER 40
 #define UZI_BULLETS_PER_SHOT 3
 
-class Uzi: public Rifle{
+class Uzi : public Rifle {
 
 public:
-    Uzi(const Point& position);
-    ~Uzi();
-    void useObject(Fighter* fighter);
-    void useObject(std::shared_ptr<Fighter> fighter);
-    std::ostream& toString(std::ostream& out);
 
+    //  Ctor which receives a point.
+    Uzi(const Point &position);
+
+    ~Uzi();
+
+    //  For Visitor purposes. Every fighter is supposed to know what to do with it
+    void useObject(Fighter *fighter);
+
+    //  For printing.
+    std::ostream &toString(std::ostream &out);
+
+    //  For Output class.
     virtual std::string getType();
 };
 

@@ -13,6 +13,7 @@
 #include "FileTokenizer.h"
 #include "PointsFactory.h"
 #include "Medic.h"
+#include "Output.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
@@ -194,16 +195,16 @@ void Game::initGame() {
 
 Player *
 Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
-                                 const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer) {
+                                 const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer, std::string filePath) {
 
     std::string pc = "Computer";
     std::string human = "Human";
 
     Player *player;
     if (isComputer) {
-        player = new ComputerPlayer(playerNumber, csv[startReadingFrom -1][0] + " | PC"/*pc + std::to_string(playerNumber)*/, strat, _battlefield);
+        player = new ComputerPlayer(playerNumber, csv[startReadingFrom -1][0] + " , PC"/*pc + std::to_string(playerNumber)*/, strat, _battlefield);
     } else {
-        player = new HumanPlayer(playerNumber, csv[startReadingFrom -1][0] + " | HUMAN"/*human + std::to_string(playerNumber)*/);
+        player = new HumanPlayer(playerNumber, csv[startReadingFrom -1][0] + " , HUMAN"/*human + std::to_string(playerNumber)*/);
     }
 
     int ind = 0;
@@ -222,7 +223,11 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
     if(!isComputer){
 
-        FileReader fr("csvs/player" + std::to_string(playerNumber) + "_file.csv");
+        if (filePath == "") {
+            filePath = "csvs/player" + std::to_string(playerNumber) + "_file.csv";
+        }
+
+        FileReader fr(filePath);
 
         if (!fr.isOpen()) {
             std::cerr << "Error opening the file " << "csvs/player" << std::to_string(playerNumber) << "_file.csv" << std::endl;
@@ -326,6 +331,13 @@ void Game::applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy) {
 
 bool Game::play() {
 
+    Output output;
+    if (!output.isValid()) {
+        std::cerr << "Cannot write output.csv!" << std::endl;
+        _readyToGo = false;
+    }
+
+
     if (!_readyToGo) {
         std::cerr << "Cannot play! See errors above." << std::endl;
         return false;
@@ -334,6 +346,7 @@ bool Game::play() {
     long numOfArmies = _players.size();
 
     while (numOfArmies >= 2) {
+        output.write(this);
         for (auto &it : _players) {
             if (it->isPlaying()) {
                 it->playTurn(this);
@@ -351,6 +364,10 @@ bool Game::play() {
         }
     }
 
+    output.write(this);
+
+    output.endGame(this);
+
     return true;
 }
 
@@ -366,6 +383,96 @@ std::vector<SolidObject*> Game::retrieveSolidObjects() {
 
 bool Game::isReadyToGo() {
     return _readyToGo;
+}
+
+void Game::initGame(std::vector<std::string> arguments) {
+
+    GameFileParser gfp(arguments[0]);
+    if (!gfp.isOpen()) {
+        std::cerr << "Error opening the file " << arguments[0] << std::endl;
+        return;
+    }
+    std::vector<std::vector<std::string>> csv = gfp.parse();
+
+    if (csv[0][0] != "Game" || csv[0].size() != 1) {
+        std::cerr << "Error in game-csv in first line" << std::endl;
+        return;
+    }
+
+    if (csv.size() < 2) {
+        std::cerr << "Error in game-csv. No battlefield!" << std::endl;
+    }
+
+    if (csv[BATTLEFIELD_LINE].size() != 3) {
+        std::cerr << "Error in game-csv in line " << BATTLEFIELD_LINE << " in file " << arguments[0] << std::endl;
+        return;
+    }
+    _battlefield = new Battlefield(std::stoi(csv[BATTLEFIELD_LINE][1]), std::stoi(csv[BATTLEFIELD_LINE][2]));
+    int numOfPlayers = std::stoi(csv[PLAYERS_LINE][1]);
+    int numOfSoldiersPerPlayer = std::stoi(csv[NUM_OF_SOLDIERS_LINE][1]);
+
+    int startSearchingObjectsFrom = 4 + (numOfPlayers * (numOfSoldiersPerPlayer + 1));
+
+    if (!addAllMapObject(startSearchingObjectsFrom, csv)) {
+        std::cerr << "Error parsing objects!" << std::endl;
+        return;
+    }
+
+    int numOfHumans = 0;
+
+    for (int i = 0; i < numOfPlayers; ++i) {
+        int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
+
+        if (csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer" && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human") {
+            std::cerr << "Player p" << (i + 1) << " is not a computer nor a human? Impossible!" << std::endl;
+            return;
+        }
+        if ((csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 2 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human")
+            || (csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 3 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer")) {
+            std::cerr << "Error found in player number " << (i + 1) << std::endl;
+            return;
+        }
+
+        bool isComputer = csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] == "computer";
+        int strat = -1;
+        if (isComputer) {
+            strat = std::stoi(csv[4 + (numOfSoldiersPerPlayer + 1) * i][2]);
+        } else {
+            numOfHumans++;
+        }
+
+        Player *p_i = generatePlayerWithSoldiers(i, startReadingPlayerInfoFrom, numOfSoldiersPerPlayer, csv,
+                                                 strat, isComputer, arguments[numOfHumans + 1]);
+
+        if (p_i == nullptr) {
+            std::cerr << "Error creating player!" << std::endl;
+            return;
+        }
+
+        std::cout << "Created a player: " << *p_i << std::endl;
+
+        _players.emplace_back(p_i);
+    }
+
+    for (int i = 0; i < numOfPlayers; ++i) {
+        std::vector<Soldier*> vec = _players[i]->_soldiers;
+
+        for (auto &it : vec) {
+            addMapObject(it);
+
+            if(it->get_weapon()/* && it->get_weapon()->isFireArm()*/){
+                std::cout << "Added " << *it->get_weapon() << std::endl;
+                addMapObject(it->get_weapon());
+            }
+            if(it->get_shield()) addMapObject(it->get_shield());
+            if(it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
+        }
+    }
+
+    _readyToGo = true;
+
+
+
 }
 
 
