@@ -44,7 +44,7 @@ public:
 
     std::vector<MapObject *> &getAllObjects();
 
-    void initGame(const std::string &path);
+    void initGame();
 
 
     void attack(Soldier* attacker, Soldier* target);

@@ -14,6 +14,7 @@
 #include "PointsFactory.h"
 #include "Medic.h"
 #include "Output.h"
+#include "FileControl.h"
 
 Game::Game()
         : _battlefield(nullptr) {}
@@ -89,7 +90,27 @@ std::vector<MapObject *> &Game::getAllObjects() {
     return _gameMap;
 }
 
-void Game::initGame(const std::string &path) {
+void Game::initGame() {
+
+    std::string input;
+    std::cout << "Do you want to create an init file, or give me a path? (create/path)" << std::endl;
+    std::cin >> input;
+
+    std::string path;
+
+    if (input == "path") {
+        std::cout << "Give me relative path:" << std::endl;
+        std::cin >> path;
+    } else {
+        FileControl fc;
+        if (fc.isValid()) {
+            fc.writeInit();
+            path = "csvs/init_file.csv";
+        } else {
+            std::cerr << "Error creating init_file.csv " << std::endl;
+            return;
+        }
+    }
 
     GameFileParser gfp(path);
     if (!gfp.isOpen()) {
@@ -326,14 +347,14 @@ bool Game::play() {
                 it->playTurn(this);
             } else {
                 numOfArmies--;
-                std::cout << "Player " << it->_army << " LOST" << std::endl;
+                std::cout << "Player " << it->_name << " LOST" << std::endl;
             }
         }
     }
 
     for (auto &it : _players) {
         if (it->isPlaying()) {
-            std::cout << "Player " << it->_army << " WON!" << std::endl;
+            std::cout << "Player " << it->_name << " WON!" << std::endl;
         }
     }
 

@@ -48,7 +48,7 @@ int main() {
     Game game;
 
     cout << "\n\n\n" << endl;
-    game.initGame("csvs/init_file_example.csv");
+    game.initGame();
 
     StatePrinter::print(game);
 

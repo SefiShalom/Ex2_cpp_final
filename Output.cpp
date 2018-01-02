@@ -9,7 +9,7 @@ int Output::iteration = 1;
 
 Output::Output() {
 
-    _output.open("output.csv", std::ofstream::out);
+    _output.open("csvs/output.csv", std::ofstream::out);
 
     _isValid = _output.is_open();
 
