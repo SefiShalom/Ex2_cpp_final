@@ -37,7 +37,8 @@ void Output::write(Game *game) {
                     << "," << pointOrDead.str() << "," << soldier->get_weapon()->getType();
 
             if (_hasBodyArmor) {
-                _output << "," << soldier->get_bodyarmor()->getType() << "," << soldier->get_bodyarmor()->getDefensePower();
+                _output << "," << soldier->get_bodyarmor()->getType() << ","
+                        << soldier->get_bodyarmor()->getDefensePower();
             }
             if (_hasShield) {
                 _output << "," << soldier->get_shield()->getType() << "," << soldier->get_shield()->getDefensePower();
@@ -50,10 +51,11 @@ void Output::write(Game *game) {
 
     for (auto &obj : game->getAllObjects()) {
 
-        if (obj->getType() != "Regular" && obj->getType() != "Sniper" && obj->getType() != "Medic" && obj->getLocation().get_x() != -INFINITY) {
+        if (obj->getType() != "Regular" && obj->getType() != "Sniper" && obj->getType() != "Medic" &&
+            obj->getLocation().get_x() != -INFINITY) {
             _output << obj->getType() << "," << obj->getLocation();
             if (obj->getType() == "BodyArmor" || obj->getType() == "ShieldArmor") {
-                _output << "," << ((Armor*)obj)->getDefensePower();
+                _output << "," << ((Armor *) obj)->getDefensePower();
             }
             _output << std::endl;
         }
