@@ -44,7 +44,6 @@ void FileControl::writeInit() {
     _outputGame << input << std::endl;
 
 
-
     _outputGame << "soldiers,";
     std::cout << "Enter number of soldiers per player:";
     std::cin >> input;
@@ -65,8 +64,7 @@ void FileControl::writeInit() {
             std::cout << "Enter computer strategy (prefer 0):";
             std::cin >> input;
             _outputGame << "," << input;
-        }
-        else {
+        } else {
 
             writePlayer(i, numberOfSoldiers);
         }
@@ -124,8 +122,7 @@ void FileControl::writeInit() {
 
 
             _outputGame << std::endl;
-        }
-        else if (input == "Armor") {
+        } else if (input == "Armor") {
             _outputGame << input << ",";
 
             std::cout << "Enter weapon name: (ShieldArmor/BodyArmor)";
@@ -143,8 +140,7 @@ void FileControl::writeInit() {
 
 
             _outputGame << std::endl;
-        }
-        else if (input == "solid") {
+        } else if (input == "solid") {
             _outputGame << input << ",";
 
             std::cout << "Enter solid object name: (Building/Tree)";
@@ -163,7 +159,6 @@ void FileControl::writeInit() {
             inputPoint(_outputGame);
 
 
-
             _outputGame << std::endl;
         }
 
@@ -171,7 +166,6 @@ void FileControl::writeInit() {
         std::cout << "Do you want to add an object? (yes/no)";
         std::cin >> enterMore;
     }
-
 
 
     _outputGame.close();
@@ -183,7 +177,7 @@ void FileControl::writePlayer(int playerNumber, int numOfSoldiers) {
     std::string fileName = "csvs/player" + std::to_string(playerNumber) + "_file.csv";
     _outputPlayer.open(fileName, std::ofstream::out | std::ofstream::trunc);
 
-    if (! _outputPlayer.is_open()) {
+    if (!_outputPlayer.is_open()) {
         std::cerr << "Error creating/writing to " << fileName << std::endl;
         return;
     }
@@ -197,7 +191,7 @@ void FileControl::writePlayer(int playerNumber, int numOfSoldiers) {
 
     for (int i = 0; i < numOfSoldiers; ++i) {
         std::cout << "Soldier number " << (i + 1) << ":" << std::endl;
-        for (int j = 0; j < numOfPoints ; ++j) {
+        for (int j = 0; j < numOfPoints; ++j) {
             std::cout << "Enter point:" << std::endl;
             inputPoint(_outputPlayer);
         }

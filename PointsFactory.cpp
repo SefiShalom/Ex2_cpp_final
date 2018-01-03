@@ -5,13 +5,14 @@
 #include "PointsFactory.h"
 
 
-std::vector<Point> PointsFactory::makePoints(std::string& input, double h, double w) {
+std::vector<Point> PointsFactory::makePoints(std::string &input, double h, double w) {
     std::vector<Point> ret;
 
     int checkCorrectness = checkLineCorrectness(input);
 
     if (checkCorrectness == -1) {
         std::cerr << "Error in PointFactory" << std::endl;
+        return ret;
     }
 
     FileTokenizer ft(input);
@@ -23,28 +24,29 @@ std::vector<Point> PointsFactory::makePoints(std::string& input, double h, doubl
 
     for (int i = 0; i < nums.size(); ++i) {
         double left = nums[i++];
-        if(left > w ) left = w;
-        else if(left < 0) left = 0;
+        if (left > w) left = w;
+        else if (left < 0) left = 0;
         if (i == nums.size()) {
-            std::cout << "Error in PointFactory!" << std::endl;
+            std::cerr << "Error in PointFactory!" << std::endl;
+            return ret;
         }
         double right = nums[i];
-        if(right > h ) right = h;
-        else if(right < 0) right = 0;
+        if (right > h) right = h;
+        else if (right < 0) right = 0;
         ret.emplace_back(Point(left, right));
 
     }
 
 
     if (checkCorrectness != ret.size()) {
-        std::cout << "Error in PointFactory!" << std::endl;
+        std::cerr << "Error in PointFactory!" << std::endl;
     }
 
     return ret;
 }
 
 
-int PointsFactory::checkLineCorrectness(std::string& toCheck) {
+int PointsFactory::checkLineCorrectness(std::string &toCheck) {
 
     std::stack<char> chars;
 
@@ -54,8 +56,7 @@ int PointsFactory::checkLineCorrectness(std::string& toCheck) {
         if (toCheck[i] == '[') {
             chars.push('[');
             points++;
-        }
-        else if (toCheck[i] == ']') {
+        } else if (toCheck[i] == ']') {
             if (chars.empty()) {
                 std::cerr << "Unbalanced point string" << std::endl;
                 return -1;
@@ -64,7 +65,7 @@ int PointsFactory::checkLineCorrectness(std::string& toCheck) {
         }
     }
 
-    if (! chars.empty()) {
+    if (!chars.empty()) {
         std::cerr << "Unbalanced point string" << std::endl;
         return -1;
     }

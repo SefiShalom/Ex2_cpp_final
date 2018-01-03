@@ -30,9 +30,10 @@ Game::~Game() {
 
 std::vector<CollectableObject *> Game::retrieveCollectablesInRadius(Soldier *soldier) {
     std::vector<CollectableObject *> objectInRadius;
-    for (auto & it : _gameMap) {
-        if (dynamic_cast<CollectableObject*>(it) && (it)->getLocation().distance(soldier->getLocation()) <= PICKABLE_RADIUS){
-            objectInRadius.emplace_back(dynamic_cast<CollectableObject*>(it));
+    for (auto &it : _gameMap) {
+        if (dynamic_cast<CollectableObject *>(it) &&
+            (it)->getLocation().distance(soldier->getLocation()) <= PICKABLE_RADIUS) {
+            objectInRadius.emplace_back(dynamic_cast<CollectableObject *>(it));
         }
     }
     return objectInRadius;
@@ -40,9 +41,9 @@ std::vector<CollectableObject *> Game::retrieveCollectablesInRadius(Soldier *sol
 
 std::vector<Soldier *> Game::retrieveEnemySoldiers(Soldier *soldier) {
     std::vector<Soldier *> enemySoldiers;
-    for (auto & it : _gameMap) {
-        if (Soldier* t = dynamic_cast<Soldier*>(it)) {
-            if(t->getArmy() != soldier->getArmy() && t->isAlive()){
+    for (auto &it : _gameMap) {
+        if (Soldier *t = dynamic_cast<Soldier *>(it)) {
+            if (t->getArmy() != soldier->getArmy() && t->isAlive()) {
                 enemySoldiers.emplace_back(t);
             }
 
@@ -52,7 +53,7 @@ std::vector<Soldier *> Game::retrieveEnemySoldiers(Soldier *soldier) {
 }
 
 
-std::vector<MapObject *> Game::retrieveObjectsWithinRadiusByPoint(const Point& point, double radius) {
+std::vector<MapObject *> Game::retrieveObjectsWithinRadiusByPoint(const Point &point, double radius) {
     std::vector<MapObject *> objectInRadius;
     std::vector<MapObject *>::iterator it;
     for (it = _gameMap.begin(); it != _gameMap.end(); it++) {
@@ -63,8 +64,9 @@ std::vector<MapObject *> Game::retrieveObjectsWithinRadiusByPoint(const Point& p
 }
 
 
-MapObject *Game::getClosestObject(const Point& point, double radius) {
-    double minDistance = Point(0,0).distance(Point(_battlefield->getWidth(), _battlefield->getHeight())); // Max distance
+MapObject *Game::getClosestObject(const Point &point, double radius) {
+    double minDistance = Point(0, 0).distance(
+            Point(_battlefield->getWidth(), _battlefield->getHeight())); // Max distance
     MapObject *ret = nullptr;
 
     for (auto &it : _gameMap) {
@@ -146,12 +148,15 @@ void Game::initGame() {
     for (int i = 0; i < numOfPlayers; ++i) {
         int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
 
-        if (csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer" && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human") {
+        if (csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer" &&
+            csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human") {
             std::cerr << "Player p" << (i + 1) << " is not a computer nor a human? Impossible!" << std::endl;
             return;
         }
-        if ((csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 2 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human")
-            || (csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 3 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer")) {
+        if ((csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 2 &&
+             csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human")
+            || (csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 3 &&
+                csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer")) {
             std::cerr << "Error found in player number " << (i + 1) << std::endl;
             return;
         }
@@ -176,17 +181,17 @@ void Game::initGame() {
     }
 
     for (int i = 0; i < numOfPlayers; ++i) {
-        std::vector<Soldier*> vec = _players[i]->_soldiers;
+        std::vector<Soldier *> vec = _players[i]->_soldiers;
 
         for (auto &it : vec) {
             addMapObject(it);
 
-            if(it->get_weapon()/* && it->get_weapon()->isFireArm()*/){
+            if (it->get_weapon()/* && it->get_weapon()->isFireArm()*/) {
                 std::cout << "Added " << *it->get_weapon() << std::endl;
                 addMapObject(it->get_weapon());
             }
-            if(it->get_shield()) addMapObject(it->get_shield());
-            if(it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
+            if (it->get_shield()) addMapObject(it->get_shield());
+            if (it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
         }
     }
 
@@ -195,16 +200,20 @@ void Game::initGame() {
 
 Player *
 Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int numOfSoldiers,
-                                 const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer, std::string filePath) {
+                                 const std::vector<std::vector<std::string>> &csv, int strat, bool isComputer,
+                                 std::string filePath) {
 
     std::string pc = "Computer";
     std::string human = "Human";
 
     Player *player;
     if (isComputer) {
-        player = new ComputerPlayer(playerNumber, csv[startReadingFrom -1][0] + " , PC"/*pc + std::to_string(playerNumber)*/, strat, _battlefield);
+        player = new ComputerPlayer(playerNumber,
+                                    csv[startReadingFrom - 1][0] + " , PC"/*pc + std::to_string(playerNumber)*/, strat,
+                                    _battlefield);
     } else {
-        player = new HumanPlayer(playerNumber, csv[startReadingFrom -1][0] + " , HUMAN"/*human + std::to_string(playerNumber)*/);
+        player = new HumanPlayer(playerNumber,
+                                 csv[startReadingFrom - 1][0] + " , HUMAN"/*human + std::to_string(playerNumber)*/);
     }
 
     int ind = 0;
@@ -214,10 +223,11 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         Soldier *newSoldier = SoldierFactory::makeSoldier(csv[startReadingFrom], playerNumber);
         if (newSoldier == nullptr) {
             std::cerr << "Invalid soldier input!" << std::endl;
-            std::cerr << "Error creating soldier number " << (i + 1) << "player number " << (playerNumber + 1) << std::endl;
+            std::cerr << "Error creating soldier number " << (i + 1) << "player number " << (playerNumber + 1)
+                      << std::endl;
 
-            for (auto & sol : player->_soldiers) {
-                delete(sol);
+            for (auto &sol : player->_soldiers) {
+                delete (sol);
             }
 
             delete player;
@@ -227,7 +237,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         ++startReadingFrom;
     }
 
-    if(!isComputer){
+    if (!isComputer) {
 
         if (filePath == "") {
             filePath = "csvs/player" + std::to_string(playerNumber) + "_file.csv";
@@ -236,7 +246,8 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         FileReader fr(filePath);
 
         if (!fr.isOpen()) {
-            std::cerr << "Error opening the file " << "csvs/player" << std::to_string(playerNumber) << "_file.csv" << std::endl;
+            std::cerr << "Error opening the file " << "csvs/player" << std::to_string(playerNumber) << "_file.csv"
+                      << std::endl;
             delete player;
             return nullptr;
         }
@@ -248,7 +259,8 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         int index = 1;
         for (auto &sol : player->_soldiers) {
             if (index < pointStr.size()) {
-                sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index],_battlefield->getHeight(),_battlefield->getWidth()));
+                sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index], _battlefield->getHeight(),
+                                                                      _battlefield->getWidth()));
                 index++;
             } else {
                 std::cerr << "Not enough points in player init file: " << filePath << std::endl;
@@ -257,7 +269,6 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
             }
         }
     }
-
 
 
     return player;
@@ -296,7 +307,7 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
 
 void Game::attack(Soldier *attacker, Soldier *target) {
     std::cout << *attacker << attacker->getID() << " attempting to attack " << *target << target->getID() << std::endl;
-    if (attacker->attack(target)){
+    if (attacker->attack(target)) {
         killSoldier(target);
         std::cout << "\t\t\t\t" << *attacker << " killed " << *target << std::endl;
     }
@@ -306,12 +317,12 @@ Battlefield Game::getBattlefield() {
     return *_battlefield;
 }
 
-std::vector<Player *> Game::getAllPlayers(){
+std::vector<Player *> Game::getAllPlayers() {
     return _players;
 }
 
 Point Game::getBattlefieldLimits() {
-    return Point(_battlefield->getWidth(),_battlefield->getHeight());
+    return Point(_battlefield->getWidth(), _battlefield->getHeight());
 }
 
 void Game::killSoldier(Soldier *soldier) {
@@ -322,9 +333,9 @@ void Game::killSoldier(Soldier *soldier) {
 
 std::vector<Soldier *> Game::retrieveFriendlySoldiers(Soldier *soldier) {
     std::vector<Soldier *> friendlySoldiers;
-    for (auto & it : _gameMap) {
-        if (Soldier* t = dynamic_cast<Soldier*>(it)) {
-            if(t->getArmy() == soldier->getArmy() && t->isAlive() && soldier->getID() != it->getID()){
+    for (auto &it : _gameMap) {
+        if (Soldier *t = dynamic_cast<Soldier *>(it)) {
+            if (t->getArmy() == soldier->getArmy() && t->isAlive() && soldier->getID() != it->getID()) {
                 friendlySoldiers.emplace_back(t);
             }
 
@@ -335,11 +346,11 @@ std::vector<Soldier *> Game::retrieveFriendlySoldiers(Soldier *soldier) {
 
 void Game::applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy) {
 
-    std::vector<MapObject*> actions = soldierStrategy->applyStrategy(soldier, this);
+    std::vector<MapObject *> actions = soldierStrategy->applyStrategy(soldier, this);
 
     for (auto &it : actions) {
-        if (dynamic_cast<Soldier*>(it) && !dynamic_cast<Medic*>(soldier)) {
-            attack(soldier, dynamic_cast<Soldier*>(it));
+        if (dynamic_cast<Soldier *>(it) && !dynamic_cast<Medic *>(soldier)) {
+            attack(soldier, dynamic_cast<Soldier *>(it));
         } else {
             it->acceptAction(soldier);
         }
@@ -388,14 +399,13 @@ bool Game::play() {
     return true;
 }
 
-std::vector<SolidObject*> Game::retrieveSolidObjects() {
+std::vector<SolidObject *> Game::retrieveSolidObjects() {
     std::vector<SolidObject *> objects;
-    SolidObject* solid;
-    for(auto & it : _gameMap)
-        if(solid = dynamic_cast<SolidObject*>(it) ) objects.emplace_back(solid);
+    SolidObject *solid;
+    for (auto &it : _gameMap)
+        if (solid = dynamic_cast<SolidObject *>(it)) objects.emplace_back(solid);
     return objects;
 }
-
 
 
 bool Game::isReadyToGo() {
@@ -440,12 +450,15 @@ void Game::initGame(std::vector<std::string> arguments) {
     for (int i = 0; i < numOfPlayers; ++i) {
         int startReadingPlayerInfoFrom = 5 + (numOfSoldiersPerPlayer + 1) * i;
 
-        if (csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer" && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human") {
+        if (csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer" &&
+            csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human") {
             std::cerr << "Player p" << (i + 1) << " is not a computer nor a human? Impossible!" << std::endl;
             return;
         }
-        if ((csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 2 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human")
-            || (csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 3 && csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer")) {
+        if ((csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 2 &&
+             csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "human")
+            || (csv[4 + (numOfSoldiersPerPlayer + 1) * i].size() == 3 &&
+                csv[4 + (numOfSoldiersPerPlayer + 1) * i][1] != "computer")) {
             std::cerr << "Error found in player number " << (i + 1) << std::endl;
             return;
         }
@@ -472,22 +485,21 @@ void Game::initGame(std::vector<std::string> arguments) {
     }
 
     for (int i = 0; i < numOfPlayers; ++i) {
-        std::vector<Soldier*> vec = _players[i]->_soldiers;
+        std::vector<Soldier *> vec = _players[i]->_soldiers;
 
         for (auto &it : vec) {
             addMapObject(it);
 
-            if(it->get_weapon()/* && it->get_weapon()->isFireArm()*/){
+            if (it->get_weapon()/* && it->get_weapon()->isFireArm()*/) {
                 std::cout << "Added " << *it->get_weapon() << std::endl;
                 addMapObject(it->get_weapon());
             }
-            if(it->get_shield()) addMapObject(it->get_shield());
-            if(it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
+            if (it->get_shield()) addMapObject(it->get_shield());
+            if (it->get_bodyarmor()) addMapObject(it->get_bodyarmor());
         }
     }
 
     _readyToGo = true;
-
 
 
 }

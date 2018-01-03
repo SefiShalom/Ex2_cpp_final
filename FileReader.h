@@ -9,6 +9,10 @@
 #include <fstream>
 #include <string>
 
+
+/**
+ *  A class which helps reading a file using file stream
+ */
 class FileReader {
 
     std::ifstream file;
@@ -19,8 +23,10 @@ class FileReader {
 
 public:
 
+    //  Ctor opens the file located at "path"
     explicit FileReader(std::string path);
 
+    //  Fetches all of the text from the file
     std::string getText();
 
     ~FileReader();
