@@ -41,10 +41,11 @@ std::ostream &SniperSoldier::toString(std::ostream &out) {
     return out;
 }
 
-SoldierStrategy* SniperSoldier::getStrategy() {
-    return new SniperStrategy;
-}
 
 std::string SniperSoldier::getType() {
     return "Sniper";
+}
+
+SniperSoldier::~SniperSoldier() {
+
 }

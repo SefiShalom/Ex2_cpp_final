@@ -46,10 +46,6 @@ void RegularSoldier::run() {
 
 
 std::ostream &RegularSoldier::toString(std::ostream &out) {
-//    out<< "RegularSoldier:" <<std::endl;
-//    out<< "Army: " << getArmy() <<std::endl;
-//    out<< "Location: " << getLocation() <<std::endl;
-//    out<< "HP: " << getHP() <<std::endl;
 
     double x = getLocation().get_x();
     double y = getLocation().get_y();
@@ -58,9 +54,6 @@ std::ostream &RegularSoldier::toString(std::ostream &out) {
     return out;
 }
 
-SoldierStrategy* RegularSoldier::getStrategy() {
-    return nullptr;
-}
 
 std::string RegularSoldier::getType() {
     return "Regular";

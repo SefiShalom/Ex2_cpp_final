@@ -199,13 +199,6 @@ std::ostream &Soldier::info(std::ostream &os) {
     return os;
 }
 
-std::vector<SolidObject *> Soldier::retrieveSolidObjectsInRadius(Game* game) {
-    std::vector<SolidObject *> objects;
-    SolidObject* solid;
-//    for(auto & it : game->_gameMap)
-//        if(solid = dynamic_cast<SolidObject*>(it) ) objects.emplace_back(solid);
-    return objects;
-}
 
 void Soldier::setIsBypassingSolidObject(bool is) {
     _isBypassingSolidObject  = is;
