@@ -46,6 +46,9 @@ Armor *ObjectFactory::makeArmor(const std::vector<std::string> &info) {
 }
 
 SolidObject *ObjectFactory::makeSolidObject(const std::vector<std::string> &info) {
+    if (info.size() < 5) {
+        return nullptr;
+    }
     std::string type  = info[1];
     const Point point = PointsFactory::makeSinglePoint(info[4]);
     double height     = std::stod(info[2]);

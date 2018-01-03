@@ -215,6 +215,11 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         if (newSoldier == nullptr) {
             std::cerr << "Invalid soldier input!" << std::endl;
             std::cerr << "Error creating soldier number " << (i + 1) << "player number " << (playerNumber + 1) << std::endl;
+
+            for (auto & sol : player->_soldiers) {
+                delete(sol);
+            }
+
             delete player;
             return nullptr;
         }
@@ -251,9 +256,6 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
                 return nullptr;
             }
         }
-
-//        for(auto &iter : pointStr) std::cout << iter << std::endl;
-
     }
 
 
@@ -268,12 +270,21 @@ bool Game::addAllMapObject(int from, const std::vector<std::vector<std::string>>
     for (int i = from + 1; i < csv.size(); ++i) {
         if (csv[i][0] == "weapon") {
             Weapon *weapon = ObjectFactory::makeWeapon(csv[i]);
+            if (!weapon) {
+                return false;
+            }
             addMapObject(weapon);
         } else if (csv[i][0] == "Armor") {
             Armor *armor = ObjectFactory::makeArmor(csv[i]);
+            if (!armor) {
+                return false;
+            }
             addMapObject(armor);
         } else if (csv[i][0] == "solid") {
             SolidObject *solidObject = ObjectFactory::makeSolidObject(csv[i]);
+            if (!solidObject) {
+                return false;
+            }
             addMapObject(solidObject);
         } else {
             return false;
