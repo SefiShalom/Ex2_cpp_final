@@ -56,10 +56,6 @@ std::ostream &Medic::toString(std::ostream &out) {
     return out;
 }
 
-SoldierStrategy *Medic::getStrategy() {
-    return new MedicStrategy;
-}
-
 std::string Medic::getType() {
     return "Medic";
 }

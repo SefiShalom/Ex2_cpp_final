@@ -48,9 +48,6 @@ public:
     //Returns an ostream containing a short description of the instance
     std::ostream& toString (std::ostream& out);
 
-    //Returns a pointer to SoldierStrategy - MedicStrategy in this case
-    SoldierStrategy* getStrategy();
-
     //Returns the type (name) of the class
     virtual std::string getType();
 
