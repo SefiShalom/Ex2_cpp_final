@@ -19,18 +19,39 @@ class Medic : public Soldier {
 
 
 public:
+
+    //ctor. receives the initial position initial HP soldier's speed (a length of a step)
+    //and the army num
     Medic(const Point& position, const short army);
+
+    //dtor
     virtual ~Medic();
+
+    //Perform a healing action on the given soldier
     void heal(Soldier* injured);
+
+    //receives a soldier to attack and uses only Fists
     virtual bool attack(Soldier *target);
+
+    //Invoked when another Medic performs a healing action on the soldier
     void healMe();
-    void whoAreYou();
+
+    //Passes the MEDIC_SPEED value to the generic walk(double speed) method at Soldier
     void walk();
+
+    //Both performAction functions are part of the implementation of the Visitors design pattern.
+    // Represent the 'Visitor' class's visit(Visited*)
     void performAction(Soldier* soldier);
     void performAction(Weapon* weapon);
+
+
+    //Returns an ostream containing a short description of the instance
     std::ostream& toString (std::ostream& out);
+
+    //Returns a pointer to SoldierStrategy - MedicStrategy in this case
     SoldierStrategy* getStrategy();
 
+    //Returns the type (name) of the class
     virtual std::string getType();
 
 };

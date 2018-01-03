@@ -16,11 +16,14 @@ class ComputerPlayer : public Player {
     int _strategy;// the identifier number of the strategy
     Battlefield *_battlefield;// a pointer to the Game's Battlefield instance
 public:
-    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield *battlefield);//ctor
+    ComputerPlayer(const int army, const std::string &name, int strat, Battlefield *battlefield);//ctor. receives the army num
+                                                                                                // the player's name, strategy identifier
+                                                                                                // and a pointer to the battlefield
+    ~ComputerPlayer();//dtor
 
-    virtual void playTurn(Game* game);
+    virtual void playTurn(Game* game);//invikes each soldier 'walk' function and let each take relevant actions
 
-    virtual bool isPlaying();
+    virtual bool isPlaying();//checks if there is at least one soldier alive. returns false otherwise
 };
 
 

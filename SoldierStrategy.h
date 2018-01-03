@@ -17,8 +17,11 @@ class SoldierStrategy {
 
 public:
 
+    //dtor
     virtual ~SoldierStrategy() = 0;
 
+    //receives a Soldier and the Game instances and applies the strategy in the soldier
+    //based on the game current state
     virtual std::vector<MapObject *> applyStrategy(Soldier *soldier, Game *game) = 0;
 
 };

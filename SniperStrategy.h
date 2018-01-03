@@ -10,6 +10,12 @@
 #include "Game.h"
 
 class SniperStrategy: public SoldierStrategy {
+
+    //dtor
+    ~SniperStrategy();
+
+    //receives a Soldier and the Game instances and applies the strategy in the soldier
+    //based on the game current state
     virtual std::vector<MapObject*> applyStrategy(Soldier* soldier, Game* game);
 };
 

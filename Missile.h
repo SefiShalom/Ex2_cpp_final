@@ -15,30 +15,37 @@
 #define NOT_AFFECTED_BY_BODYARMOR 1
 
 class Missile : public Weapon {
+//A derived class of Weapon.
+//Represents Missile weapon
+//Has its own power and bullets per shot
+
 
 public:
+    //ctor. Only receives the initial position of the instance
     Missile(const Point &position);
 
+    //dtor
     virtual ~Missile();
 
+    //performs an attack on a given shield armor
     double attackArmor(ShieldArmor *sheild);
 
+    //performs an attack on a given body armor
     double attackArmor(BodyArmor *bodyarmor);
 
+    //for Visitor purposes
     void useObject(Fighter *soldier);
 
+    //drops the instance on the given soldier's current position
     void drop(Fighter *soldier);
 
-    virtual double attackArmor(std::shared_ptr<ShieldArmor> sheild);
-
-    virtual double attackArmor(std::shared_ptr<BodyArmor> armor);
-
-    virtual void drop(std::shared_ptr<Fighter> soldier);
-
+    //Returns an ostream containing a short description of the instance
     std::ostream& toString(std::ostream& out);
 
+    //returns true. Missile instance is a fire arm
     virtual bool isFireArm();
 
+    //Returns the type (name) of the class
     virtual std::string getType();
 };
 

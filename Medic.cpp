@@ -23,10 +23,6 @@ bool Medic::attack(Soldier *target) {
     return target->defend(_weapon);
 }
 
-void Medic::whoAreYou() {
-    std::cout << "I am a medic." << std::endl;
-}
-
 
 void Medic::healMe() {
    refillHP(MEDIC_HP);

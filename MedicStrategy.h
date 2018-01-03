@@ -11,7 +11,12 @@
 class MedicStrategy : public SoldierStrategy{
 
 public:
+
+    //dotr
     ~MedicStrategy();
+
+    //receives a Soldier and the Game instances and applies the strategy in the soldier
+    //based on the game current state
     std::vector<MapObject*> applyStrategy(Soldier* soldier, Game* game);
 
 };

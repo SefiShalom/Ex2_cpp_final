@@ -86,3 +86,7 @@ std::vector<MapObject*> SniperStrategy::applyStrategy(Soldier *soldier, Game *ga
 
 }
 
+SniperStrategy::~SniperStrategy() {
+
+}
+

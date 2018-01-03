@@ -318,6 +318,7 @@ std::vector<Soldier *> Game::retrieveFriendlySoldiers(Soldier *soldier) {
 }
 
 void Game::applyStrategy(Soldier *soldier, SoldierStrategy *soldierStrategy) {
+
     std::vector<MapObject*> actions = soldierStrategy->applyStrategy(soldier, this);
 
     for (auto &it : actions) {

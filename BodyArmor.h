@@ -16,22 +16,33 @@ class BodyArmor : public Armor {
     //Represents a BodyArmor that a soldier wears upon it's body
 
 public:
-    BodyArmor(const Point& position, double defensePower);//ctor. gets the initial position and the defense power
 
-    ~BodyArmor();//dtor
+    //ctor. gets the initial position and the defense power
+    BodyArmor(const Point& position, double defensePower);
 
-    void drop(Soldier* soldier);//drops the BodyArmor in the given soldier's current position
+    //dtor
+    ~BodyArmor();
 
-    double defend(Weapon *weapon);// reduces the given Weapon attack power by the BodyArmor defense power
+    //drops the instance in the given soldier's current position
+    void drop(Soldier* soldier);
 
-    void useObject(Soldier* soldier);// invokes the given soldier 'pickObject' method which assigning the BodyArmor to it.
+    // reduces the given Weapon attack power by the instance defense power
+    double defend(Weapon *weapon);
 
-    void acceptAction(Soldier* soldier);// passing the instance to the given Soldier's 'performAction'
-                                        // to perform the relevant action on the instance
+    // invokes the given soldier 'pickObject' method which assigning the BodyArmor to it.
 
-    std::ostream& toString(std::ostream& out);//returns an ostreaqm object containing a short description if the BodyArmor
+    void useObject(Soldier* soldier);
 
-    virtual std::string getType();//returns the type (name) of the class BodyArmor
+    // passing the instance to the given Soldier's 'performAction'
+    // to perform the relevant action on the instance
+    //Visitor purposes
+    void acceptAction(Soldier* soldier);
+
+    //returns an ostreaqm object containing a short description about the instance
+    std::ostream& toString(std::ostream& out);
+
+    //returns the type (name) of the class BodyArmor
+    virtual std::string getType();
 };
 
 

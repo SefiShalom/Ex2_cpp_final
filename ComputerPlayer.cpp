@@ -49,3 +49,5 @@ bool ComputerPlayer::isPlaying() {
     }
     return false;
 }
+
+ComputerPlayer::~ComputerPlayer() {}
