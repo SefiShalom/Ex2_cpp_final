@@ -1,0 +1,43 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node21 [label="MapObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_map_object.html"];
+  Node21 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="CollectableObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_collectable_object.html"];
+  Node22 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="Armor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_armor.html"];
+  Node23 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="BodyArmor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_body_armor.html"];
+  Node23 -> Node25 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="ShieldArmor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_shield_armor.html"];
+  Node22 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="Weapon",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_weapon.html"];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="Fists",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_fists.html"];
+  Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Missile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_missile.html"];
+  Node0 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Rifle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_rifle.html"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="M16",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m16.html"];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Uzi",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_uzi.html"];
+  Node21 -> Node26 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="Soldier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_soldier.html"];
+  Node26 -> Node27 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node27 [label="Fighter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_fighter.html"];
+  Node27 -> Node28 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node28 [label="RegularSoldier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_regular_soldier.html"];
+  Node27 -> Node29 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 [label="SniperSoldier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sniper_soldier.html"];
+  Node26 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="Medic",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_medic.html"];
+  Node21 -> Node31 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node31 [label="SolidObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_solid_object.html"];
+  Node31 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node32 [label="Building",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_building.html"];
+  Node1 [label="typedef1",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}
