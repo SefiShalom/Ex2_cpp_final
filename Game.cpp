@@ -214,7 +214,8 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
         Soldier *newSoldier = SoldierFactory::makeSoldier(csv[startReadingFrom], playerNumber);
         if (newSoldier == nullptr) {
             std::cerr << "Invalid soldier input!" << std::endl;
-            std::cerr << "Error creating a soldier for player number " << (playerNumber + 1) << std::endl;
+            std::cerr << "Error creating soldier number " << (i + 1) << "player number " << (playerNumber + 1) << std::endl;
+            delete player;
             return nullptr;
         }
         player->addSoldier(newSoldier);
@@ -231,6 +232,7 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
         if (!fr.isOpen()) {
             std::cerr << "Error opening the file " << "csvs/player" << std::to_string(playerNumber) << "_file.csv" << std::endl;
+            delete player;
             return nullptr;
         }
 
@@ -240,11 +242,14 @@ Game::generatePlayerWithSoldiers(int playerNumber, int startReadingFrom, int num
 
         int index = 1;
         for (auto &sol : player->_soldiers) {
-            if (index >= pointStr.size()) {
-                std::cout << "ERROR IN PLAYER_INIT FILE! ERROR IN PLAYER NUMBER " << playerNumber << std::endl;
+            if (index < pointStr.size()) {
+                sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index],_battlefield->getHeight(),_battlefield->getWidth()));
+                index++;
+            } else {
+                std::cerr << "Not enough points in player init file: " << filePath << std::endl;
+                delete player;
+                return nullptr;
             }
-            sol->feedMeWithDestinations(PointsFactory::makePoints(pointStr[index],_battlefield->getHeight(),_battlefield->getWidth()));
-            index++;
         }
 
 //        for(auto &iter : pointStr) std::cout << iter << std::endl;
